@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Widget3 extends React.Component {
+class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,4 +15,4 @@ class Widget3 extends React.Component {
   }
 };
 
-export default Widget3;
+export default Questions_Answers;

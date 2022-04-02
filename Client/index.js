@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Widget1 from './Widget1/Widget1.js'
-import Widget2 from './Widget2/Widget2.js'
-import Widget3 from './Widget3/Widget3.js'
-import Widget4 from './Widget4/Widget4.js'
+import Product_Detail_Page from './Product_Detail_Page/Product_Detail_Page.js'
+import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.js'
+import Questions_Answers from './Questions_Answers/Questions_Answers.js'
+import Related_Items_Comparisons from './Related_Items_Comparisons/Related_Items_Comparisons.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,10 +16,10 @@ class App extends React.Component {
       <div>
         <h1>Hello, world!</h1>
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-        <Widget1 />
-        <Widget2 />
-        <Widget3 />
-        <Widget4 />
+        <Product_Detail_Page />
+        <Ratings_Reviews />
+        <Questions_Answers />
+        <Related_Items_Comparisons />
       </div>
     );
   }

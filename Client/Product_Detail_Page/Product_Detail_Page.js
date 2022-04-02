@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Widget2 extends React.Component {
+class Product_Detail_Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -9,10 +9,10 @@ class Widget2 extends React.Component {
   render() {
     return (
       <div>
-        <h1>Widget2</h1>
+        <h1 className='carl'>Widget 1</h1>
       </div>
     );
   }
 };
 
-export default Widget2;
+export default Product_Detail_Page;

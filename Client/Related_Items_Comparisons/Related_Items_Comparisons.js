@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Widget4 extends React.Component {
+class Related_Items_Comparisons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,4 +15,4 @@ class Widget4 extends React.Component {
   }
 };
 
-export default Widget4;
+export default Related_Items_Comparisons;
