@@ -9,7 +9,7 @@ class Widget1 extends React.Component {
   render() {
     return (
       <div>
-        <h1>Widget 1</h1>
+        <h1 className='carl'>Widget 1</h1>
       </div>
     );
   }
