@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const requests = require('../API_Requests/requests.js');
 
 const app = express();
 const port = 3000;
@@ -12,7 +13,10 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../Client')));
 
 
-app.get('/', (req, res) => {
+
+app.get('/products', (req, res) => {
+  var productId = req.body.data;
+  // request.getAll
  res.send('Test');
 });
 
