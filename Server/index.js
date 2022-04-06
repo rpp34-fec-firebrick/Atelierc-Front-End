@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const requests = require('../API_Requests/requests.js');
+const TOKEN = require('../Auth.js');
+const axios = require('axios');
 
 const app = express();
 const port = 3000;
@@ -20,7 +22,25 @@ app.get('/products', (req, res) => {
  res.send('Test');
 });
 
+app.get('/questions', (req, res) => {
+  axios.defaults.headers.common['Authorization'] = TOKEN.TOKEN;
+  var randomIndex = Math.floor(Math.random() * 1011);
+  randomIndex += 64620; // for single product, use 64620
 
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/`, {
+    params: {
+      product_id: randomIndex,
+      count: 100
+    }
+  })
+  .then((response) => {
+    console.log(response.data);
+    const data = response.data;
+  }).catch((error) => {
+    console.log(`There was an error getting question data: ${error}`);
+  })
+
+})
 
 
 
