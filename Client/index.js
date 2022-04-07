@@ -16,46 +16,49 @@ class App extends React.Component {
       styles: [],
       relatedProducts : [],
       myOutfit : [],
-      questions: [],
+      questions: this.props.questions
     };
+
   }
 
   // Initial Post Request to the Server
-componentDidMount () {
-  var randomIndex = Math.floor(Math.random() * 1011);
-  randomIndex += 64620;
-  // var randomIndex = 64620;
-  axios.post('/products', {
-    productId: randomIndex
-  })
-  .then((response) => {
-    console.log('Successful Post Request')
-    console.log(response.data);
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+// componentDidMount () {
+//   var randomIndex = Math.floor(Math.random() * 1011);
+//   randomIndex += 64620;
+//   // var randomIndex = 64620;
+//   axios.post('/products', {
+//     productId: randomIndex
+//   })
+//   .then((response) => {
+//     console.log('Successful Post Request');
+//     console.log(response.data);
+//   }).catch((error) => {
+//     console.log('error', 'error');
+//   })
 
-  axios.post('/questions', {
-    productId: randomIndex
-  })
-  .then((response) => {
-    console.log('Successful Question Request')
-    console.log(response.data);
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+//   axios.post('/questions', {
+//     productId: randomIndex
+//   })
+//   .then((response) => {
+//     console.log('Successful Question Request: ', response.data);
+//     this.setState({
+//       questions: response.data
+//     })
+//   }).catch((error) => {
+//     console.log(`There was an error getting question data: ${error}`);
+//   })
 
-  axios.post('/reviews', {
-    productId: randomIndex,
-  })
-  .then((response) => {
-    console.log('Successful Reviews Request')
-    console.log(response.data);
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+//   axios.post('/reviews', {
+//     productId: randomIndex,
+//   })
+//   .then((response) => {
+//     console.log('Successful Reviews Request');
+//     console.log(response.data);
+//   }).catch((error) => {
+//     console.log('error', 'error');
+//   })
 
-}
+// }
 
 
   render() {
@@ -65,13 +68,38 @@ componentDidMount () {
         <h2>It is</h2>
         <Product_Detail_Page />
         <Ratings_Reviews />
-        <Questions_Answers />
+        <Questions_Answers questions={this.state.questions}/>
         <Related_Items_Comparisons />
       </div>
     );
   }
 }
 
+var orderAnswers = (ans) => {
+
+}
+
+var setUp = () => {
+
+  var randomIndex = Math.floor(Math.random() * 1011);
+  randomIndex += 64620;
+
+  axios.post('/questions', {
+    productId: randomIndex
+  })
+  .then((response) => {
+    console.log('Successful Question Request: ', response.data);
+
+    // iterate over results
+
+      //
 
 
-ReactDOM.render(<App />,document.getElementById('app'));
+  }).catch((error) => {
+
+    console.log(`There was an error getting question data: ${error}`);
+  })
+
+}
+
+setUp();
