@@ -9,7 +9,15 @@ import Related_Items_Comparisons from './Related_Items_Comparisons/Related_Items
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentProductId: 0,
+      starValue: 0,
+      reviews : [],
+      styles: [],
+      relatedProducts : [],
+      myOutfit : [],
+      questions: [],
+    };
   }
 
   // Initial Post Request to the Server
