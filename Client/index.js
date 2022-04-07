@@ -47,7 +47,6 @@ componentDidMount () {
   })
   .then((response) => {
     console.log('Successful Question Request')
-    console.log(response.data);
   }).catch((error) => {
     console.log('error', 'error');
   })
@@ -57,7 +56,6 @@ componentDidMount () {
   })
   .then((response) => {
     console.log('Successful Reviews Request')
-    console.log(response.data);
   }).catch((error) => {
     console.log('error', 'error');
   })
