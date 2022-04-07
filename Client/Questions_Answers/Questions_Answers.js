@@ -1,11 +1,10 @@
 import React from 'react';
-import Questions from './Questions.js'
+import Questions from './Questions.js';
+import Search from './Search.js';
 
 class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
-
-    //sort by helpfulness, then sort answers by helpfulness
 
     this.state = {
       questions: props.questions,
@@ -19,7 +18,13 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <h1>Questions and Answers</h1>
-        <Questions display={this.state.displayedQuestions} />
+        <Search />
+        <div>
+          {this.state.displayedQuestions.map((question) =>
+            <Questions question={question} />
+          )}
+
+        </div>
       </div>
     );
   }

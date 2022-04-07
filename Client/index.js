@@ -9,6 +9,7 @@ import Related_Items_Comparisons from './Related_Items_Comparisons/Related_Items
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       currentProductId: 0,
       starValue: 0,
@@ -91,6 +92,9 @@ var orderAnswers = (ans) => {
       }
     }
   }
+
+  // if answerer_name === Seller, it needs to be put on the top of the array
+  // maybe that could be done in the top iteration? put sellers into a separate array and then merge it once others have been sorted
 
   orderedAnswers.sort((a, b) => {
     return b.helpfulness - a.helpfulness;
