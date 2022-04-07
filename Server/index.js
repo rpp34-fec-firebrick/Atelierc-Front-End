@@ -14,11 +14,46 @@ app.use(express.static(path.join(__dirname, '../Client')));
 
 
 
-app.get('/products', (req, res) => {
-  var productId = req.body.data;
-  // request.getAll
- res.send('Test');
+app.post('/products', (req, res) => {
+  var productId = req.body.productId;
+  requests.getAllProducts(productId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getAll Data')
+      res.send(response);
+    }
+  })
 });
+
+app.post('/questions', (req, res) => {
+  var productId = req.body.productId;
+  requests.getAllQuestions(productId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getAll Data')
+      res.send(response);
+    }
+  })
+});
+
+app.post('/reviews', (req, res) => {
+  var productId = req.body.productId;
+  requests.getAllReviews(productId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getAll Data')
+      res.send(response);
+    }
+  })
+});
+
+
+
+
+
 
 
 
