@@ -14,16 +14,26 @@ class Questions_Answers extends React.Component {
 
   }
 
+  onSearchChange (e) {
+    this.setState({
+      searchText: e.target.value
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Questions and Answers</h1>
-        <Search />
+        <Search searchChange={this.onSearchChange.bind(this)} text={this.state.searchText}/>
         <div>
           {this.state.displayedQuestions.map((question) =>
             <Questions question={question} />
           )}
 
+        </div>
+        <div>
+          <button>More Answered Questions</button>
+          <button>Add a Question +</button>
         </div>
       </div>
     );

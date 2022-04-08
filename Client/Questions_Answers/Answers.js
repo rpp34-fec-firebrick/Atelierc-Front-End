@@ -20,6 +20,8 @@ class Answers extends React.Component {
         <div>
           by {this.state.answer.answerer_name}, {this.state.answer.date}
         </div>
+        <div>Helpful? <u>Yes</u> ({this.state.answer.helpfulness})</div>
+        <div><u>Report</u></div>
       </div>
     )
   }

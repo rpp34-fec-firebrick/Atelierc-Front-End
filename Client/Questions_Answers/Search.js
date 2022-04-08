@@ -13,7 +13,7 @@ class Search extends React.Component {
   render () {
     return (
       <div>
-        Have a question? Search for answers...
+        <input type="text" onChange={this.props.searchChange} placeholder="Have a question? Search for answers..." value={this.props.text} />
       </div>
     )
   }
