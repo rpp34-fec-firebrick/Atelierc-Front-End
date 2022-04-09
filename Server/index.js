@@ -20,7 +20,7 @@ app.post('/products', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getAll Data')
+      console.log('Successful getAllProducts Data')
       res.send(response);
     }
   })
@@ -32,7 +32,7 @@ app.post('/questions', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getAll Data')
+      console.log('Successful getAllQuestions Data')
       res.send(response);
     }
   })
@@ -44,7 +44,7 @@ app.post('/reviews', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getAll Data')
+      console.log('Successful getAllReviews Data')
       res.send(response);
     }
   })

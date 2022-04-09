@@ -14,41 +14,53 @@ class App extends React.Component {
       currentProductId: 0,
       starValue: 0,
       reviews : [],
-      styles: [],
+      styles: {},
       relatedProducts : [],
       myOutfit : [],
-      questions: this.props.questions
+      questions: [],
+      productData: {},
     };
 
   }
 
   // Initial Post Request to the Server
-// componentDidMount () {
-//   var randomIndex = Math.floor(Math.random() * 1011);
-//   randomIndex += 64620;
+componentDidMount () {
+  var randomIndex = Math.floor(Math.random() * 1011);
+  randomIndex += 64620;
+  // var randomIndex = 64620;
+  axios.post('/products', {
+    productId: randomIndex
+  })
+  .then((response) => {
+    console.log('Successful Product Request')
+    //Update State Based on Data
+    //Each if Statement in the for loop is associated with a unique identifier in state
+    for (var i = 0; i < response.data.length; i++) {
+      if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
+      if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
+      if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
+    }
+  }).catch((error) => {
+    console.log('error', 'error');
+  })
 
-//   // var randomIndex = 64620;
-//   axios.post('/products', {
-//     productId: randomIndex
-//   })
-//   .then((response) => {
-//     console.log('Successful Post Request');
-//     console.log(response.data);
-//   }).catch((error) => {
-//     console.log('error', 'error');
-//   })
+  axios.post('/questions', {
+    productId: randomIndex
+  })
+  .then((response) => {
+    console.log('Successful Question Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  })
 
-//   axios.post('/questions', {
-//     productId: randomIndex
-//   })
-//   .then((response) => {
-//     console.log('Successful Question Request: ', response.data);
-//     this.setState({
-//       questions: response.data
-//     })
-//   }).catch((error) => {
-//     console.log(`There was an error getting question data: ${error}`);
-//   })
+  axios.post('/reviews', {
+    productId: randomIndex,
+  })
+  .then((response) => {
+    console.log('Successful Reviews Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  })
 
 //   axios.post('/reviews', {
 //     productId: randomIndex,
@@ -68,7 +80,7 @@ class App extends React.Component {
       <div>
         <h1>Hello, world!</h1>
         <h2>It is</h2>
-        <Product_Detail_Page />
+        <Product_Detail_Page productData={this.state.productData} styles={this.state.styles}/>
         <Ratings_Reviews />
         <Questions_Answers />
         <Related_Items_Comparisons />
