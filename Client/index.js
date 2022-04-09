@@ -26,6 +26,7 @@ class App extends React.Component {
 // componentDidMount () {
 //   var randomIndex = Math.floor(Math.random() * 1011);
 //   randomIndex += 64620;
+
 //   // var randomIndex = 64620;
 //   axios.post('/products', {
 //     productId: randomIndex
@@ -69,64 +70,12 @@ class App extends React.Component {
         <h2>It is</h2>
         <Product_Detail_Page />
         <Ratings_Reviews />
-        <Questions_Answers questions={this.state.questions}/>
+        <Questions_Answers />
         <Related_Items_Comparisons />
       </div>
     );
   }
 }
 
-var orderAnswers = (ans) => {
-  let orderedAnswers = [];
 
-  for (var key in ans) {
-    if (orderedAnswers.length === 0) {
-      orderedAnswers.push(ans[key]);
-
-    } else {
-      if (ans[key].helpfulness >= orderedAnswers[0].helpfulness) {
-        orderedAnswers.unshift(ans[key]);
-
-      } else if (ans[key].helpfulness <= orderedAnswers[0].helpfulness) {
-        orderedAnswers.push(ans[key]);
-      }
-    }
-  }
-
-  // if answerer_name === Seller, it needs to be put on the top of the array
-  // maybe that could be done in the top iteration? put sellers into a separate array and then merge it once others have been sorted
-
-  orderedAnswers.sort((a, b) => {
-    return b.helpfulness - a.helpfulness;
-  })
-
-  return orderedAnswers;
-}
-
-var setUp = () => {
-
-  var randomIndex = Math.floor(Math.random() * 1011);
-  randomIndex += 64620;
-
-  axios.post('/questions', {
-    productId: randomIndex
-  })
-  .then((response) => {
-    console.log('Successful Question Request: ', response.data);
-
-    response.data.results.forEach((question) => {
-      question.answers = orderAnswers(question.answers)
-    })
-
-    return response.data;
-  })
-  .then((questions) => {
-    ReactDOM.render(<App questions={questions} />, document.getElementById('app'));
-  })
-  .catch((error) => {
-    console.log(`There was an error getting question data: ${error}`);
-  })
-
-}
-
-setUp();
+ReactDOM.render(<App />, document.getElementById('app'));
