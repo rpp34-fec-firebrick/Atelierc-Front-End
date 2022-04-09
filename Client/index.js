@@ -13,10 +13,11 @@ class App extends React.Component {
       currentProductId: 0,
       starValue: 0,
       reviews : [],
-      styles: [],
+      styles: {},
       relatedProducts : [],
       myOutfit : [],
       questions: [],
+      productData: {},
     };
   }
 
@@ -29,8 +30,14 @@ componentDidMount () {
     productId: randomIndex
   })
   .then((response) => {
-    console.log('Successful Post Request')
-    console.log(response.data);
+    console.log('Successful Product Request')
+    //Update State Based on Data
+    //Each if Statement in the for loop is associated with a unique identifier in state
+    for (var i = 0; i < response.data.length; i++) {
+      if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
+      if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
+      if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
+    }
   }).catch((error) => {
     console.log('error', 'error');
   })
@@ -40,7 +47,6 @@ componentDidMount () {
   })
   .then((response) => {
     console.log('Successful Question Request')
-    console.log(response.data);
   }).catch((error) => {
     console.log('error', 'error');
   })
@@ -50,7 +56,6 @@ componentDidMount () {
   })
   .then((response) => {
     console.log('Successful Reviews Request')
-    console.log(response.data);
   }).catch((error) => {
     console.log('error', 'error');
   })
@@ -63,7 +68,7 @@ componentDidMount () {
       <div>
         <h1>Hello, world!</h1>
         <h2>It is</h2>
-        <Product_Detail_Page />
+        <Product_Detail_Page productData={this.state.productData} styles={this.state.styles}/>
         <Ratings_Reviews />
         <Questions_Answers />
         <Related_Items_Comparisons />
