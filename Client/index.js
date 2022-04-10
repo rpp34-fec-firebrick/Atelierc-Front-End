@@ -26,6 +26,7 @@ componentDidMount () {
   var randomIndex = Math.floor(Math.random() * 1011);
   randomIndex += 64620;
   // var randomIndex = 64620;
+  this.setState({['currentProductId']: randomIndex})
   axios.post('/products', {
     productId: randomIndex
   })
@@ -68,7 +69,7 @@ componentDidMount () {
       <div>
         <h1>Hello, world!</h1>
         <h2>It is</h2>
-        <Product_Detail_Page productData={this.state.productData} styles={this.state.styles}/>
+        <Product_Detail_Page productId={this.state.currentProductId}/>
         <Ratings_Reviews />
         <Questions_Answers />
         <Related_Items_Comparisons />
