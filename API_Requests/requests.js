@@ -38,7 +38,6 @@ var getAllQuestions  = (productId, callback) => {
     }
   })
   .then((response) => {
-    console.log(response.data);
     const data = response.data;
     callback(null, data);
   }).catch((error) => {
@@ -60,7 +59,6 @@ var getAllReviews  = (productId, callback) => {
     }
   })
   .then((response) => {
-    console.log(response.data);
     const data = response.data;
     callback(null, data);
   }).catch((error) => {
