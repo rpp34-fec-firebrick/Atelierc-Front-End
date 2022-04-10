@@ -9,6 +9,7 @@ import Related_Items_Comparisons from './Related_Items_Comparisons/Related_Items
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       currentProductId: 0,
       starValue: 0,
@@ -19,6 +20,7 @@ class App extends React.Component {
       questions: [],
       productData: {},
     };
+
   }
 
   // Initial Post Request to the Server
@@ -60,7 +62,17 @@ componentDidMount () {
     console.log('error', 'error');
   })
 
-}
+//   axios.post('/reviews', {
+//     productId: randomIndex,
+//   })
+//   .then((response) => {
+//     console.log('Successful Reviews Request');
+//     console.log(response.data);
+//   }).catch((error) => {
+//     console.log('error', 'error');
+//   })
+
+// }
 
 
   render() {
@@ -78,5 +90,4 @@ componentDidMount () {
 }
 
 
-
-ReactDOM.render(<App />,document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
