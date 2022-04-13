@@ -18,29 +18,39 @@ class Questions_Answers extends React.Component {
   componentDidMount () {
     var orderAnswers = (ans) => {
       let orderedAnswers = [];
+      let sellerAnswers = [];
 
       for (var key in ans) {
         if (orderedAnswers.length === 0) {
-          orderedAnswers.push(ans[key]);
+          if (ans[key].answerer_name === 'Seller') {
+            console.log('Seller!');
+            sellerAnswers.push(ans[key]);
+
+          } else {
+            orderedAnswers.push(ans[key]);
+
+          }
 
         } else {
-          if (ans[key].helpfulness >= orderedAnswers[0].helpfulness) {
-            orderedAnswers.unshift(ans[key]);
+          if (ans[key].answerer_name === 'Seller') {
+            sellerAnswers.push(ans[key]);
+          } else {
+            if (ans[key].helpfulness >= orderedAnswers[0].helpfulness) {
+              orderedAnswers.unshift(ans[key]);
 
-          } else if (ans[key].helpfulness <= orderedAnswers[0].helpfulness) {
-            orderedAnswers.push(ans[key]);
+            } else if (ans[key].helpfulness <= orderedAnswers[0].helpfulness) {
+              orderedAnswers.push(ans[key]);
+            }
+
           }
         }
       }
-
-      // if answerer_name === Seller, it needs to be put on the top of the array
-      // maybe that could be done in the top iteration? put sellers into a separate array and then merge it once others have been sorted
 
       orderedAnswers.sort((a, b) => {
         return b.helpfulness - a.helpfulness;
       })
 
-      return orderedAnswers;
+      return sellerAnswers.concat(orderedAnswers);
     }
 
     var randomIndex = Math.floor(Math.random() * 1011);

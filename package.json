@@ -9,6 +9,9 @@
     "webpack": "webpack --mode development -w",
     "build": "webpack --mode production"
   },
+  "jest":{
+    "testEnvironment": "jsdom"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rpp34-fec-firebrick/FEC.git"

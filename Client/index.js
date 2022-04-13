@@ -73,7 +73,7 @@ componentDidMount () {
 //     console.log('error', 'error');
 //   })
 
-// }
+}
 
 
   render() {
