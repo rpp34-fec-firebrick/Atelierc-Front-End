@@ -1,5 +1,6 @@
 import React from 'react';
 import Answers from './Answers.js';
+import Axios from 'axios';
 
 class Questions extends React.Component {
   constructor(props) {
@@ -7,10 +8,27 @@ class Questions extends React.Component {
 
     this.state = {
       question: props.question,
+      questionHelpfulness: this.props.question.question_helpfulness,
       helpful: false,
-      reported: props.question.reported,
+      reported: false,
       answers: props.question.answers,
       displayedAnswers: props.question.answers.slice(0, 2)
+    }
+  }
+
+  questionHelpful () {
+    if (!this.state.helpful) {
+      Axios.post('/questionHelpful', {
+        question_id: this.state.question.question_id
+      })
+      .then(() => {
+        this.setState({
+          helpful: true,
+          questionHelpfulness: this.state.questionHelpfulness+1
+        })
+
+      })
+
     }
 
   }
@@ -20,7 +38,7 @@ class Questions extends React.Component {
     return (
       <div key={this.state.question.question_id}>
         <h3>Q: {this.state.question.question_body}</h3>
-        <div>Helpful? <u>Yes</u> ({this.state.question.question_helpfulness})</div>
+        <div>Helpful? | <div onClick={this.questionHelpful.bind(this)}><u>Yes</u></div> ({this.state.questionHelpfulness}) | </div>
         <div><u>Add Answer</u></div>
         <div>
           <h4>A:</h4>

@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const requests = require('../API_Requests/requests.js');
 
+const axios = require('axios');
+
 const app = express();
 const port = 3000;
 
@@ -36,6 +38,16 @@ app.post('/questions', (req, res) => {
       res.send(response);
     }
   })
+});
+
+app.post('/questionHelpful', (req, res) => {
+  console.log('Wow, such helpful question');
+  res.status(201).end();
+});
+
+app.post('/answerHelpful', (req, res) => {
+  console.log('Wow, such helpful answer');
+  res.status(201).end();
 });
 
 app.post('/reviews', (req, res) => {
