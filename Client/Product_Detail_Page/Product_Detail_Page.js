@@ -16,7 +16,7 @@ class Product_Detail_Page extends React.Component {
       relatedProducts: [],
       productData: [],
       styles: {},
-      currentStyleId: {}
+      currentStyleId: {},
     };
   }
 
@@ -49,13 +49,26 @@ class Product_Detail_Page extends React.Component {
     })
   }
 
+  handleStyleClick (event) {
+    var clickedOnStyleId = Number(event.target.name);
+    var currentStyles = this.state.styles.results;
+    for (var i = 0; i < currentStyles.length; i++) {
+      // console.log(currentStyles[i]['style_id'], clickedOnStyleId)
+      if (currentStyles[i]['style_id'] === clickedOnStyleId) {
+        this.setState({['currentStyleId']: currentStyles[i]});
+        break;
+      }
+    }
+  }
+
   render() {
     return (
       <div>
         <ProductInformation data = {this.state.productData} style = {this.state.currentStyleId}/>
         <Features data ={this.state.productData.features}/>
         <ImageWheel images = {this.state.styles}/>
-        <StyleSelection styles = {this.state.styles} styleId = {this.state.currentStyleId}/>
+        <StyleSelection onClick ={this.handleStyleClick.bind(this)}
+         styles = {this.state.styles} styleId = {this.state.currentStyleId}/>
         <AddToCart />
         <Description data = {this.state.productData}/>
         <DescriptionList listItems = {this.state.productData}/>

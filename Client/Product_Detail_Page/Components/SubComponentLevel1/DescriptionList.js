@@ -7,7 +7,7 @@ function DescriptionList (props) {
     <div>
       {(props.listItems.features) ?
         props.listItems.features.map((item) =>
-        <DescriptionListRender item = {item} key = {item.value}/>)
+        <DescriptionListRender item = {item} key = {item.feature}/>)
         : null}
     </div>
   );
