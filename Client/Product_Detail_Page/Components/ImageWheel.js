@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageRender from './ImageRender.js'
+import ImageRender from './SubComponentLevel1/ImageRender.js'
 
 function ImageWheel (props) {
   return (

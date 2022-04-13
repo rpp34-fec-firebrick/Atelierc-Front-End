@@ -44,7 +44,7 @@ class Product_Detail_Page extends React.Component {
         <ImageWheel images = {this.state.styles}/>
         <StyleSelection styles = {this.state.styles} />
         <AddToCart />
-        <Description />
+        <Description data = {this.state.productData}/>
       </div>
     );
   }

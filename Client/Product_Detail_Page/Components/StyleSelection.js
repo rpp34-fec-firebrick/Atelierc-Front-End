@@ -1,5 +1,5 @@
 import React from 'react';
-import StyleRender from './StyleRender.js'
+import StyleRender from './SubComponentLevel1/StyleRender.js'
 
 function StyleSelection (props) {
     return (
