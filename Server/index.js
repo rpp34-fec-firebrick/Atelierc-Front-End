@@ -50,9 +50,33 @@ app.post('/reviews', (req, res) => {
   })
 });
 
+app.post('/relatedProductInfo', (req, res) => {
+  //this is an array of all related product IDs
+  var productIds = req.body.productIds;
+  //console.log('IDSS', productIds);
+  requests.getRelatedProductInfo(productIds, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getRelatedProductInfo Data');
+      res.send(response);
+    }
+  })
+});
 
-
-
+app.post('/relatedProductstyle', (req, res) => {
+  //this is an array of all related product IDs
+  var productIds = req.body.productIds;
+  //console.log('IDSS', productIds);
+  requests.getRelatedProductStyle(productIds, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getRelatedProductStyle Data');
+      res.send(response);
+    }
+  })
+});
 
 
 

@@ -67,6 +67,58 @@ var getAllReviews  = (productId, callback) => {
   })
 }
 
+var getRelatedProductInfo  = (productIds, callback) => {
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  var count = 0;
+  var allRelatedProduct = [];
+  //console.log('IDSSS', productIds)
+  for (var i = 0; i < productIds.length; i++) {
+    var productId = productIds[i];
+    var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`;
+    axios.get(url, {
+      params: {
+        product_id: productId
+      }
+    })
+    .then((response) => {
+      allRelatedProduct.push(response.data);
+      count++;
+      if (count === productIds.length) {
+        callback(null, allRelatedProduct);
+      }
+    }).catch((error) => {
+      callback(error, null)
+    })
+  }
+}
+
+var getRelatedProductStyle  = (productIds, callback) => {
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  var count = 0;
+  var allRelatedProductStyle = [];
+  //console.log('IDSSS', productIds)
+  for (var i = 0; i < productIds.length; i++) {
+    var productId = productIds[i];
+    var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/styles`;
+    axios.get(url, {
+      params: {
+        product_id: productId
+      }
+    })
+    .then((response) => {
+      allRelatedProductStyle.push(response.data);
+      count++;
+      if (count === productIds.length) {
+        callback(null, allRelatedProductStyle);
+      }
+    }).catch((error) => {
+      callback(error, null)
+    })
+  }
+}
+
 module.exports.getAllReviews = getAllReviews;
 module.exports.getAllProducts = getAllProducts;
 module.exports.getAllQuestions = getAllQuestions;
+module.exports.getRelatedProductInfo = getRelatedProductInfo;
+module.exports.getRelatedProductStyle = getRelatedProductStyle;

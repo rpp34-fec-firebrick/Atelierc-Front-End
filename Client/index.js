@@ -15,10 +15,10 @@ class App extends React.Component {
       starValue: 0,
       reviews : [],
       styles: {},
-      relatedProducts : [],
       myOutfit : [],
       questions: [],
       productData: {},
+      relatedProducts: []
     };
 
   }
@@ -62,7 +62,7 @@ componentDidMount () {
   }).catch((error) => {
     console.log('error', 'error');
   })
-
+}
 //   axios.post('/reviews', {
 //     productId: randomIndex,
 //   })
@@ -84,7 +84,11 @@ componentDidMount () {
         <Product_Detail_Page productId={this.state.currentProductId}/>
         <Ratings_Reviews />
         <Questions_Answers />
-        <Related_Items_Comparisons />
+        <Related_Items_Comparisons 
+        productId={this.state.currentProductId} 
+        myOutfit={this.state.myOutfit}
+        relatedProducts={this.state.relatedProducts} 
+        />
       </div>
     );
   }
