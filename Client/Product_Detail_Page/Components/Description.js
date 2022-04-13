@@ -1,5 +1,5 @@
 import React from 'react';
-import DescriptionList from './SubComponentLevel1/DescriptionList.js';
+// import DescriptionList from './SubComponentLevel1/DescriptionList.js';
 class Description extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ class Description extends React.Component {
         Product Description
         {(this.state.productData) ? this.state.productData.description : null}
         Product Features List
-        <DescriptionList listItems = {(this.state.productData) ? this.state.productData : null}/>
+        {/* <DescriptionList listItems = {(this.state.productData) ? this.state.productData : null}/> */}
       </div>
     );
   }

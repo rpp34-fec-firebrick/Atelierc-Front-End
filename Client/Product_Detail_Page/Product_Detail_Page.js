@@ -5,7 +5,7 @@ import AddToCart from './Components/AddToCart.js';
 import ImageWheel from './Components/ImageWheel.js';
 import Description from './Components/Description.js';
 import StyleSelection from './Components/StyleSelection.js';
-
+import DescriptionList from './Components/SubComponentLevel1/DescriptionList.js'
 class Product_Detail_Page extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +45,7 @@ class Product_Detail_Page extends React.Component {
         <StyleSelection styles = {this.state.styles} />
         <AddToCart />
         <Description data = {this.state.productData}/>
+        <DescriptionList listItems = {this.state.productData}/>
       </div>
     );
   }

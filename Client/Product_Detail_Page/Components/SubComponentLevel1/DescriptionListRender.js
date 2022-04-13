@@ -3,7 +3,8 @@ import React from 'react';
 function DescriptionListRender (props) {
   return (
     <div>
-      hi
+      -- {props.item.feature}
+      <br></br>
     </div>
   );
 }
