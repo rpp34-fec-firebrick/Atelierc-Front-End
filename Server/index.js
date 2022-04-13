@@ -41,14 +41,25 @@ app.post('/questions', (req, res) => {
 });
 
 app.post('/questionHelpful', (req, res) => {
-  console.log('Wow, such helpful question');
+  console.log('Wow, such helpful question', req.body);
   res.status(201).end();
+
+  // POST to /qa/questions/question_id/helpful
 });
 
 app.post('/answerHelpful', (req, res) => {
-  console.log('Wow, such helpful answer');
+  console.log('Wow, such helpful answer', req.body);
   res.status(201).end();
+
+  // POST to /qa/answers/answer_id/helpful
 });
+
+app.post('/answerReport', (req, res) => {
+  console.log('Wow, much reported', req.body);
+  res.status(201).end();
+
+  // POST to /qa/answers/answer_id/report
+})
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;

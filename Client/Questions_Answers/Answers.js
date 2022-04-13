@@ -22,12 +22,23 @@ class Answers extends React.Component {
         this.setState({
           helpful: true,
           answerHelpfulness: this.state.answerHelpfulness+1
-        })
+        });
+      })
+    }
+  }
+
+  reportAnswer () {
+    if (!this.state.reported) {
+      Axios.post('/answerReport', {
+        answer_id: this.state.answer.id
+      })
+      .then(() => {
+        this.setState({
+          reported: true
+        });
 
       })
-
     }
-
   }
 
   render () {
@@ -37,10 +48,7 @@ class Answers extends React.Component {
           <b>{this.state.answer.body}</b>
         </div>
         <div>
-          by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date}
-        </div>
-        <div>Helpful? | <div onClick={this.answerHelpful.bind(this)}><u>Yes</u></div> ({this.state.answerHelpfulness}) |</div>
-        <div><u>Report</u></div>
+          by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u>Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u>{!this.state.reported ? 'Report' : 'Reported'}</u></span></div>
       </div>
     )
   }

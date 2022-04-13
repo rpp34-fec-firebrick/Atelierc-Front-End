@@ -50,6 +50,10 @@ class Questions_Answers extends React.Component {
         return b.helpfulness - a.helpfulness;
       })
 
+      if (sellerAnswers.length > 0) {
+        console.log('OH MY GOD THERES ACTUALLY SELLER ANSWERS IN HERE', sellerAnswers)
+      }
+
       return sellerAnswers.concat(orderedAnswers);
     }
 
@@ -70,7 +74,7 @@ class Questions_Answers extends React.Component {
     })
     .then((questions) => {
       this.setState({
-        questions: questions,
+        questions: questions.results,
         displayedQuestions: questions.results.slice(0, 2)
       })
     })
@@ -85,23 +89,36 @@ class Questions_Answers extends React.Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Questions and Answers</h1>
-        <Search searchChange={this.onSearchChange.bind(this)} text={this.state.searchText}/>
-        <div>
-          {this.state.displayedQuestions.map((question) =>
-            <Questions question={question} />
-          )}
+  loadMoreQuestions () {
+    this.setState({
+      displayedQuestions: this.state.questions
+    })
+  }
 
-        </div>
+  render() {
+    if (this.state.questions.length === 0) {
+      return (
+        <h3>There isn't any questions for this product yet</h3>
+      )
+    } else {
+      return (
         <div>
-          <button>More Answered Questions</button>
-          <button>Add a Question +</button>
+          <h1>Questions and Answers</h1>
+          <Search searchChange={this.onSearchChange.bind(this)} text={this.state.searchText}/>
+          <div>
+            {this.state.displayedQuestions.map((question) =>
+              <Questions question={question} />
+            )}
+
+          </div>
+          <div>
+            {this.state.questions.length > 2 ? <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button> : <div></div>}
+            <button>Add a Question +</button>
+          </div>
         </div>
-      </div>
-    );
+      );
+
+    }
   }
 };
 
