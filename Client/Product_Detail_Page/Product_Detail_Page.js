@@ -5,14 +5,18 @@ import AddToCart from './Components/AddToCart.js';
 import ImageWheel from './Components/ImageWheel.js';
 import Description from './Components/Description.js';
 import StyleSelection from './Components/StyleSelection.js';
+import ProductInformation from './Components/ProductInformation.js';
 import DescriptionList from './Components/SubComponentLevel1/DescriptionList.js'
+
+
 class Product_Detail_Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       relatedProducts: [],
       productData: [],
-      styles: {}
+      styles: {},
+      currentStyleId: {}
     };
   }
 
@@ -32,6 +36,14 @@ class Product_Detail_Page extends React.Component {
         if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
         if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
       }
+      // Idenifying the Default Image in Styles
+      var currentStyles = this.state.styles.results;
+      for (var i = 0; i < currentStyles.length; i++) {
+        if (currentStyles[i]['default?'] === true) {
+          this.setState({['currentStyleId']: currentStyles[i]})
+          break;
+        }
+      }
     }).catch((error) => {
       console.log('error', 'error');
     })
@@ -40,9 +52,10 @@ class Product_Detail_Page extends React.Component {
   render() {
     return (
       <div>
+        <ProductInformation data = {this.state.productData} style = {this.state.currentStyleId}/>
         <Features data ={this.state.productData.features}/>
         <ImageWheel images = {this.state.styles}/>
-        <StyleSelection styles = {this.state.styles} />
+        <StyleSelection styles = {this.state.styles} styleId = {this.state.currentStyleId}/>
         <AddToCart />
         <Description data = {this.state.productData}/>
         <DescriptionList listItems = {this.state.productData}/>
