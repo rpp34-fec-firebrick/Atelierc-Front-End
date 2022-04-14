@@ -15,7 +15,7 @@ class Product_Detail_Page extends React.Component {
     this.state = {
       relatedProducts: [],
       productData: [],
-      styles: {},
+      styles: '',
       currentStyleId: {},
     };
   }
