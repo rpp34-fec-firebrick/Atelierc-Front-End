@@ -10,6 +10,7 @@ class Questions_Answers extends React.Component {
     this.state = {
       questions: [],
       displayedQuestions: [],
+      questionIndex: 2,
       searchText: ''
     };
 
@@ -91,14 +92,25 @@ class Questions_Answers extends React.Component {
 
   loadMoreQuestions () {
     // if displayedQuestions and questions length isn't equal
-
+    if (this.state.displayedQuestions.length !== this.state.questions.length) {
       // if questions at slice index plus two isn't equal to undefined
+      if (this.state.questions.slice(0, this.state.questionIndex + 2) !== undefined) {
+        this.setState({
+          displayedQuestions: this.state.questions.slice(0, this.state.questionIndex + 2),
+          questionIndex: this.state.questionIndex + 2
+        });
+        return;
+      } else {
+        console.log('undefined')
+        this.setState({
+          displayedQuestions: this.state.questions,
+          questionIndex: this.state.questionIndex + 1
+        })
+        return;
+      }
 
-        // displayedQuestions is questions at slice index plus two, slice index plus two
 
-      // else
-
-        // displayedQuestions is questions at slice index plus one, slice index plus one
+    }
 
     this.setState({
       displayedQuestions: this.state.questions
@@ -123,7 +135,7 @@ class Questions_Answers extends React.Component {
           </div>
           <div>
             {/* if displayedQuesitons and questions array length are the same, don't display button */}
-            {this.state.questions.length > 2 ? <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button> : <div></div>}
+            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
             <button>Add a Question +</button>
           </div>
         </div>
