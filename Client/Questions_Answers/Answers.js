@@ -49,6 +49,9 @@ class Answers extends React.Component {
         </div>
         <div>
           by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u>Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u>{!this.state.reported ? 'Report' : 'Reported'}</u></span></div>
+          <div>
+            {this.state.answer.photos.length > 0 ? this.state.answer.photos.map((photo) => <img class="answerImage" src={photo} />) : <span></span>}
+          </div>
       </div>
     )
   }

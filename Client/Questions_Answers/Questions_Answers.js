@@ -97,7 +97,9 @@ class Questions_Answers extends React.Component {
           search.push(this.state.questions[i]);
         }
       }
-      console.log(search)
+
+      console.log(search);
+
       this.setState({
         searched: search
       })

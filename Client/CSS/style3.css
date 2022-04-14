@@ -1,1 +1,7 @@
 /* make questionHead and answerHead incline */
+
+.answerImage {
+  max-height: 75px;
+  max-width: 75px;
+  margin: 5px;
+}
