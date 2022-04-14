@@ -90,9 +90,19 @@ class Questions_Answers extends React.Component {
   }
 
   loadMoreQuestions () {
+    // if displayedQuestions and questions length isn't equal
+
+      // if questions at slice index plus two isn't equal to undefined
+
+        // displayedQuestions is questions at slice index plus two, slice index plus two
+
+      // else
+
+        // displayedQuestions is questions at slice index plus one, slice index plus one
+
     this.setState({
       displayedQuestions: this.state.questions
-    })
+    });
   }
 
   render() {
@@ -112,6 +122,7 @@ class Questions_Answers extends React.Component {
 
           </div>
           <div>
+            {/* if displayedQuesitons and questions array length are the same, don't display button */}
             {this.state.questions.length > 2 ? <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button> : <div></div>}
             <button>Add a Question +</button>
           </div>
