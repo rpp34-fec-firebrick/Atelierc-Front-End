@@ -10,6 +10,7 @@ class Questions_Answers extends React.Component {
     this.state = {
       questions: [],
       displayedQuestions: [],
+      searched: [],
       questionIndex: 2,
       searchText: ''
     };
@@ -88,33 +89,36 @@ class Questions_Answers extends React.Component {
     this.setState({
       searchText: e.target.value
     })
+
+    if (this.state.searchText.length + 1 >= 3) {
+      let search = [];
+      for(var i = 0; i < this.state.questions.length; i++) {
+        if (this.state.questions[i].question_body.includes(this.state.searchText)) {
+          search.push(this.state.questions[i]);
+        }
+      }
+      console.log(search)
+      this.setState({
+        searched: search
+      })
+    }
   }
 
   loadMoreQuestions () {
-    // if displayedQuestions and questions length isn't equal
     if (this.state.displayedQuestions.length !== this.state.questions.length) {
-      // if questions at slice index plus two isn't equal to undefined
       if (this.state.questions.slice(0, this.state.questionIndex + 2) !== undefined) {
         this.setState({
           displayedQuestions: this.state.questions.slice(0, this.state.questionIndex + 2),
           questionIndex: this.state.questionIndex + 2
         });
-        return;
+
       } else {
-        console.log('undefined')
         this.setState({
           displayedQuestions: this.state.questions,
           questionIndex: this.state.questionIndex + 1
         })
-        return;
       }
-
-
     }
-
-    this.setState({
-      displayedQuestions: this.state.questions
-    });
   }
 
   render() {
@@ -128,13 +132,10 @@ class Questions_Answers extends React.Component {
           <h1>Questions and Answers</h1>
           <Search searchChange={this.onSearchChange.bind(this)} text={this.state.searchText}/>
           <div>
-            {this.state.displayedQuestions.map((question) =>
-              <Questions question={question} />
-            )}
+            {this.state.searchText.length < 3 ? this.state.displayedQuestions.map((question) => <Questions question={question} /> ) : this.state.searched.map((search) => <Questions question={search} />)}
 
           </div>
           <div>
-            {/* if displayedQuesitons and questions array length are the same, don't display button */}
             {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
             <button>Add a Question +</button>
           </div>
