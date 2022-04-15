@@ -67,6 +67,23 @@ var getAllReviews  = (productId, callback) => {
   })
 }
 
+var getRelatedProductId  = (productId, callback) => {
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/related`, {
+    params: {
+      product_id: productId,
+    }
+  })
+  .then((response) => {
+    const data = response.data;
+    callback(null, data);
+  }).catch((error) => {
+    console.log(`There was an error getting related product ID data: ${error}`);
+    callback(error, null)
+  })
+}
+
 var getRelatedProductInfo  = (productIds, callback) => {
   axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
   var count = 0;
@@ -120,5 +137,6 @@ var getRelatedProductStyle  = (productIds, callback) => {
 module.exports.getAllReviews = getAllReviews;
 module.exports.getAllProducts = getAllProducts;
 module.exports.getAllQuestions = getAllQuestions;
+module.exports.getRelatedProductId = getRelatedProductId;
 module.exports.getRelatedProductInfo = getRelatedProductInfo;
 module.exports.getRelatedProductStyle = getRelatedProductStyle;

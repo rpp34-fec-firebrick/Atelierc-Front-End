@@ -19,46 +19,72 @@ class Related_Items_Comparisons extends React.Component {
     var randomIndex = Math.floor(Math.random() * 1011);
     randomIndex += 64620;
 
-    //this reqesut prodcut details for each related prodcuts 
-    //(category, name, price, sale price, stat(will get it from the parent), image)
-    axios.post('/relatedProductInfo', {
-      productIds: [randomIndex, randomIndex + 1, randomIndex + 2]
+    //this reqesut related prodcut id for each related prodcuts 
+    axios.post('/relatedProductId', {
+      productIds: randomIndex
     })
       .then((response) => {
-        console.log('Successful get all related products Request: ', response.data);
+        console.log('Successful get all related products ID Request: ', response.data);
         return response.data;
       })
-      .then((relatedProductsData) => {
+      .then((relatedProductsId) => {
         this.setState({
-          allRelatedProduct: relatedProductsData
+          relatedProductsID: relatedProductsId
         })
       })
       .catch((error) => {
-        console.log(`There was an error getting all related products data: ${error}`);
+        console.log(`There was an error getting all related products ID: ${error}`);
       })
 
-      axios.post('/relatedProductstyle', {
-        productIds: [randomIndex, randomIndex + 1, randomIndex + 2]
-      })
-        .then((response) => {
-          console.log('Successful get all related products style Request: ', response.data);
-          return response.data;
+      //this reqesut prodcut details for each related prodcuts 
+      //(category, name, price, sale price, stat(will get it from the parent), image)
+      .then(() => {
+        axios.post('/relatedProductInfo', {
+          //productIds: this.state.relatedProductsID
+          productIds: this.state.relatedProductsID
         })
-        .then((relatedProductsStyleData) => {
-          this.setState({
-            allRelatedProductStyle: relatedProductsStyleData
+          .then((response) => {
+            console.log('Successful get all related products information Request: ', response.data);
+            return response.data;
           })
+          .then((relatedProductsData) => {
+            this.setState({
+              allRelatedProduct: relatedProductsData
+            })
+          })
+          .catch((error) => {
+            console.log(`There was an error getting all related products information data: ${error}`);
+          })
+
+        //this reqesut prodcut style for each related prodcuts 
+        axios.post('/relatedProductstyle', {
+          // productIds: this.state.relatedProductsID
+          productIds: this.state.relatedProductsID
         })
-        .catch((error) => {
-          console.log(`There was an error getting all related products style data: ${error}`);
-        })
+          .then((response) => {
+            console.log('Successful get all related products style Request: ', response.data);
+            return response.data;
+          })
+          .then((relatedProductsStyleData) => {
+            this.setState({
+              allRelatedProductStyle: relatedProductsStyleData
+            })
+          })
+          .catch((error) => {
+            console.log(`There was an error getting all related products style data: ${error}`);
+          })
+      })
   }
+
+  // {this.state.relatedProductsID.map((id) =>
+  //   <RelatedProd productId={id} />
+  // )}
 
   render() {
     return (
       <div>
         <h1>Widget4 is related product list and my out fit list</h1>
-        <RelatedProd />
+        <RelatedProd productInfo={this.state.allRelatedProduct} productStyle={this.state.allRelatedProductStyle} />
         <MyOutfit />
       </div>
     );

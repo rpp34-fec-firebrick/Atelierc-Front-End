@@ -18,7 +18,6 @@ class App extends React.Component {
       myOutfit : [],
       questions: [],
       productData: {},
-      relatedProducts: []
     };
 
   }
@@ -87,7 +86,6 @@ componentDidMount () {
         <Related_Items_Comparisons 
         productId={this.state.currentProductId} 
         myOutfit={this.state.myOutfit}
-        relatedProducts={this.state.relatedProducts} 
         />
       </div>
     );
