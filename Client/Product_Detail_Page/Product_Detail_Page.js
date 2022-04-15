@@ -50,7 +50,6 @@ class Product_Detail_Page extends React.Component {
   }
 
   handleStyleClick (event) {
-    console.log('Test')
     var clickedOnStyleId = Number(event.target.name);
     var currentStyles = this.state.styles.results;
     for (var i = 0; i < currentStyles.length; i++) {
@@ -83,7 +82,7 @@ class Product_Detail_Page extends React.Component {
         onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
         <StyleSelection onClick ={this.handleStyleClick.bind(this)}
          styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-        <AddToCart />
+        <AddToCart currentStyle = {this.state.currentStyle}/>
         <Description data = {this.state.productData}/>
         <DescriptionList listItems = {this.state.productData}/>
       </div>
