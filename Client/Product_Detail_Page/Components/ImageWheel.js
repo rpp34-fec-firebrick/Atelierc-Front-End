@@ -13,10 +13,16 @@ class ImageWheel extends React.Component {
   }
   UNSAFE_componentWillReceiveProps (props) {
     // console.log(props)
-    if (typeof props.images !== 'string') {
+    if (typeof props.images !== 'string' && props.styleId?.name) {
       this.setState({['currentSelectedStyle']: props.styleId})
-      this.setState({['wheelPhotos']: props.styleId.photos})
-      this.setState({['handleImageClick']: props.onClick})
+      this.setState({['handleImageClick']: props.onClick});
+      this.setState({['largePhoto']: props.styleId?.photos[0].url})
+      if (props.styleId.photos?.length <= 5) {
+        this.setState({['wheelPhotos']: props.styleId.photos})
+      } else {
+        this.setState({['wheelPhotos']: props.styleId.photos.slice(0, 5)});
+      }
+
     }
   }
 
@@ -27,15 +33,18 @@ class ImageWheel extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.imageWheelClick.bind(this)} name='UP'> UP </button>
-        <br></br>
-        {(this.state.wheelPhotos) ?
-        this.state.wheelPhotos?.map((item) =>
-        <ImageRender onclick = {this.state.handleImageClick}
-        image = {item} key = {item.style_id}/>)
-        : null}
-        <br></br>
-        <button onClick={this.imageWheelClick.bind(this)} name='DOWN'>Down</button>
+        <img className = "CentralPhoto" src = {this.state.largePhoto}/>
+        <div>
+          <button onClick={this.imageWheelClick.bind(this)} name='UP'> UP </button>
+          <br></br>
+          {(this.state.wheelPhotos) ?
+          this.state.wheelPhotos?.map((item) =>
+          <ImageRender onclick = {this.state.handleImageClick}
+          image = {item} key = {item.url}/>)
+          : null}
+          <br></br>
+          <button onClick={this.imageWheelClick.bind(this)} name='DOWN'>Down</button>
+        </div>
       </div>
     );
   }
