@@ -14,8 +14,8 @@ class ImageWheel extends React.Component {
   UNSAFE_componentWillReceiveProps (props) {
     // console.log(props)
     if (typeof props.images !== 'string') {
-      this.setState({['wheelPhotos']: props.images.results})
-      // this.setState({['largePhoto']: props.images.results[0].photos[0].url})
+      this.setState({['currentSelectedStyle']: props.styleId})
+      this.setState({['wheelPhotos']: props.styleId.photos})
       this.setState({['handleImageClick']: props.onClick})
     }
   }

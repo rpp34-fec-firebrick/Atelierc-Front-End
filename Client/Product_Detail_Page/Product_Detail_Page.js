@@ -16,7 +16,7 @@ class Product_Detail_Page extends React.Component {
       relatedProducts: [],
       productData: [],
       styles: '',
-      currentStyleId: {},
+      currentStyle: {},
     };
   }
 
@@ -40,7 +40,7 @@ class Product_Detail_Page extends React.Component {
       var currentStyles = this.state.styles.results;
       for (var i = 0; i < currentStyles.length; i++) {
         if (currentStyles[i]['default?'] === true) {
-          this.setState({['currentStyleId']: currentStyles[i]})
+          this.setState({['currentStyle']: currentStyles[i]})
           break;
         }
       }
@@ -55,7 +55,7 @@ class Product_Detail_Page extends React.Component {
     var currentStyles = this.state.styles.results;
     for (var i = 0; i < currentStyles.length; i++) {
       if (currentStyles[i]['style_id'] === clickedOnStyleId) {
-        this.setState({['currentStyleId']: currentStyles[i]});
+        this.setState({['currentStyle']: currentStyles[i]});
         break;
       }
     }
@@ -66,7 +66,7 @@ class Product_Detail_Page extends React.Component {
     // var currentStyles = this.state.styles.results;
     // for (var i = 0; i < currentStyles.length; i++) {
     //   if (currentStyles[i]['style_id'] === clickedOnStyleId) {
-    //     this.setState({['currentStyleId']: currentStyles[i]});
+    //     this.setState({['currentStyle']: currentStyles[i]});
     //     break;
     //   }
     // }
@@ -77,11 +77,12 @@ class Product_Detail_Page extends React.Component {
   render() {
     return (
       <div>
-        <ProductInformation data = {this.state.productData} style = {this.state.currentStyleId}/>
+        <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
         <Features data ={this.state.productData.features}/>
-        <ImageWheel images = {this.state.styles} onClick ={this.handleImageClick.bind(this)}/>
+        <ImageWheel images = {this.state.styles}
+        onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
         <StyleSelection onClick ={this.handleStyleClick.bind(this)}
-         styles = {this.state.styles} styleId = {this.state.currentStyleId}/>
+         styles = {this.state.styles} styleId = {this.state.currentStyle}/>
         <AddToCart />
         <Description data = {this.state.productData}/>
         <DescriptionList listItems = {this.state.productData}/>
