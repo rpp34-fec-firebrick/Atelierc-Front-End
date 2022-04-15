@@ -168,8 +168,10 @@ class Questions_Answers extends React.Component {
     let entry = this.state;
 
     if (entry.questionBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
+      console.log('empty field');
       canSubmit = false;
     } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
+      console.log('email format bad');
       canSubmit = false;
     } else {
       canSubmit = true;
@@ -217,17 +219,17 @@ class Questions_Answers extends React.Component {
                 <div>
                   Your question:
                 </div>
-                <textarea id="questionBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?"></textarea>
+                <textarea id="questionBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" onChange={(e) => { this.onTextChange(e) }}></textarea>
 
                 <div>
                   Nickname:
-                  <input type="text" id="nickname" maxLength="60" placeholder="Example: jackson11!"/>
+                  <input type="text" id="nickname" maxLength="60" placeholder="Example: jackson11!" onChange={(e) => { this.onTextChange(e) }} />
                 </div>
                 <div>For privacy reasons, do not use your full name or email address.</div>
 
                 <div>
                   E-mail:
-                  <input type="text" id="email" maxLength="60" placeholder="sample@email.com" />
+                  <input type="text" id="email" maxLength="60" placeholder="sample@email.com" onChange={(e) => { this.onTextChange(e) }} />
                 </div>
                 <div>For authentication reasons, you will not be emailed.</div>
                 <button onClick={this.handleQuestionSubmission.bind(this)}>Submit Question</button>
