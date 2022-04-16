@@ -44,35 +44,34 @@ componentDidMount () {
     console.log('error', 'error');
   })
 
-  axios.post('/questions', {
-    productId: randomIndex
-  })
-  .then((response) => {
-    console.log('Successful Question Request')
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+    axios.post('/questions', {
+      productId: randomIndex
+    })
+    .then((response) => {
+      console.log('Successful Question Request')
+    }).catch((error) => {
+      console.log('error', 'error');
+    })
 
-  axios.post('/reviews', {
-    productId: randomIndex,
-  })
-  .then((response) => {
-    console.log('Successful Reviews Request')
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
-}
-//   axios.post('/reviews', {
-//     productId: randomIndex,
-//   })
-//   .then((response) => {
-//     console.log('Successful Reviews Request');
-//     console.log(response.data);
-//   }).catch((error) => {
-//     console.log('error', 'error');
-//   })
+    axios.post('/reviews', {
+      productId: randomIndex,
+    })
+    .then((response) => {
+      console.log('Successful Reviews Request')
+    }).catch((error) => {
+      console.log('error', 'error');
+    })
 
-}
+  //   axios.post('/reviews', {
+  //     productId: randomIndex,
+  //   })
+  //   .then((response) => {
+  //     console.log('Successful Reviews Request');
+  //     console.log(response.data);
+  //   }).catch((error) => {
+  //     console.log('error', 'error');
+  //   })
+  }
 
 
   render() {
