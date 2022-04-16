@@ -6,7 +6,7 @@
   margin: 5px;
 }
 
-#questionModal {
+#questionModal, #answerModal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -19,7 +19,7 @@
   background-color: rgba(0,0,0,0.4);
 }
 
-#qModalContent {
+#questionModalContent, #answerModalContent {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;

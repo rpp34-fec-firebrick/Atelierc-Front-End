@@ -64,6 +64,15 @@ app.post('/answerReport', (req, res) => {
 app.post('/questionSubmit', (req, res) => {
   console.log('Wow, question much recorded', req.body);
   res.status(201).end();
+
+  // POST to /qa/questions
+});
+
+app.post('/answerSubmit', (req, res) => {
+  console.log('Wow, answer much recorded', req.body);
+  res.status(201).end();
+
+  // POST to /qa/questions/question_id/answers
 })
 
 app.post('/reviews', (req, res) => {

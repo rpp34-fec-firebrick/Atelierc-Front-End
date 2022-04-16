@@ -7,10 +7,8 @@ class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
 
-    // QUESTIONS AND ANSWERS NEEDS TO BE PASSED PRODUCT ID FOR BEFORE DEPLOYMENT
-
     this.state = {
-      productId: 0,
+      productId: props.productId,
       questions: [],
       displayedQuestions: [],
       searched: [],
@@ -24,6 +22,8 @@ class Questions_Answers extends React.Component {
 
   }
 
+  // UNSAFE component will recieve props
+
   componentDidMount () {
     var orderAnswers = (ans) => {
       let orderedAnswers = [];
@@ -32,7 +32,6 @@ class Questions_Answers extends React.Component {
       for (var key in ans) {
         if (orderedAnswers.length === 0) {
           if (ans[key].answerer_name === 'Seller') {
-            console.log('Seller!');
             sellerAnswers.push(ans[key]);
 
           } else {
@@ -44,37 +43,24 @@ class Questions_Answers extends React.Component {
           if (ans[key].answerer_name === 'Seller') {
             sellerAnswers.push(ans[key]);
           } else {
-            if (ans[key].helpfulness >= orderedAnswers[0].helpfulness) {
-              orderedAnswers.unshift(ans[key]);
-
-            } else if (ans[key].helpfulness <= orderedAnswers[0].helpfulness) {
-              orderedAnswers.push(ans[key]);
-            }
-
+            orderedAnswers.push(ans[key]);
           }
         }
       }
 
       orderedAnswers.sort((a, b) => {
         return b.helpfulness - a.helpfulness;
-      })
+      });
 
       if (sellerAnswers.length > 0) {
-        console.log('OH MY GOD THERES ACTUALLY SELLER ANSWERS IN HERE', sellerAnswers)
+        console.log('OH MY GOD THERES ACTUALLY SELLER ANSWERS IN HERE', sellerAnswers);
       }
 
       return sellerAnswers.concat(orderedAnswers);
     }
 
-    var randomIndex = Math.floor(Math.random() * 1011);
-    randomIndex += 64620;
-
-    this.setState({
-      productId: randomIndex
-    })
-
     axios.post('/questions', {
-      productId: randomIndex
+      productId: this.state.productId
     })
     .then((response) => {
       console.log('Successful Question Request: ', response.data);
@@ -93,21 +79,19 @@ class Questions_Answers extends React.Component {
     })
     .catch((error) => {
       console.log(`There was an error getting question data: ${error}`);
-    })
+    });
   }
 
   onTextChange (e) {
     this.setState({
       [e.target.id]: e.target.value
-    })
+    });
 
     this.searchUpdate();
-
   }
 
   searchUpdate () {
     // ARRAY SEEMS TO BE BEHIND BY ONE CHARACTER
-
     if (this.state.searchText.length >= 3) {
       let search = [];
       for(var i = 0; i < this.state.questions.length; i++) {
@@ -115,8 +99,6 @@ class Questions_Answers extends React.Component {
           search.push(this.state.questions[i]);
         }
       }
-
-      console.log(search);
 
       this.setState({
         searched: search
@@ -153,12 +135,10 @@ class Questions_Answers extends React.Component {
     } else {
       questionModal.style.display = "none";
 
-
       this.setState({
         modalUp: false
       })
     }
-
 
   }
 
@@ -168,10 +148,8 @@ class Questions_Answers extends React.Component {
     let entry = this.state;
 
     if (entry.questionBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
-      console.log('empty field');
       canSubmit = false;
     } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
-      console.log('email format bad');
       canSubmit = false;
     } else {
       canSubmit = true;
@@ -196,7 +174,36 @@ class Questions_Answers extends React.Component {
   render() {
     if (this.state.questions.length === 0) {
       return (
-        <h3>There isn't any questions for this product yet</h3>
+        <div>
+          <h3>There isn't any questions for this product yet</h3>
+          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
+
+          <div id="questionModal">
+              <div id="questionModalContent">
+                <span className="close" onClick={this.handleQuestionModal.bind(this)}>&times;</span>
+                <h2>Ask Your Question</h2>
+                <h3>About the [Product Here]</h3>
+                <div>
+                  Your question:
+                </div>
+                <textarea id="questionBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" onChange={(e) => { this.onTextChange(e) }}></textarea>
+
+                <div>
+                  Nickname:
+                  <input type="text" id="nickname" maxLength="60" placeholder="Example: jackson11!" onChange={(e) => { this.onTextChange(e) }} />
+                </div>
+                <div>For privacy reasons, do not use your full name or email address.</div>
+
+                <div>
+                  E-mail:
+                  <input type="text" id="email" maxLength="60" placeholder="sample@email.com" onChange={(e) => { this.onTextChange(e) }} />
+                </div>
+                <div>For authentication reasons, you will not be emailed.</div>
+                <button onClick={this.handleQuestionSubmission.bind(this)}>Submit Question</button>
+              </div>
+            </div>
+
+        </div>
       )
     } else {
       return (
@@ -212,7 +219,7 @@ class Questions_Answers extends React.Component {
             <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
             <div id="questionModal">
-              <div id="qModalContent">
+              <div id="questionModalContent">
                 <span className="close" onClick={this.handleQuestionModal.bind(this)}>&times;</span>
                 <h2>Ask Your Question</h2>
                 <h3>About the [Product Here]</h3>
