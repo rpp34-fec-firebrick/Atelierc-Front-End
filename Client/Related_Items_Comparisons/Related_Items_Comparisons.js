@@ -1,5 +1,5 @@
 import React from 'react';
-import RelatedProd from './components/RelatedProd';
+import RelatedCardList from './components/RelatedProd';
 import MyOutfit from './components/MyOutfit';
 import axios from 'axios';
 
@@ -78,13 +78,13 @@ class Related_Items_Comparisons extends React.Component {
 
   // {this.state.relatedProductsID.map((id) =>
   //   <RelatedProd productId={id} />
-  // )}
+  // )}        
+
 
   render() {
     return (
       <div>
-        <h1>Widget4 is related product list and my out fit list</h1>
-        <RelatedProd productInfo={this.state.allRelatedProduct} productStyle={this.state.allRelatedProductStyle} />
+        <RelatedCardList productInfo={this.state.allRelatedProduct} productStyle={this.state.allRelatedProductStyle} />
         <MyOutfit />
       </div>
     );

@@ -1,24 +1,14 @@
+import RelatedCard from './RelatedCard';
 import React from 'react';
 
-class RelatedProd extends React.Component {
-  constructor(props) {
-    super(props);
+var RelatedCardList = (props) => (
 
-    this.state = {
-      productId: props.productInfo
-    }
-  }
+  <div className="Related-Card-list">
+    <h2>Related Product card list:</h2>
+    {props.productInfo.map((product, index) => {
+      return (<RelatedCard product={product} key={index}/>);
+    })}
+  </div>
+);
 
-
-  
-  render () {
-    return (
-      <div>
-        <h2>Related Product goes here.</h2>
-        <h3>{this.props.relatedProduct}</h3>
-      </div>
-    )
-  }
-}
-
-export default RelatedProd;
+export default RelatedCardList;
