@@ -12,7 +12,9 @@ class AddToCartButton extends React.Component {
 
   UNSAFE_componentWillReceiveProps (props) {
     if (props.currentStyle !== null) {
+      console.log(this.state.sizeId)
       this.setState({['sizeId']: props.sizeId});
+      console.log(this.state.sizeId)
       this.setState({['quantity']: props.quantity});
       this.setState({['currentStyle']: props.currentStyle});
     }
