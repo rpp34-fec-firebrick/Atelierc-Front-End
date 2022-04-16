@@ -87,6 +87,18 @@ app.post('/reviews', (req, res) => {
   })
 });
 
+app.post('/reviews/meta', (req, res) => {
+  var productId = req.body.productId;
+  requests.getMetaReviews(productId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Successful getMetaReviews Data');
+      res.send(response);
+    }
+  })
+});
+
 app.post('/relatedProductId', (req, res) => {
   //this is an array of all related product IDs
   var productIds = req.body.productIds;

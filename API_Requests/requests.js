@@ -67,6 +67,23 @@ var getAllReviews  = (productId, callback) => {
   })
 }
 
+var getMetaReviews = (productId, callback) => {
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', {
+    params: {
+      product_id: productId
+    }
+  })
+  .then((response) => {
+    const data = response.data;
+    callback(null, data);
+  }).catch((error) => {
+    console.log(`There was an error getting review meta data: ${error}`);
+    callback(error, null);
+  })
+}
+
 var getRelatedProductId  = (productId, callback) => {
   axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
@@ -140,3 +157,4 @@ module.exports.getAllQuestions = getAllQuestions;
 module.exports.getRelatedProductId = getRelatedProductId;
 module.exports.getRelatedProductInfo = getRelatedProductInfo;
 module.exports.getRelatedProductStyle = getRelatedProductStyle;
+module.exports.getMetaReviews = getMetaReviews;
