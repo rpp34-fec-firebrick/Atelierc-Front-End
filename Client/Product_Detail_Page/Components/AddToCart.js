@@ -8,7 +8,8 @@ class AddToCart extends React.Component {
     super(props);
     this.state = {
       currentStyle : null,
-      selectedSize: null
+      selectedSize: null,
+      selectedQuantity: null
     };
   }
 
@@ -24,12 +25,18 @@ class AddToCart extends React.Component {
     this.setState({['selectedSize']: event.target.value})
   }
 
+  onQuantityChange (event) {
+    console.log('hi')
+    this.setState({['selectedQuantity']: event.target.value})
+  }
+
   render() {
     return (
       <div>
         <SizeSelector currentStyle={this.state.currentStyle}
         onChange={this.onSizeChange.bind(this)} selectedSize = {this.state.selectedSize}/>
-        <QuantitySelector currentStyle={this.state.currentStyle}/>
+        <QuantitySelector currentStyle={this.state.currentStyle}
+        onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
         <AddToCartButton/>
       </div>
     );

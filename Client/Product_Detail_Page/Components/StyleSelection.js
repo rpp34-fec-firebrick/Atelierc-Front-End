@@ -8,7 +8,6 @@ class StyleSelection extends React.Component {
       styles : [],
       handleStyleClick : ''
     }
-    // this.handleStyleClick = this.handleStyleClick.bind(this)
   }
   UNSAFE_componentWillReceiveProps (props) {
     if (props !== undefined) {
@@ -16,9 +15,7 @@ class StyleSelection extends React.Component {
       this.setState({['handleStyleClick']: props.onClick})
     }
   }
-  // handleStyleClick (event) {
-  //   console.log(event.target.name)
-  // }
+
 
   render() {
     return (
