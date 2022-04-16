@@ -32,7 +32,7 @@ class QuantitySelector extends React.Component {
     return (
       <div>
         QuantitySelector
-        <label for="size-select">Select your Size!</label>
+        <label for="size-select">Select your Desired Quantity!</label>
         <select name="pets" id="pet-select" onChange={this.state.onQuantityChange}>
           <option value="">--Please choose your size--</option>
         {(this.state.selectedSku !== null) ?
