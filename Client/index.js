@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: 0,
+      currentProductId: Math.floor(Math.random() * 1011) + 64620,
       starValue: 0,
       reviews: [],
       styles: {},
@@ -23,35 +23,36 @@ class App extends React.Component {
   }
 
   // Initial Post Request to the Server
-  componentDidMount() {
-    var randomIndex = Math.floor(Math.random() * 1011);
-    randomIndex += 64620;
-    // var randomIndex = 64620;
-    this.setState({ ['currentProductId']: randomIndex })
-    axios.post('/products', {
-      productId: randomIndex
-    })
-      .then((response) => {
-        console.log('Successful Product Request')
-        //Update State Based on Data
-        //Each if Statement in the for loop is associated with a unique identifier in state
-        for (var i = 0; i < response.data.length; i++) {
-          if (response.data[i].length) this.setState({ ['relatedProducts']: response.data[i] });
-          if (response.data[i].campus !== undefined) this.setState({ ['productData']: response.data[i] });
-          if (response.data[i].results !== undefined) this.setState({ ['styles']: response.data[i] });
-        }
-      }).catch((error) => {
-        console.log('error', 'error');
-      })
+
+componentDidMount () {
+  var randomIndex = Math.floor(Math.random() * 1011)
+  randomIndex += 64620;
+  // var randomIndex = 64620;
+  this.setState({currentProductId: randomIndex});
+  axios.post('/products', {
+    productId: randomIndex
+  })
+  .then((response) => {
+    console.log('Successful Product Request')
+    //Update State Based on Data
+    //Each if Statement in the for loop is associated with a unique identifier in state
+    for (var i = 0; i < response.data.length; i++) {
+      if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
+      if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
+      if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
+    }
+  }).catch((error) => {
+    console.log('error', 'error');
+  })
 
     axios.post('/questions', {
       productId: randomIndex
     })
-      .then((response) => {
-        console.log('Successful Question Request')
-      }).catch((error) => {
-        console.log('error', 'error');
-      })
+    .then((response) => {
+      console.log('Successful Question Request')
+    }).catch((error) => {
+      console.log('error', 'error');
+    })
 
     axios.post('/reviews', {
       productId: randomIndex,
@@ -87,7 +88,7 @@ class App extends React.Component {
         <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId} />
         <Ratings_Reviews />
-        <Questions_Answers />
+        <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
           productId={this.state.currentProductId}
           myOutfit={this.state.myOutfit}
