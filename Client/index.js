@@ -13,9 +13,9 @@ class App extends React.Component {
     this.state = {
       currentProductId: Math.floor(Math.random() * 1011) + 64620,
       starValue: 0,
-      reviews : [],
+      reviews: [],
       styles: {},
-      myOutfit : [],
+      myOutfit: [],
       questions: [],
       productData: {},
     };
@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   // Initial Post Request to the Server
+
 componentDidMount () {
   var randomIndex = Math.floor(Math.random() * 1011)
   randomIndex += 64620;
@@ -56,12 +57,12 @@ componentDidMount () {
     axios.post('/reviews', {
       productId: randomIndex,
     })
-    .then((response) => {
-      console.log('Successful Reviews Request')
-    }).catch((error) => {
-      console.log('error', 'error');
-    })
-
+      .then((response) => {
+        console.log('Successful Reviews Request')
+      }).catch((error) => {
+        console.log('error', 'error');
+      })
+  }
   //   axios.post('/reviews', {
   //     productId: randomIndex,
   //   })
@@ -71,20 +72,27 @@ componentDidMount () {
   //   }).catch((error) => {
   //     console.log('error', 'error');
   //   })
-  }
 
+  // }
+
+  //this click function handle related prodcut card click and update the current prodcut id
+  onClickEvent(productId) {
+    console.log('related product name is clicked!!!')
+    this.setState({ currentProductId: productId });
+  }
 
   render() {
     return (
       <div>
         <h1>Hello, world!</h1>
         <h2>It is</h2>
-        <Product_Detail_Page productId={this.state.currentProductId}/>
+        <Product_Detail_Page productId={this.state.currentProductId} />
         <Ratings_Reviews />
         <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
-        productId={this.state.currentProductId}
-        myOutfit={this.state.myOutfit}
+          productId={this.state.currentProductId}
+          myOutfit={this.state.myOutfit}
+          eventHandler={this.onClickEvent.bind(this)}
         />
       </div>
     );
