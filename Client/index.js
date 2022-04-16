@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: Math.floor(Math.random() * 1011) + 64620,
+      currentProductId: Math.floor(Math.random() * 1011) * 64620,
       starValue: 0,
       reviews: [],
       styles: {},
@@ -63,17 +63,6 @@ componentDidMount () {
         console.log('error', 'error');
       })
   }
-  //   axios.post('/reviews', {
-  //     productId: randomIndex,
-  //   })
-  //   .then((response) => {
-  //     console.log('Successful Reviews Request');
-  //     console.log(response.data);
-  //   }).catch((error) => {
-  //     console.log('error', 'error');
-  //   })
-
-  // }
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
@@ -86,7 +75,7 @@ componentDidMount () {
       <div>
         <h1>Hello, world!</h1>
         <h2>It is</h2>
-        <Product_Detail_Page productId={this.state.currentProductId} />
+        <Product_Detail_Page productId={this.state.currentProductId}/>
         <Ratings_Reviews />
         <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
