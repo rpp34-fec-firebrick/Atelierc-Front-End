@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const requests = require('../API_Requests/requests.js');
 
+const axios = require('axios');
+
 const app = express();
 const port = 3000;
 
@@ -37,6 +39,41 @@ app.post('/questions', (req, res) => {
     }
   })
 });
+
+app.post('/questionHelpful', (req, res) => {
+  console.log('Wow, such helpful question', req.body);
+  res.status(201).end();
+
+  // POST to /qa/questions/question_id/helpful
+});
+
+app.post('/answerHelpful', (req, res) => {
+  console.log('Wow, such helpful answer', req.body);
+  res.status(201).end();
+
+  // POST to /qa/answers/answer_id/helpful
+});
+
+app.post('/answerReport', (req, res) => {
+  console.log('Wow, much reported', req.body);
+  res.status(201).end();
+
+  // POST to /qa/answers/answer_id/report
+});
+
+app.post('/questionSubmit', (req, res) => {
+  console.log('Wow, question much recorded', req.body);
+  res.status(201).end();
+
+  // POST to /qa/questions
+});
+
+app.post('/answerSubmit', (req, res) => {
+  console.log('Wow, answer much recorded', req.body);
+  res.status(201).end();
+
+  // POST to /qa/questions/question_id/answers
+})
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;

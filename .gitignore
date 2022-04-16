@@ -1,3 +1,5 @@
 node_modules
 Auth.js
 package-lock
+dist/main.js
+main.js

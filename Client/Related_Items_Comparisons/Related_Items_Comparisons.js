@@ -84,7 +84,11 @@ class Related_Items_Comparisons extends React.Component {
   render() {
     return (
       <div>
-        <RelatedCardList productInfo={this.state.allRelatedProduct} productStyle={this.state.allRelatedProductStyle} />
+        <RelatedCardList 
+        productInfo={this.state.allRelatedProduct} 
+        productStyle={this.state.allRelatedProductStyle} 
+        eventHandler={this.props.eventHandler}
+        />
         <MyOutfit />
       </div>
     );
