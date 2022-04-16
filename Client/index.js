@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: 0,
+      currentProductId: Math.floor(Math.random() * 1011) + 64620,
       starValue: 0,
       reviews : [],
       styles: {},
@@ -24,10 +24,10 @@ class App extends React.Component {
 
   // Initial Post Request to the Server
 componentDidMount () {
-  var randomIndex = Math.floor(Math.random() * 1011);
+  var randomIndex = Math.floor(Math.random() * 1011)
   randomIndex += 64620;
   // var randomIndex = 64620;
-  this.setState({['currentProductId']: randomIndex})
+  this.setState({currentProductId: randomIndex});
   axios.post('/products', {
     productId: randomIndex
   })
@@ -72,7 +72,7 @@ componentDidMount () {
 //     console.log('error', 'error');
 //   })
 
-// }
+}
 
 
   render() {
@@ -82,9 +82,9 @@ componentDidMount () {
         <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId}/>
         <Ratings_Reviews />
-        <Questions_Answers />
-        <Related_Items_Comparisons 
-        productId={this.state.currentProductId} 
+        <Questions_Answers productId={this.state.currentProductId}/>
+        <Related_Items_Comparisons
+        productId={this.state.currentProductId}
         myOutfit={this.state.myOutfit}
         />
       </div>
