@@ -1,6 +1,8 @@
 import React from 'react';
-import Answers from './Answers.js';
 import Axios from 'axios';
+
+import Answers from './Answers.js';
+import Modal from './Modal.js';
 
 class Questions extends React.Component {
   constructor(props) {
@@ -130,33 +132,7 @@ class Questions extends React.Component {
 
         </div>
 
-        <div id="answerModal">
-            <div id="answerModalContent">
-              <span className="close" onClick={this.handleAnswerModal.bind(this)}>&times;</span>
-              <h2>Submit Your Answer</h2>
-              <h3>[PRODUCT NAME]: [QUESTION BODY]</h3>
-              <div>
-                Your answer:
-              </div>
-              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" onChange={(e) => { this.handleTextChange(e) }}></textarea>
-
-              <div>
-                Nickname:
-                <input type="text" id="nickname" maxLength="60" placeholder="Example: jack543!" onChange={(e) => { this.handleTextChange(e) }} />
-              </div>
-              <div>For privacy reasons, do not use your full name or email address.</div>
-
-              <div>
-                E-mail:
-                <input type="text" id="email" maxLength="60" placeholder="Example: jack@email.com" onChange={(e) => { this.handleTextChange(e) }} />
-              </div>
-              <div>For authentication reasons, you will not be emailed.</div>
-
-              <div>ADD PICTURE UPLOADER HERE</div>
-
-              <button onClick={this.handleAnswerModal.bind(this)}>Submit Question</button>
-            </div>
-          </div>
+        <Modal type={'answer'} product={this.props.product} question={this.state.question.question_body} modalUp={this.handleAnswerModal.bind(this)} textChange={this.handleTextChange.bind(this)} submit={this.handleAnswerSubmission.bind(this)} />
 
       </div>
     )

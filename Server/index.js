@@ -3,6 +3,7 @@ const express = require('express');
 const requests = require('../API_Requests/requests.js');
 
 const axios = require('axios');
+const AUTH = require('../Auth.js');
 
 const app = express();
 const port = 3000;
@@ -39,6 +40,20 @@ app.post('/questions', (req, res) => {
     }
   })
 });
+
+app.post('/productsForQuestions', (req, res) => {
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+
+  console.log(req.body);
+
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.body.productId}`)
+  .then((response) => {
+    res.send(response.data.name);
+  })
+  .catch((err) => {
+    console.log(`Error getting product data: ${err}`)
+  })
+})
 
 app.post('/questionHelpful', (req, res) => {
   console.log('Wow, such helpful question', req.body);
