@@ -175,7 +175,11 @@ class Questions_Answers extends React.Component {
       })
       .then(() => {
         // add another then block that calls componentDidMount to update questions
-        this.handleQuestionModal();
+        this.setState({
+          questionBody: '',
+          nickname: '',
+          email: ''
+        }, this.handleQuestionModal());
       })
     } else {
       alert(`Couldn't submit your quesiton. Either a field was left blank or the email is in an incorrect format.`);
@@ -206,7 +210,7 @@ class Questions_Answers extends React.Component {
             {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
             <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
-            <Modal modalUp={this.handleQuestionModal.bind(this)} textChange={this.onTextChange.bind(this)} submit={this.handleQuestionSubmission.bind(this)} product={this.state.productName} type={'question'} />
+            <Modal type={'question'} product={this.state.productName} name={this.state.nickname} email={this.state.email} body={this.state.questionBody} modalUp={this.handleQuestionModal.bind(this)} textChange={this.onTextChange.bind(this)} submit={this.handleQuestionSubmission.bind(this)} />
 
           </div>
         </div>

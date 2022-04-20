@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 import Answers from './Answers.js';
 import Modal from './Modal.js';
@@ -19,13 +19,14 @@ class Questions extends React.Component {
       modalUp: false,
       answerBody: '',
       nickname: '',
-      email: ''
+      email: '',
+      photos: []
     }
   }
 
   questionHelpful () {
     if (!this.state.helpful) {
-      Axios.post('/questionHelpful', {
+      axios.post('/questionHelpful', {
         question_id: this.state.question.question_id
       })
       .then(() => {
@@ -82,7 +83,7 @@ class Questions extends React.Component {
 
     let entry = this.state;
 
-    if (entry.questionBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
+    if (entry.answerBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
       console.log('empty field');
       canSubmit = false;
     } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
@@ -94,17 +95,22 @@ class Questions extends React.Component {
 
     if (canSubmit) {
       axios.post('/answerSubmit', {
-        body: entry.questionBody,
+        body: entry.answerBody,
         name: entry.nickname,
         email: entry.email,
-        product_id: entry.productId
+        question_id: entry.question.question_id
       })
       .then(() => {
         // add another then block that calls componentDidMount to update questions
-        this.handleAnswerModal();
+        this.setState({
+          answerBody: '',
+          nickname: '',
+          email: '',
+          photos: []
+        }, this.handleAnswerModal());
       })
     } else {
-      alert(`Couldn't submit your quesiton. Either a field was left blank or the email is in an incorrect format.`);
+      alert(`Couldn't submit your quesiton. Either a field was left blank, the email is in an incorrect format, or an image uploaded was not able to be processed.`);
     }
   }
 
@@ -132,7 +138,7 @@ class Questions extends React.Component {
 
         </div>
 
-        <Modal type={'answer'} product={this.props.product} question={this.state.question.question_body} modalUp={this.handleAnswerModal.bind(this)} textChange={this.handleTextChange.bind(this)} submit={this.handleAnswerSubmission.bind(this)} />
+        <Modal type={'answer'} product={this.props.product} name={this.state.nickname} body={this.state.answerBody} email={this.state.email} question={this.state.question.question_body} modalUp={this.handleAnswerModal.bind(this)} textChange={this.handleTextChange.bind(this)} submit={this.handleAnswerSubmission.bind(this)} />
 
       </div>
     )
