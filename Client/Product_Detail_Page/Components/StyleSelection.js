@@ -6,13 +6,15 @@ class StyleSelection extends React.Component {
     super(props);
     this.state = {
       styles : [],
-      handleStyleClick : ''
+      handleStyleClick : '',
+      currentStyle: null
     }
   }
   UNSAFE_componentWillReceiveProps (props) {
     if (props !== undefined) {
       this.setState({['styles']: props.styles})
       this.setState({['handleStyleClick']: props.onClick})
+      this.setState({['currentStyle']: props.styleId})
     }
   }
 
@@ -20,6 +22,7 @@ class StyleSelection extends React.Component {
   render() {
     return (
       <div>
+        <div>Style > {this.state.currentStyle?.name}</div>
           {(this.state.styles.length !== 0) ?
           this.state.styles.results?.map((style) =>
             <StyleRender onclick = {this.state.handleStyleClick}

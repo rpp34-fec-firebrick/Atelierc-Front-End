@@ -8,7 +8,8 @@ class QuantitySelector extends React.Component {
       currentStyle: null,
       selectedSize: null,
       selectedSku: null,
-      onQuantityChange: null
+      onQuantityChange: null,
+      outOfStock: false,
     };
   }
 
@@ -18,12 +19,19 @@ class QuantitySelector extends React.Component {
       this.setState({['selectedSize']: props.selectedSize})
       this.setState({['onQuantityChange']: props.onChange})
       if (props.selectedSize !== null) {
-        var len = (props.selectedSize > 15) ? 15 : props.selectedSize;
+        var skuValue = props.selectedSize;
+        var quantity = props.currentStyle.skus[skuValue].quantity;
+        var len = (quantity > 15) ? 15 : quantity;
         var arr = [];
         for (var i = 1; i <= len; i++) {
           arr.push(i)
         }
-        this.setState({['selectedSku']: arr});
+        if (arr.length === 0) {
+          this.setState({['outOfStock']: true});
+        } else {
+          this.setState({['selectedSku']: arr});
+          this.setState({['outOfStock']: false});
+        }
       }
     }
   }
@@ -34,8 +42,10 @@ class QuantitySelector extends React.Component {
         QuantitySelector
         <label for="size-select">Select your Desired Quantity!</label>
         <select name="pets" id="pet-select" onChange={this.state.onQuantityChange}>
-          <option value="">--Please choose your size--</option>
-        {(this.state.selectedSku !== null) ?
+          {(this.state.outOfStock) ?
+          <option value="">--Out of Stock!--</option> :
+          <option value="">--Select your Desired Quantity!--</option>}
+        {(this.state.selectedSku !== null && this.state.outOfStock === false) ?
           this.state.selectedSku?.map((item) =>
           <QuantitySelectorRender index = {item} key = {item}/> )
           : null
