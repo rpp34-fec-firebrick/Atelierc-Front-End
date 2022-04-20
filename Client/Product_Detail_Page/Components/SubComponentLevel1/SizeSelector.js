@@ -25,7 +25,6 @@ class SizeSelector extends React.Component {
       } else {
         this.setState({['outOfStock']: false})
       }
-
     }
   }
 
@@ -33,8 +32,8 @@ class SizeSelector extends React.Component {
     return (
       <div>
         SizeSelector
-        <label for="size-select">Select your Size!</label>
-        <select name="pets" id="pet-select" onChange={this.state.onSizeChange}>
+        <label>Select your Size!</label>
+        <select onChange={this.state.onSizeChange}>
         {(this.state.outOfStock) ?
           <option value="">--Out of Stock!--</option> :
           <option value="">--Please choose your size!--</option>}

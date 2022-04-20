@@ -24,7 +24,13 @@ class AddToCart extends React.Component {
   }
 
   onSizeChange (event) {
-    this.setState({['selectedSize']: event.target.value})
+    if (event.target.value === '') {
+      var quantity = (this.state?.selectedQuantity) ? this.state.selectedQuantity : null;
+      this.setState({['selectedQuantity']: quantity});
+      this.setState({['selectedSize']: null})
+    } else {
+      this.setState({['selectedSize']: event.target.value})
+    }
   }
 
   onQuantityChange (event) {
