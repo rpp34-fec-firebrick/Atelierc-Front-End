@@ -3,3 +3,4 @@ Auth.js
 package-lock
 dist/main.js
 main.js
+coverage

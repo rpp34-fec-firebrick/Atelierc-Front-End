@@ -21,27 +21,27 @@ afterEach(cleanup)
    ReactDOM.render(Features, div)
  })
 
- it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(AddToCart, div)
-})
+//  it ("renders without crashing", () => {
+//   var div = document.createElement('div');
+//   ReactDOM.render(AddToCart, div)
+// })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(ImageWheel, div)
-})
+// it ("renders without crashing", () => {
+//   var div = document.createElement('div');
+//   ReactDOM.render(ImageWheel, div)
+// })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(Description, div)
-})
+// it ("renders without crashing", () => {
+//   var div = document.createElement('div');
+//   ReactDOM.render(Description, div)
+// })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(StyleSelection, div)
-})
+// it ("renders without crashing", () => {
+//   var div = document.createElement('div');
+//   ReactDOM.render(StyleSelection, div)
+// })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(ProductInformation, div)
-})
+// it ("renders without crashing", () => {
+//   var div = document.createElement('div');
+//   ReactDOM.render(ProductInformation, div)
+// })
