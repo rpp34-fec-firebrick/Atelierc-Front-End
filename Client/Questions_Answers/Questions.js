@@ -74,40 +74,6 @@ class Questions extends React.Component {
 
   }
 
-  handleAnswerSubmission () {
-    let canSubmit;
-
-    let entry = this.state;
-
-    if (entry.answerBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
-      canSubmit = false;
-    } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
-      canSubmit = false;
-    } else {
-      canSubmit = true;
-    }
-
-    if (canSubmit) {
-      axios.post('/answerSubmit', {
-        body: entry.answerBody,
-        name: entry.nickname,
-        email: entry.email,
-        question_id: entry.question.question_id
-      })
-      .then(() => {
-        // add another then block that calls componentDidMount to update questions
-        this.setState({
-          answerBody: '',
-          nickname: '',
-          email: '',
-          photos: []
-        }, this.handleAnswerModal());
-      })
-    } else {
-      alert(`Couldn't submit your quesiton. Either a field was left blank, the email is in an incorrect format, or an image uploaded was not able to be processed.`);
-    }
-  }
-
 
   render () {
     return (
@@ -122,13 +88,17 @@ class Questions extends React.Component {
         <div>
           {this.state.displayedAnswers.length === 0 ? <h4>There are no answers for this question</h4> : <h4 id="answerHead">A:</h4>}
 
-          {this.state.displayedAnswers.map((answer) =>
-            <Answers answer={answer} />
-
-          )}
+          {this.state.displayedAnswers.map((answer) => <Answers answer={answer} /> )}
         </div>
         <div>
-        {this.state.answers.length > 2 ? (!this.state.expanded ? <div onClick={this.loadMoreAnswers.bind(this)}><b>Load more answers</b></div> : <div onClick={this.collapseAnswers.bind(this)}><b>Collapse answers</b></div>) : <div></div>}
+
+        {
+        this.state.answers.length > 2 ?
+
+        (!this.state.expanded ? <div onClick={this.loadMoreAnswers.bind(this)}><b>Load more answers</b></div> : <div onClick={this.collapseAnswers.bind(this)}><b>Collapse answers</b></div>)
+
+        : <div></div>
+        }
 
         </div>
 

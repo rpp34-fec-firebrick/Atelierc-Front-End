@@ -94,15 +94,26 @@ app.post('/answerSubmit', (req, res) => {
 });
 
 app.post('/uploadImages', upload.array('images', 5), async function (req, res) {
-  const locations = [];
+  const imageURLs = [];
+  const keys = [];
 
   for (var i = 0; i < req.files.length; i++) {
     let result = await s3Helpers.uploadFile(req.files[i])
-    locations.push(result.Location);
+    imageURLs.push(result.Location);
+    keys.push(result.key);
+
   }
-  console.log(locations);
-  res.status(201).json(locations);
-})
+
+  res.status(201).json({ urls: imageURLs, keys: keys });
+});
+
+app.get('/images/:key', (req, res) => {
+  let key = req.params.key;
+
+  let stream = s3Helpers.downloadImage(key);
+
+  stream.pipe(res);
+});
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;

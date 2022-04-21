@@ -5,14 +5,13 @@ class Modal extends React.Component {
   constructor (props) {
     super(props);
 
-    // REFACTOR MODAL TO REDUCE STATE AND METHODS ON OTHER COMPONENTS
-
     this.state = {
       questionBody: '',
       answerBody: 'Hubba',
       nickname: 'Mr. Outfitter',
       email: 'sample@email.com',
-      images: []
+      images: [],
+      locations: []
     }
   }
 
@@ -32,7 +31,12 @@ class Modal extends React.Component {
       }
 
       axios.post('/uploadImages', fd)
-
+      .then((res) => {
+        this.setState({
+          images: res.data.urls,
+          locations: res.data.keys
+        }, () => { console.log(this.state.images, this.state.locations) });
+      })
     } else {
       alert('Please only upload five images.');
     }
@@ -82,6 +86,7 @@ class Modal extends React.Component {
           body: entry.answerBody,
           name: entry.nickname,
           email: entry.email,
+          photos: entry.images,
           question_id: this.props.question.question_id
         })
         .then(() => {
@@ -143,26 +148,28 @@ class Modal extends React.Component {
           {
             this.props.type === 'answer' ?
             <div>
-              <input type="file" accept="image/*" onChange={(e) => { this.setState({ images: e.target.files }, () => { console.log(this.state.images) }) }} multiple/>
+              <input type="file" accept="image/*" onChange={(e) => { this.setState({ images: e.target.files }, () => { this.handleUpload() }) }} multiple/>
             </div>
+
+            : <></>
+          }
+
+          {
+            this.state.locations.length > 0 ?
+            this.state.locations.map((imageKey) => <span><img className="answerImage" src={`/images/${imageKey}`}></img></span>)
 
             :
 
-            <>
-            </>
+            <></>
           }
 
           {
             this.props.type === 'question' ?
-            <>
-              <button onClick={() => { this.handleSubmission('question') }}>Submit Question</button>
-            </>
+            <div><button onClick={() => { this.handleSubmission('question') }}>Submit Question</button></div>
 
             :
 
-            <>
-              <button onClick={() => { this.handleUpload() }}>Submit Answer</button>
-            </>
+            <div><button onClick={() => { this.handleSubmission('answer') }}>Submit Answer</button></div>
           }
         </div>
       </div>

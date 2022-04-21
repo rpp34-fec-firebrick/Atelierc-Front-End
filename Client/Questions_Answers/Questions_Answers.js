@@ -9,7 +9,7 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: props.productId,
+      productId: 0,
       productName: '',
       questions: [],
       displayedQuestions: [],
@@ -17,14 +17,17 @@ class Questions_Answers extends React.Component {
       questionIndex: 2,
       modalUp: false,
       searchText: '',
-      questionBody: '',
-      nickname: '',
-      email: ''
     };
 
   }
 
-  // UNSAFE component will recieve props
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.productId !== prevState.productId) {
+      return { productId: nextProps.productId };
+    } else {
+      return null;
+    }
+  }
 
   componentDidMount () {
     var orderAnswers = (ans) => {
@@ -101,18 +104,18 @@ class Questions_Answers extends React.Component {
 
   searchUpdate () {
     // ARRAY SEEMS TO BE BEHIND BY ONE CHARACTER
-    if (this.state.searchText.length >= 3) {
-      let search = [];
-      for(var i = 0; i < this.state.questions.length; i++) {
-        if (this.state.questions[i].question_body.includes(this.state.searchText)) {
-          search.push(this.state.questions[i]);
-        }
-      }
+    let search = [];
 
-      this.setState({
-        searched: search
-      })
+    for (var i = 0; i < this.state.questions.length; i++) {
+      let currentQuestion = this.state.questions[i].question_body;
+      if (currentQuestion.includes(this.state.searchText)) {
+        search.push(this.state.questions[i]);
+      }
     }
+
+    this.setState({
+      searched: search
+    }, () => { console.log(this.state.searched) });
   }
 
   loadMoreQuestions () {
@@ -151,39 +154,6 @@ class Questions_Answers extends React.Component {
 
   }
 
-  handleQuestionSubmission () {
-    let canSubmit;
-
-    let entry = this.state;
-
-    if (entry.questionBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
-      canSubmit = false;
-    } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
-      canSubmit = false;
-    } else {
-      canSubmit = true;
-    }
-
-    if (canSubmit) {
-      axios.post('/questionSubmit', {
-        body: entry.questionBody,
-        name: entry.nickname,
-        email: entry.email,
-        product_id: entry.productId
-      })
-      .then(() => {
-        // add another then block that calls componentDidMount to update questions
-        this.setState({
-          questionBody: '',
-          nickname: '',
-          email: ''
-        }, this.handleQuestionModal());
-      })
-    } else {
-      alert(`Couldn't submit your quesiton. Either a field was left blank or the email is in an incorrect format.`);
-    }
-  }
-
   render() {
     if (this.state.questions.length === 0) {
       return (
@@ -199,9 +169,9 @@ class Questions_Answers extends React.Component {
       return (
         <div>
           <h1>Questions and Answers</h1>
-          <Search searchChange={this.onTextChange.bind(this)} text={this.state.searchText}/>
+          <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
           <div>
-            {this.state.searchText.length < 3 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} /> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName}/>)}
+            {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} /> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName}/>)}
 
           </div>
           <div>

@@ -25,4 +25,14 @@ const uploadFile = (file) => {
   return s3.upload(uploadParams).promise();
 };
 
+const downloadImage = (key) => {
+  const downloadParams = {
+    Key: key,
+    Bucket: bucketName
+  };
+
+  return s3.getObject(downloadParams).createReadStream();
+};
+
 exports.uploadFile = uploadFile;
+exports.downloadImage = downloadImage;
