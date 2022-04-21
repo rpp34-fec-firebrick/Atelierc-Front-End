@@ -1,11 +1,12 @@
 const path = require('path');
 const express = require('express');
-const requests = require('../API_Requests/requests.js');
-
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const axios = require('axios');
+
+const requests = require('../API_Requests/requests.js');
 const AUTH = require('../Auth.js');
+const s3Helpers = require('../Client/Questions_Answers/s3-helpers.js');
 
 const app = express();
 const port = 3000;
@@ -92,9 +93,15 @@ app.post('/answerSubmit', (req, res) => {
   // POST to /qa/questions/question_id/answers
 });
 
-app.post('/uploadImages', upload.array('images', 5), function (req, res, next) {
-  console.log(req.files);
-  res.status(201).end();
+app.post('/uploadImages', upload.array('images', 5), async function (req, res) {
+  const locations = [];
+
+  for (var i = 0; i < req.files.length; i++) {
+    let result = await s3Helpers.uploadFile(req.files[i])
+    locations.push(result.Location);
+  }
+  console.log(locations);
+  res.status(201).json(locations);
 })
 
 app.post('/reviews', (req, res) => {
