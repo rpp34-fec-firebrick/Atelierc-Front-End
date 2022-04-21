@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const requests = require('../API_Requests/requests.js');
 
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 const axios = require('axios');
 const AUTH = require('../Auth.js');
 
@@ -88,6 +90,10 @@ app.post('/answerSubmit', (req, res) => {
   res.status(201).end();
 
   // POST to /qa/questions/question_id/answers
+});
+
+app.post('/uploadImages', upload.array('images', 5), function (req, res, next) {
+  console.log(req.files);
 })
 
 app.post('/reviews', (req, res) => {

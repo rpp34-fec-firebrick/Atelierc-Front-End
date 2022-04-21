@@ -98,7 +98,10 @@ class Questions_Answers extends React.Component {
       [e.target.id]: e.target.value
     });
 
-    this.searchUpdate();
+    if (e.target.id === 'searchText') {
+      this.searchUpdate();
+
+    }
   }
 
   searchUpdate () {
@@ -193,7 +196,7 @@ class Questions_Answers extends React.Component {
           <h3>There isn't any questions for this product yet</h3>
           <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
-          <Modal modalUp={this.handleQuestionModal.bind(this)} textChange={this.onTextChange.bind(this)} submit={this.handleQuestionSubmission.bind(this)} product={this.state.productName} type={'question'} />
+          <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
 
         </div>
       )
@@ -210,7 +213,7 @@ class Questions_Answers extends React.Component {
             {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
             <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
-            <Modal type={'question'} product={this.state.productName} name={this.state.nickname} email={this.state.email} body={this.state.questionBody} modalUp={this.handleQuestionModal.bind(this)} textChange={this.onTextChange.bind(this)} submit={this.handleQuestionSubmission.bind(this)} />
+            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
 
           </div>
         </div>

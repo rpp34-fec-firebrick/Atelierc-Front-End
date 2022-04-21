@@ -16,11 +16,7 @@ class Questions extends React.Component {
       expanded: false,
       answers: props.question.answers,
       displayedAnswers: props.question.answers.slice(0, 2),
-      modalUp: false,
-      answerBody: '',
-      nickname: '',
-      email: '',
-      photos: []
+      modalUp: false
     }
   }
 
@@ -84,10 +80,8 @@ class Questions extends React.Component {
     let entry = this.state;
 
     if (entry.answerBody.length === 0 || entry.nickname.length === 0 || entry.email.length === 0) {
-      console.log('empty field');
       canSubmit = false;
     } else if (entry.email.indexOf('.') < entry.email.indexOf('@') || entry.email.indexOf('@') === -1) {
-      console.log('email format bad');
       canSubmit = false;
     } else {
       canSubmit = true;
@@ -119,7 +113,7 @@ class Questions extends React.Component {
     return (
       <div key={this.state.question.question_id}>
         <h3 id="questionHead">Q: {this.state.question.question_body}</h3>
-        <span>Helpful? <span><u>Yes</u> ({this.state.questionHelpfulness})</span>
+        <span>Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
 
         &nbsp; | &nbsp;
 
@@ -138,7 +132,7 @@ class Questions extends React.Component {
 
         </div>
 
-        <Modal type={'answer'} product={this.props.product} name={this.state.nickname} body={this.state.answerBody} email={this.state.email} question={this.state.question.question_body} modalUp={this.handleAnswerModal.bind(this)} textChange={this.handleTextChange.bind(this)} submit={this.handleAnswerSubmission.bind(this)} />
+        <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} />
 
       </div>
     )
