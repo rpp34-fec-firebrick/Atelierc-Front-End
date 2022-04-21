@@ -9,7 +9,7 @@ import renderer from "react-test-renderer"
 
 
 
- it ("renders without crashing", () => {
+ it ("Renders Product Detail Page without crashing", () => {
    var div = document.createElement('div');
    ReactDOM.render(<Product_Detail_Page/>, div)
  })
