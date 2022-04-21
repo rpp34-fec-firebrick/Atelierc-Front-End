@@ -96,12 +96,7 @@ class Questions_Answers extends React.Component {
   onTextChange (e) {
     this.setState({
       [e.target.id]: e.target.value
-    });
-
-    if (e.target.id === 'searchText') {
-      this.searchUpdate();
-
-    }
+    }, this.searchUpdate());
   }
 
   searchUpdate () {

@@ -94,6 +94,7 @@ app.post('/answerSubmit', (req, res) => {
 
 app.post('/uploadImages', upload.array('images', 5), function (req, res, next) {
   console.log(req.files);
+  res.status(201).end();
 })
 
 app.post('/reviews', (req, res) => {
