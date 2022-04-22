@@ -17,15 +17,14 @@ class Product_Detail_Page extends React.Component {
       productData: [],
       styles: '',
       currentStyle: {},
+      currentProductId: null,
     };
   }
 
-  componentDidMount () {
-    var randomIndex = Math.floor(Math.random() * 1011);
-    randomIndex += 64620;
-    // var randomIndex = 64620;
+  UNSAFE_componentWillReceiveProps (props) {
+    this.setState({currentProductId: props.productId})
     axios.post('/products', {
-      productId: randomIndex
+      productId: props.productId
     })
     .then((response) => {
       console.log('Successful Product Request')
