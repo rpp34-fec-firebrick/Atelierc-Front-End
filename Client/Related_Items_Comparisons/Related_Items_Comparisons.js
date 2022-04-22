@@ -12,7 +12,6 @@ class Related_Items_Comparisons extends React.Component {
       relatedProductsID: [],
       allRelatedProduct: [],
       allRelatedProductStyle: [],
-      infoToFeedTheCard: []
     };
   }
 
@@ -26,6 +25,9 @@ class Related_Items_Comparisons extends React.Component {
     })
       .then((response) => {
         console.log('Successful get all related products ID Request: ', response.data);
+        response.data.sort(function (a, b) {
+          return a - b;
+        })
         return response.data;
       })
       .then((relatedProductsId) => {
@@ -41,12 +43,13 @@ class Related_Items_Comparisons extends React.Component {
       //(category, name, price, sale price, stat(will get it from the parent), image)
       .then(() => {
         axios.post('/relatedProductInfo', {
-          //productIds: this.state.relatedProductsID
           productIds: this.state.relatedProductsID
         })
           .then((response) => {
-            console.log('Successful get all related products information Request: ', response.data);
-            return response.data;
+            console.log('Successful get all related products information Request: ', response.data)
+            //here we sorted the data based on the ID
+            var data = response.data.sort((a, b) => Number(a.id) - Number(b.id));
+            return data;
           })
           .then((relatedProductsData) => {
             this.setState({
@@ -56,7 +59,8 @@ class Related_Items_Comparisons extends React.Component {
           .catch((error) => {
             console.log(`There was an error getting all related products information data: ${error}`);
           })
-
+      })
+      .then(() => {
         //this reqesut prodcut style for each related prodcuts 
         axios.post('/relatedProductstyle', {
           // productIds: this.state.relatedProductsID
@@ -64,7 +68,9 @@ class Related_Items_Comparisons extends React.Component {
         })
           .then((response) => {
             console.log('Successful get all related products style Request: ', response.data);
-            return response.data;
+            //here we sorted the data based on the ID
+            var data = response.data.sort((a, b) => Number(a.product_id) - Number(b.product_id));
+            return data;
           })
           .then((relatedProductsStyleData) => {
             this.setState({
@@ -85,10 +91,10 @@ class Related_Items_Comparisons extends React.Component {
   render() {
     return (
       <div>
-        <RelatedCardList 
-        productInfo={this.state.allRelatedProduct} 
-        productStyle={this.state.allRelatedProductStyle} 
-        eventHandler={this.props.eventHandler}
+        <RelatedCardList
+          productInfo={this.state.allRelatedProduct}
+          productStyle={this.state.allRelatedProductStyle}
+          eventHandler={this.props.eventHandler}
         />
         <MyOutfit />
       </div>
