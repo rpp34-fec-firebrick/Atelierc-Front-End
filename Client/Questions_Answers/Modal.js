@@ -83,11 +83,13 @@ class Modal extends React.Component {
     } else {
       if (canSubmit) {
         axios.post('/answerSubmit', {
-          body: entry.answerBody,
-          name: entry.nickname,
-          email: entry.email,
-          photos: entry.images,
-          question_id: this.props.question.question_id
+          question_id: this.props.question.question_id,
+          answerContents: {
+            body: entry.answerBody,
+            name: entry.nickname,
+            email: entry.email,
+            photos: entry.images
+          }
         })
         .then(() => {
           // add another then block that calls componentDidMount to update questions

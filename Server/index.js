@@ -10,6 +10,7 @@ const s3Helpers = require('../Client/Questions_Answers/s3-helpers.js');
 
 const app = express();
 const port = 3000;
+const root = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 // const HTML_FILE = path.join(DIST_DIR, 'index.html'); // NEW
 app.use(express.json());
@@ -47,50 +48,75 @@ app.post('/questions', (req, res) => {
 app.post('/productsForQuestions', (req, res) => {
   axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  console.log(req.body);
-
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.body.productId}`)
+  axios.get(`${root}/hr-rpp/products/${req.body.productId}`)
   .then((response) => {
     res.send(response.data.name);
   })
   .catch((err) => {
     console.log(`Error getting product data: ${err}`)
-  })
+  });
 })
 
 app.post('/questionHelpful', (req, res) => {
-  console.log('Wow, such helpful question', req.body);
-  res.status(201).end();
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  // POST to /qa/questions/question_id/helpful
+  axios.put(`${root}/qa/questions/${req.body.question_id}/helpful`)
+  .then((helpfulRes) => {
+    res.status(204).end();
+  })
+  .catch((err) => {
+    console.log(`Error sending question helpfulness: ${err}`);
+  });
 });
 
 app.post('/answerHelpful', (req, res) => {
-  console.log('Wow, such helpful answer', req.body);
-  res.status(201).end();
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  // POST to /qa/answers/answer_id/helpful
+  axios.put(`${root}/qa/answers/${req.body.answer_id}/helpful`)
+  .then((helpfulRes) => {
+    res.status(204).end();
+  })
+  .catch((err) => {
+    console.log(`Error sending answer helpfulness: ${err}`);
+  });
 });
 
 app.post('/answerReport', (req, res) => {
-  console.log('Wow, much reported', req.body);
-  res.status(201).end();
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  // POST to /qa/answers/answer_id/report
+  axios.put(`${root}/qa/answers/${req.body.answer_id}/report`)
+  .then((reportedRes) => {
+    res.status(204).end();
+  })
+  .catch((err) => {
+    console.log(`Error reporting answer: ${err}`);
+  });
 });
 
 app.post('/questionSubmit', (req, res) => {
-  console.log('Wow, question much recorded', req.body);
-  res.status(201).end();
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  // POST to /qa/questions
+  console.log('hi')
+
+  axios.post(`${root}/qa/questions`, req.body)
+  .then((questionCreatedRes) => {
+    res.status(201).end();
+  })
+  .catch((err) => {
+    console.log(`Error sending question: ${err}`);
+  });
 });
 
 app.post('/answerSubmit', (req, res) => {
-  console.log('Wow, answer much recorded', req.body);
-  res.status(201).end();
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
-  // POST to /qa/questions/question_id/answers
+  axios.post(`${root}/qa/questions/${req.body.question_id}/answers`, req.body.answerContents)
+  .then((answerCreatedRes) => {
+    res.status(201).end();
+  })
+  .catch((err) => {
+    console.log(`Error sending answer: ${err}`);
+  });
 });
 
 app.post('/uploadImages', upload.array('images', 5), async function (req, res) {
