@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import '@testing-library/jest-dom';
 import { render, cleanup } from "@testing-library/react";
+import { createRoot } from 'react-dom/client';
 // import "jest-dom/extend-expect";
 import {describe, expect, test} from '@jest/globals'
 import renderer from "react-test-renderer"
@@ -16,32 +17,38 @@ import ProductInformation from './ProductInformation.js';
 
 afterEach(cleanup)
 
- it ("renders without crashing", () => {
-   var div = document.createElement('div');
-   ReactDOM.render(Features, div)
+ it ("Renders Features without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<Features />);
  })
 
- it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(AddToCart, div)
+ it ("Renders AddToCart without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<AddToCart />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(ImageWheel, div)
+it ("Renders ImageWheel without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<ImageWheel />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(Description, div)
+it ("Renders Description without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<Description />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(StyleSelection, div)
+it ("Renders StyleSelection without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<StyleSelection />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(ProductInformation, div)
+it ("Renders ProductInformation without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<ProductInformation />);
 })

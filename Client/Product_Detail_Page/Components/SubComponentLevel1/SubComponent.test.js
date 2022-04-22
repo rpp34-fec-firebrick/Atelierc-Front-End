@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 
 import '@testing-library/jest-dom';
 import { render, cleanup } from "@testing-library/react";
+import { act } from 'react-dom/test-utils';
 // import "jest-dom/extend-expect";
+import { createRoot } from 'react-dom/client';
 import {describe, expect, test} from '@jest/globals'
 import renderer from "react-test-renderer"
 
@@ -18,37 +20,48 @@ import SizeSelector from './SizeSelector.js';
 
 afterEach(cleanup)
 
- it ("renders without crashing", () => {
-   var div = document.createElement('div');
-   ReactDOM.render(AddToCartButton, div)
+ it ("Renders AddToCartButton without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<AddToCartButton />);
  })
 
- it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(ImageRender, div)
+ it ("Renders ImageRender without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  root.render(<ImageRender />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(DescriptionListRender, div)
+it ("Renders DescriptionListRender without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+    root.render(<DescriptionListRender />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(DescriptionList, div)
+it ("Renders DescriptionList without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+    root.render(<DescriptionList />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(StyleRender, div)
+it ("Renders StyleRender without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+    root.render(<StyleRender />);
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(QuantitySelector, div)
+it ("Renders QuantitySelector without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  act(() => {
+    root.render(<QuantitySelector />);
+  });
 })
 
-it ("renders without crashing", () => {
-  var div = document.createElement('div');
-  ReactDOM.render(SizeSelector, div)
+it ("Renders SizeSelector without crashing", () => {
+  const container = document.createElement('div');
+  const root = createRoot(container);
+  act(() => {
+    root.render(<SizeSelector />);
+  });
 })
