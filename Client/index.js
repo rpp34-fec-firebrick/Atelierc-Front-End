@@ -87,7 +87,7 @@ componentDidMount () {
         <h1>Hello, world!</h1>
         <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId} />
-        <Ratings_Reviews />
+        <Ratings_Reviews productId={this.state.currentProductId}/>
         <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
           productId={this.state.currentProductId}

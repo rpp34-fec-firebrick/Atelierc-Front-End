@@ -142,6 +142,18 @@ app.post('/relatedProductstyle', (req, res) => {
   })
 });
 
+app.post('/reviews', (req, res) => {
+  var params = req.body.params;
+  requests.getAllProducts(params, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+    } else {
+      console.log('Review Posted')
+      res.sendStatus(201);
+    }
+  })
+});
+
 
 
 

@@ -8,7 +8,7 @@ class Helpful extends React.Component {
   render() {
     return (
       <div>
-        Hi
+        <p>Helpful?</p>
       </div>
     );
   }

@@ -36,7 +36,7 @@ class Ratings_Reviews extends React.Component {
         <Stars/>
         <Review/>
         <More/>
-        <Add/>
+        <Add productId={this.state.productId}/>
       </div>
     );
   }

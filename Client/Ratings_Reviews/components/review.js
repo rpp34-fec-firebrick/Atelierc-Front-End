@@ -8,7 +8,8 @@ class Review extends React.Component {
   render() {
     return (
       <div>
-        Hi
+        <p>This is the review area text</p>
+        <p>This is the answer portion</p>
       </div>
     );
   }
