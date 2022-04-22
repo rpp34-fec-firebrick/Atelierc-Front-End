@@ -31,6 +31,9 @@ class Questions extends React.Component {
           questionHelpfulness: this.state.questionHelpfulness+1
         })
       })
+      .catch((err) => {
+        console.log(`Error submitting question to server: ${err}`);
+      })
     }
   }
 
@@ -45,12 +48,6 @@ class Questions extends React.Component {
     this.setState({
       expanded: false,
       displayedAnswers: this.state.answers.slice(0, 2)
-    })
-  }
-
-  handleTextChange (e) {
-    this.setState({
-      [e.target.id]: e.target.value
     })
   }
 
@@ -102,7 +99,7 @@ class Questions extends React.Component {
 
         </div>
 
-        <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} />
+        <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} refresh={this.props.refresh} />
 
       </div>
     )

@@ -68,6 +68,9 @@ class Modal extends React.Component {
           product_id: this.props.productId
         })
         .then(() => {
+          this.props.refresh();
+        })
+        .then(() => {
           // add another then block that calls componentDidMount to update questions
           this.setState({
             questionBody: '',
@@ -90,6 +93,9 @@ class Modal extends React.Component {
             email: entry.email,
             photos: entry.images
           }
+        })
+        .then(() => {
+          this.props.refresh();
         })
         .then(() => {
           // add another then block that calls componentDidMount to update questions

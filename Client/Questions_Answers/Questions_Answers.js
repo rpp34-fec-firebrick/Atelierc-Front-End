@@ -9,7 +9,7 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: 0,
+      productId: 64912,
       productName: '',
       questions: [],
       displayedQuestions: [],
@@ -21,13 +21,13 @@ class Questions_Answers extends React.Component {
 
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.productId !== prevState.productId) {
-      return { productId: nextProps.productId };
-    } else {
-      return null;
-    }
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.productId !== prevState.productId) {
+  //     return { productId: nextProps.productId };
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   componentDidMount () {
     var orderAnswers = (ans) => {
@@ -161,26 +161,27 @@ class Questions_Answers extends React.Component {
           <h3>There isn't any questions for this product yet</h3>
           <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
-          <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
+          <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
 
         </div>
       )
     } else {
       return (
         <div>
-          <h1>Questions and Answers</h1>
+          <h4>Questions and Answers</h4>
           <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
-          <div>
-            {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} /> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName}/>)}
+          <div id="QnAContainer">
+            <div>
+              {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
 
+            </div>
+            <div>
+              <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+
+            </div>
           </div>
-          <div>
-            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
-            <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
-
-            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
-
-          </div>
+          {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <></>}
+          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
         </div>
       );
 
