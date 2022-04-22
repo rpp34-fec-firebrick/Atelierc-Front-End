@@ -157,7 +157,7 @@ class Questions_Answers extends React.Component {
   render() {
     if (this.state.questions.length === 0) {
       return (
-        <div>
+        <div className="QnAContainer">
           <h3>There isn't any questions for this product yet</h3>
           <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
@@ -167,21 +167,23 @@ class Questions_Answers extends React.Component {
       )
     } else {
       return (
-        <div>
-          <h4>Questions and Answers</h4>
-          <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
-          <div id="QnAContainer">
-            <div>
-              {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
+        <div className="QnAContainer">
+          <div>
+            <h4>Questions and Answers</h4>
+            <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
+            <div id="questionList">
+              <div>
+                {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
 
-            </div>
-            <div>
-              <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+              </div>
+              <div>
+                <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
 
+              </div>
             </div>
+            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</div>) : <></>}
+            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)}>Add a Question +</div>
           </div>
-          {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <></>}
-          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
         </div>
       );
 

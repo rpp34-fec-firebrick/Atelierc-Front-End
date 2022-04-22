@@ -71,7 +71,6 @@ class Modal extends React.Component {
           this.props.refresh();
         })
         .then(() => {
-          // add another then block that calls componentDidMount to update questions
           this.setState({
             questionBody: '',
             nickname: '',
@@ -98,7 +97,6 @@ class Modal extends React.Component {
           this.props.refresh();
         })
         .then(() => {
-          // add another then block that calls componentDidMount to update questions
           this.setState({
             answerBody: '',
             nickname: '',
@@ -137,7 +135,7 @@ class Modal extends React.Component {
               <div>
                 Your answer:
               </div>
-              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
+              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
             </div>
           }
 

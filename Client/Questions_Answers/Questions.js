@@ -76,14 +76,14 @@ class Questions extends React.Component {
     return (
       <div key={this.state.question.question_id}>
         <h3 id="questionHead">Q: {this.state.question.question_body}</h3>
-        <span>Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
+        <span id="questionLinks">Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
 
         &nbsp; | &nbsp;
 
         <span onClick={this.handleAnswerModal.bind(this)}><u>Add Answer</u></span>
         </span>
         <div>
-          {this.state.displayedAnswers.length === 0 ? <h4>There are no answers for this question</h4> : <h4 id="answerHead">A:</h4>}
+          {this.state.displayedAnswers.length === 0 ? <h4>There are no answers for this question</h4> : <h4 id="answerHead">A: &nbsp;</h4>}
 
           {this.state.displayedAnswers.map((answer) => <Answers answer={answer} /> )}
         </div>
