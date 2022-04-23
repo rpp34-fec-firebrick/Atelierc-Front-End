@@ -10,7 +10,7 @@ class Questions_Answers extends React.Component {
 
     this.state = {
       productId: 64912,
-      productName: '',
+      productName: 'A Pretend Product, but only for now',
       questions: [],
       displayedQuestions: [],
       searched: [],

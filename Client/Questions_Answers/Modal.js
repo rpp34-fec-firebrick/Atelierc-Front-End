@@ -5,8 +5,6 @@ class Modal extends React.Component {
   constructor (props) {
     super(props);
 
-    console.log(props.question);
-
     this.state = {
       questionBody: '',
       answerBody: 'Hubba',
