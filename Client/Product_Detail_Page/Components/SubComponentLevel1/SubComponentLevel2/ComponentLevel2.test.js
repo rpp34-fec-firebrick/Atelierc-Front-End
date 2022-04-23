@@ -25,6 +25,9 @@ it ("Renders QuantitySelectorRender without crashing", () => {
 })
 
 // it ("renders without crashing", () => {
-//   var div = document.createElement('div');
-//   ReactDOM.render(<SizeSelectorRender />, div)
+//   const container = document.createElement('div');
+//   var root = createRoot(container);
+//   act(() => {
+//     root.render(<SizeSelectorRender />);
+//   });
 // })

@@ -35,6 +35,7 @@ afterEach(cleanup)
 it ("Renders DescriptionListRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
+
     root.render(<DescriptionListRender />);
 })
 
