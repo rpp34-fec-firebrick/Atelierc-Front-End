@@ -11,6 +11,7 @@ class Answers extends React.Component {
       answerHelpfulness: props.answer.helpfulness,
       reported: false
     }
+
   }
 
   answerHelpful () {
@@ -49,7 +50,13 @@ class Answers extends React.Component {
             this.state.answer.photos.length > 0 ?
 
             <div className="QnAPadLeft">
-              {this.state.answer.photos.map((photo) => <img className="answerImage" src={photo} />)}
+              {this.state.answer.photos.map((photo) => <img className="answerImage" onClick={(e) => {
+                let srcArr = e.target.src.split('/');
+                for (var i = 0; i < this.state.answer.photos.length; i++) {
+                  if (this.state.answer.photos[i].includes(srcArr[srcArr.length - 1])) {
+                    console.log('Found it!');
+                  }
+                } }} src={photo} />)}
             </div>
 
             :

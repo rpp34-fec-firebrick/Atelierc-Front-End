@@ -52,21 +52,22 @@ class Questions extends React.Component {
   }
 
   handleAnswerModal () {
-    let answerModal = document.getElementById('answerModal');
 
     if (!this.state.modalUp) {
-      answerModal.style.display = "block";
-
       this.setState({
         modalUp: true
-      })
-    } else {
-      answerModal.style.display = "none";
+      }, () => {
+        let answerModal = document.getElementById('answerModal');
+        answerModal.style.display = "block";
+      });
 
+    } else {
+      let answerModal = document.getElementById('answerModal');
+      answerModal.style.display = "none";
 
       this.setState({
         modalUp: false
-      })
+      });
     }
 
   }
@@ -98,8 +99,11 @@ class Questions extends React.Component {
         }
 
         </div>
-
-        <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} refresh={this.props.refresh} />
+        {
+          this.state.modalUp ?
+          <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} refresh={this.props.refresh} />
+          : <></>
+        }
 
       </div>
     )

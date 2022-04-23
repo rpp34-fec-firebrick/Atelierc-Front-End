@@ -160,20 +160,22 @@ class Questions_Answers extends React.Component {
   }
 
   handleQuestionModal () {
-    let questionModal = document.getElementById('questionModal');
 
     if (!this.state.modalUp) {
-      questionModal.style.display = "block";
 
       this.setState({
         modalUp: true
-      })
+      }, () => {
+        let questionModal = document.getElementById('questionModal');
+        questionModal.style.display = "block";
+      });
     } else {
+      let questionModal = document.getElementById('questionModal');
       questionModal.style.display = "none";
 
       this.setState({
         modalUp: false
-      })
+      });
     }
 
   }
@@ -186,7 +188,11 @@ class Questions_Answers extends React.Component {
           <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
           <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
-          <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+          {
+            this.state.modalUp ?
+            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+            : <></>
+          }
 
         </div>
       )
@@ -202,8 +208,11 @@ class Questions_Answers extends React.Component {
 
               </div>
               <div>
-                <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
-
+                {
+                  this.state.modalUp ?
+                  <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+                  : <></>
+                }
               </div>
             </div>
             {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}><b>MORE ANSWERED QUESTIONS</b></div>) : <></>}

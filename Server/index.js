@@ -110,6 +110,8 @@ app.post('/questionSubmit', (req, res) => {
 app.post('/answerSubmit', (req, res) => {
   axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
+  console.log(req.body);
+
   axios.post(`${root}/qa/questions/${req.body.question_id}/answers`, req.body.answerContents)
   .then((answerCreatedRes) => {
     res.status(201).end();
