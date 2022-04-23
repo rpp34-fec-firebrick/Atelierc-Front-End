@@ -74,7 +74,7 @@ class Product_Detail_Page extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="productDetailPage1">
         <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
         <Features data ={this.state.productData.features}/>
         <ImageWheel images = {this.state.styles}
