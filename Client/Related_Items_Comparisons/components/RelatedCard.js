@@ -24,9 +24,7 @@ class RelatedCard extends React.Component {
         }
         ]
       }
-
     };
-
     this.hideModal = this.hideModal.bind(this);
     this.onCardSelect = this.onCardSelect.bind(this);
     this.onStarSelect = this.onStarSelect.bind(this);
@@ -34,10 +32,50 @@ class RelatedCard extends React.Component {
   }
 
   stateManipulater = () => {
-    this.setState((prevState) => {
-      return { clicked: prevState.clicked + 1 };
-    }, () => {
-      console.log("This line will only get printed after state gets updated");
+    var featureStorage = {};
+    var featureStorageArr = [];
+    var currentFeaturesArr = this.props.currProdInfo.features;
+    var relatedFeaturesArr = this.props.product.features;
+    // console.log('currentFeaturesArr', currentFeaturesArr);
+
+    //Adding current product's feature into the storage
+    for (var i = 0; i < currentFeaturesArr.length; i++) {
+      var currentFeature = currentFeaturesArr[i].feature;
+      var currentValue = currentFeaturesArr[i].value;
+      featureStorage[currentFeature] = [currentValue, null];
+    }
+    
+    //Adding related product's feature into the storage whether it existing or not
+    for (var j = 0; j < relatedFeaturesArr.length; j++) {
+      var relatedFeature = relatedFeaturesArr[j].feature;
+      var relatedValue = relatedFeaturesArr[j].value;
+
+      if (featureStorage[relatedFeature] !== undefined) {
+        featureStorage[relatedFeature][1] = relatedValue;
+      } else {
+        featureStorage[relatedFeature] = [null, relatedValue];
+      }
+    }
+
+    //push each feature into the feature storage array 
+    for (var key in featureStorage) {
+      var featureObj = {
+        currentProdVal: featureStorage[key][0],
+        chara: key,
+        relatedProdVal: featureStorage[key][1]
+      }
+      featureStorageArr.push(featureObj);
+    }
+
+    this.setState(() => {
+      return {
+        prodCharaData:
+        {
+          currentProductName: this.props.currProdInfo.name,
+          relatedProductName: this.props.product.name,
+          charas: featureStorageArr
+        }
+      };
     })
   }
 

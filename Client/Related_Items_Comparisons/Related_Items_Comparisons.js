@@ -32,7 +32,7 @@ class Related_Items_Comparisons extends React.Component {
       })
       .then((currentProductsData) => {
         this.setState({
-          currentProdData: currentProductsData
+          currentProdData: currentProductsData[0]
         })
       })
       .catch((error) => {
