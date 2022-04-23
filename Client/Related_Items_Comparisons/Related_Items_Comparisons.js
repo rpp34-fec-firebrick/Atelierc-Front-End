@@ -2,6 +2,7 @@ import React from 'react';
 import RelatedCardList from './components/RelatedProd';
 import MyOutfit from './components/MyOutfitCard';
 import axios from 'axios';
+// import { acceptsEncodings } from 'express/lib/request';
 
 
 
@@ -9,15 +10,34 @@ class Related_Items_Comparisons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProdData: [],
       relatedProductsID: [],
       allRelatedProduct: [],
-      allRelatedProductStyle: [],
+      allRelatedProductStyle: []
     };
   }
 
   componentDidMount() {
     var randomIndex = Math.floor(Math.random() * 1011);
     randomIndex += 64620;
+
+    //this request the current product info
+    axios.post('/relatedProductInfo', {
+      productIds: [randomIndex]
+    })
+      .then((response) => {
+        console.log('Successful get current product information Request: ', response.data)
+        //here we sorted the data based on the ID
+        return response.data;
+      })
+      .then((currentProductsData) => {
+        this.setState({
+          currentProdData: currentProductsData
+        })
+      })
+      .catch((error) => {
+        console.log(`There was an error getting all related products information data: ${error}`);
+      })
 
     //this reqesut related prodcut id for each related prodcuts 
     axios.post('/relatedProductId', {
@@ -95,6 +115,7 @@ class Related_Items_Comparisons extends React.Component {
           productInfo={this.state.allRelatedProduct}
           productStyle={this.state.allRelatedProductStyle}
           eventHandler={this.props.eventHandler}
+          currProdInfo={this.state.currentProdData}
         />
         <MyOutfit />
       </div>
