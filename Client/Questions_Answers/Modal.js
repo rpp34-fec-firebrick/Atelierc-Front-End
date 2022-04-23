@@ -7,9 +7,9 @@ class Modal extends React.Component {
 
     this.state = {
       questionBody: '',
-      answerBody: 'Hubba',
-      nickname: 'Mr. Outfitter',
-      email: 'sample@email.com',
+      answerBody: '',
+      nickname: '',
+      email: '',
       images: [],
       locations: []
     }
@@ -113,7 +113,7 @@ class Modal extends React.Component {
 
   render () {
     return (
-      <div id={`${this.props.type}Modal`}>
+      <div className="lightText" id={`${this.props.type}Modal`}>
         <div id={`${this.props.type}ModalContent`}>
           <span className="close" onClick={() => { this.props.toggleModal() }}>&times;</span>
           {
@@ -131,34 +131,25 @@ class Modal extends React.Component {
 
             <div>
               <h2>Submit Your Answer</h2>
-              <h3>{this.props.product}: {this.props.question.question_body}</h3>
+              <h3>{this.props.product}: "{this.props.question.question_body}"</h3>
               <div>
                 Your answer:
               </div>
-              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
+              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" placeholder="What would you like to say for this question?" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
             </div>
           }
 
-          <div>
+          <div className="QnAPadTop">
             Nickname:
             <input type="text" id="nickname" maxLength="60" placeholder={this.props.type === 'question' ? 'Example: jackson11!' : 'Example: jack543!'} value={this.state.nickname} onChange={(e) => { this.handleTextChange(e) }} />
           </div>
-          <div>For privacy reasons, do not use your full name or email address.</div>
+          <div id="noticeText">For privacy reasons, do not use your full name or email address.</div>
 
           <div>
             E-mail:
             <input type="email" id="email" maxLength="60" placeholder="sample@email.com" value={this.state.email} onChange={(e) => { this.handleTextChange(e) }} />
           </div>
-          <div>For authentication reasons, you will not be emailed.</div>
-
-          {
-            this.props.type === 'answer' ?
-            <div>
-              <input type="file" accept="image/*" onChange={(e) => { this.setState({ images: e.target.files }, () => { this.handleUpload() }) }} multiple/>
-            </div>
-
-            : <></>
-          }
+          <div id="noticeText">For authentication reasons, you will not be emailed.</div>
 
           {
             this.state.locations.length > 0 ?
@@ -170,12 +161,28 @@ class Modal extends React.Component {
           }
 
           {
+            this.props.type === 'answer' ?
+            <div>
+              <input type="file" accept="image/*"
+              onChange={(e) => { this.setState({ images: e.target.files }, () => { this.handleUpload() }) }}
+              ref={fileUpload => this.fileUpload = fileUpload}
+              style={{display: 'none'}}
+              multiple/>
+              <div className="questionButton" onClick={() => { this.fileUpload.click() }}><b>UPLOAD IMAGES</b></div>
+              <div className="questionButton" onClick={() => { this.handleSubmission('answer') }}><b>SUBMIT ANSWER</b></div>
+            </div>
+
+            : <></>
+          }
+
+
+          {
             this.props.type === 'question' ?
-            <div className="questionButton" onClick={() => { this.handleSubmission('question') }}><b>SUBMIT QUESTION</b></div>
-
+            <div>
+              <div className="questionButton" onClick={() => { this.handleSubmission('question') }}><b>SUBMIT QUESTION</b></div>
+            </div>
             :
-
-            <div className="questionButton" onClick={() => { this.handleSubmission('answer') }}><b>SUBMIT ANSWER</b></div>
+            <></>
           }
         </div>
       </div>

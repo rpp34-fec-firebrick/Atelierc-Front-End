@@ -21,6 +21,22 @@
   width: 50%;
 }
 
+#questionBody, #answerBody {
+  resize: none;
+}
+
+/* border: 1px solid rgb(199, 199, 199); */
+
+.lightText {
+  font-weight: 300;
+}
+
+#noticeText {
+  font-size: 12px;
+  padding-top: 1px;
+  padding-bottom: 10px;
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -54,6 +70,10 @@
 
 #toggleAnswers {
   font-size: 12px;
+}
+
+textarea {
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* ANSWERS */
@@ -123,10 +143,6 @@ span:nth-child(2) {
   font-size: 15px;
 }
 
-/* #searchText[type=text]:focus {
-  border: 1px solid rgb(199, 199, 199);
-} */
-
 /* BUTTONS */
 
 .questionButton {
@@ -146,6 +162,10 @@ span:nth-child(2) {
 }
 
 /* MISC */
+
+.QnAPadTop {
+  padding-top: 10px;
+}
 
 .QnAPadDown {
   padding-bottom: 30px;
