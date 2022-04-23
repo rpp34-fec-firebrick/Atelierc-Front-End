@@ -1,6 +1,7 @@
 node_modules
 Auth.js
 package-lock
-dist/
+dist/main.js
 main.js
 coverage
+

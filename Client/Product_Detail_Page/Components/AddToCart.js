@@ -9,7 +9,8 @@ class AddToCart extends React.Component {
     this.state = {
       currentStyle : null,
       selectedSize: null,
-      selectedQuantity: null
+      selectedQuantity: null,
+      productId: null
     };
   }
 
@@ -18,15 +19,33 @@ class AddToCart extends React.Component {
     // console.log(props)
     if (typeof props.currentStyle?.name === 'string') {
       this.setState({['currentStyle']: props.currentStyle})
+      this.setState({['productId']: props.productId})
     }
   }
 
   onSizeChange (event) {
-    this.setState({['selectedSize']: event.target.value})
+    if (event.target.value === '') {
+      var quantity = (this.state?.selectedQuantity) ? this.state.selectedQuantity : null;
+      this.setState({['selectedQuantity']: quantity});
+      this.setState({['selectedSize']: null})
+    } else {
+      this.setState({['selectedSize']: event.target.value})
+    }
   }
 
   onQuantityChange (event) {
     this.setState({['selectedQuantity']: event.target.value})
+  }
+
+  onAddToBagClick () {
+    console.log('clicked')
+    var data = {
+      sizeId : this.state.selectedSize,
+      quantity : this.state.selectedQuantity,
+      currentStyle: this.state.currentStyle,
+      productId: this.state.productId
+    };
+    // console.log(data)
   }
 
   render() {
@@ -39,6 +58,7 @@ class AddToCart extends React.Component {
         {(this.state.selectedQuantity && this.state.selectedSize) ?
         <AddToCartButton sizeId = {this.state.selectedSize}
         quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
+        onClick={this.onAddToBagClick.bind(this)}
         /> : null
       }
       </div>

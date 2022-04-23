@@ -7,7 +7,8 @@ class SizeSelector extends React.Component {
     this.state = {
       selectedStyle: null,
       selectedSize: null,
-      onSizeChange: null
+      onSizeChange: null,
+      outOfStock: false
     };
   }
 
@@ -16,6 +17,14 @@ class SizeSelector extends React.Component {
       this.setState({['selectedStyle']: props.currentStyle})
       this.setState({['onSizeChange']: props.onChange})
       this.setState({['selectedSize']: props.selectedSize})
+
+      var selectedSku = props.selectedSize;
+      var quantity = props.currentStyle?.skus[selectedSku]?.quantity;
+      if (quantity === 0) {
+        this.setState({['outOfStock']: true});
+      } else {
+        this.setState({['outOfStock']: false})
+      }
     }
   }
 
@@ -23,10 +32,12 @@ class SizeSelector extends React.Component {
     return (
       <div>
         SizeSelector
-        <label for="size-select">Select your Size!</label>
-        <select name="pets" id="pet-select" onChange={this.state.onSizeChange}>
-          <option value="">--Please choose your size--</option>
-          {(this.state.selectedStyle !== null) ?
+        <label>Select your Size!</label>
+        <select onChange={this.state.onSizeChange}>
+        {(this.state.outOfStock) ?
+          <option value="">--Out of Stock!--</option> :
+          <option value="">--Please choose your size!--</option>}
+          {(this.state.selectedStyle !== null && this.state.outOfStock === false) ?
           Object.keys(this.state.selectedStyle?.skus).map((key, index) =>
             <SizeSelectorRender skuInfo = {this.state.selectedStyle?.skus[key]}
             value = {key} key={key}/>)
