@@ -74,16 +74,26 @@ class Product_Detail_Page extends React.Component {
 
   render() {
     return (
-      <div className="productDetailPage1">
-        <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
-        <Features data ={this.state.productData.features}/>
-        <ImageWheel images = {this.state.styles}
-        onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
-        <StyleSelection onClick ={this.handleStyleClick.bind(this)}
-         styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-        <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
-        <Description data = {this.state.productData}/>
-        <DescriptionList listItems = {this.state.productData}/>
+      <div className = "productDetailPage1">
+        <div className = "layout1">
+
+          <div className ='PDPLayout1'>
+            <ImageWheel images = {this.state.styles}
+            onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
+          </div>
+          <div className = "PDPLayout2">
+            <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+            <StyleSelection onClick ={this.handleStyleClick.bind(this)}
+            styles = {this.state.styles} styleId = {this.state.currentStyle}/>
+            <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+          </div>
+
+         </div>
+         <div className = 'layout2'>
+          <Description data = {this.state.productData}/>
+          <DescriptionList listItems = {this.state.productData}/>
+          <Features data ={this.state.productData.features}/>
+         </div>
       </div>
     );
   }
