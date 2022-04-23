@@ -83,7 +83,7 @@ class Questions extends React.Component {
         <span onClick={this.handleAnswerModal.bind(this)}><u>Add Answer</u></span>
         </span>
         <div>
-          {this.state.displayedAnswers.length === 0 ? <h4>There are no answers for this question</h4> : <h4 id="answerHead">A: &nbsp;</h4>}
+          {this.state.displayedAnswers.length === 0 ? <h4 className="QnAPadLeft" id="noAnswers">There are no answers for this question</h4> : <h3 className="QnAPadDown" id="answerHead">A:</h3>}
 
           {this.state.displayedAnswers.map((answer) => <Answers answer={answer} /> )}
         </div>
@@ -92,7 +92,7 @@ class Questions extends React.Component {
         {
         this.state.answers.length > 2 ?
 
-        (!this.state.expanded ? <div onClick={this.loadMoreAnswers.bind(this)}><b>Load more answers</b></div> : <div onClick={this.collapseAnswers.bind(this)}><b>Collapse answers</b></div>)
+        (!this.state.expanded ? <div className="QnAPad" id="toggleAnswers" onClick={this.loadMoreAnswers.bind(this)}><b>LOAD MORE ANSWERS</b></div> : <div className="QnAPad" id="toggleAnswers" onClick={this.collapseAnswers.bind(this)}><b>COLLAPSE ANSWERS</b></div>)
 
         : <div></div>
         }

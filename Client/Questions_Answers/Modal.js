@@ -171,11 +171,11 @@ class Modal extends React.Component {
 
           {
             this.props.type === 'question' ?
-            <div><button onClick={() => { this.handleSubmission('question') }}>Submit Question</button></div>
+            <div className="questionButton" onClick={() => { this.handleSubmission('question') }}><b>SUBMIT QUESTION</b></div>
 
             :
 
-            <div><button onClick={() => { this.handleSubmission('answer') }}>Submit Answer</button></div>
+            <div className="questionButton" onClick={() => { this.handleSubmission('answer') }}><b>SUBMIT ANSWER</b></div>
           }
         </div>
       </div>

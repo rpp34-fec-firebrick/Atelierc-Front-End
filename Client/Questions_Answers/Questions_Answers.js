@@ -30,6 +30,30 @@ class Questions_Answers extends React.Component {
   // }
 
   componentDidMount () {
+    var configureDate = (date) => {
+      let months = {
+        '01': 'January',
+        '02': 'February',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December'
+      };
+
+      date = date.split('-');
+      let day = date[2].split('T')[0];
+      let month = months[date[1]];
+      let year = date[0]
+
+      return `${month} ${day}, ${year}`;
+    };
+
     var orderAnswers = (ans) => {
       let orderedAnswers = [];
       let sellerAnswers = [];
@@ -57,12 +81,12 @@ class Questions_Answers extends React.Component {
         return b.helpfulness - a.helpfulness;
       });
 
-      if (sellerAnswers.length > 0) {
-        console.log('OH MY GOD THERES ACTUALLY SELLER ANSWERS IN HERE', sellerAnswers);
-      }
+      orderedAnswers.forEach((answer) => {
+        answer.date = configureDate(answer.date);
+      });
 
       return sellerAnswers.concat(orderedAnswers);
-    }
+    };
 
     axios.post('/questions', {
       productId: this.state.productId
@@ -157,8 +181,9 @@ class Questions_Answers extends React.Component {
   render() {
     if (this.state.questions.length === 0) {
       return (
-        <div className="QnAContainer">
-          <h3>There isn't any questions for this product yet</h3>
+        <div className="QnAContainer color">
+          <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
+          <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
           <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
 
           <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
@@ -167,9 +192,9 @@ class Questions_Answers extends React.Component {
       )
     } else {
       return (
-        <div className="QnAContainer">
+        <div className="QnAContainer color">
           <div>
-            <h4>Questions and Answers</h4>
+            <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
             <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
             <div id="questionList">
               <div>
@@ -181,8 +206,8 @@ class Questions_Answers extends React.Component {
 
               </div>
             </div>
-            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</div>) : <></>}
-            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)}>Add a Question +</div>
+            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}><b>MORE ANSWERED QUESTIONS</b></div>) : <></>}
+            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)}><b>ADD A QUESTION +</b></div>
           </div>
         </div>
       );
