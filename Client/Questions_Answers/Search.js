@@ -12,8 +12,8 @@ class Search extends React.Component {
 
   render () {
     return (
-      <div>
-        <input type="text" id="searchText" onChange={this.props.searchChange} placeholder="Have a question? Search for answers..." value={this.props.text} />
+      <div className="QnAPadDown">
+        <input type="text" id="searchText" onChange={this.props.searchChange} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." value={this.props.text} />
       </div>
     )
   }

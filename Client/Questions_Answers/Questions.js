@@ -31,6 +31,9 @@ class Questions extends React.Component {
           questionHelpfulness: this.state.questionHelpfulness+1
         })
       })
+      .catch((err) => {
+        console.log(`Error submitting question to server: ${err}`);
+      })
     }
   }
 
@@ -48,28 +51,23 @@ class Questions extends React.Component {
     })
   }
 
-  handleTextChange (e) {
-    this.setState({
-      [e.target.id]: e.target.value
-    })
-  }
-
   handleAnswerModal () {
-    let answerModal = document.getElementById('answerModal');
 
     if (!this.state.modalUp) {
-      answerModal.style.display = "block";
-
       this.setState({
         modalUp: true
-      })
-    } else {
-      answerModal.style.display = "none";
+      }, () => {
+        let answerModal = document.getElementById('answerModal');
+        answerModal.style.display = "block";
+      });
 
+    } else {
+      let answerModal = document.getElementById('answerModal');
+      answerModal.style.display = "none";
 
       this.setState({
         modalUp: false
-      })
+      });
     }
 
   }
@@ -79,14 +77,14 @@ class Questions extends React.Component {
     return (
       <div key={this.state.question.question_id}>
         <h3 id="questionHead">Q: {this.state.question.question_body}</h3>
-        <span>Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
+        <span id="questionLinks">Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
 
         &nbsp; | &nbsp;
 
         <span onClick={this.handleAnswerModal.bind(this)}><u>Add Answer</u></span>
         </span>
         <div>
-          {this.state.displayedAnswers.length === 0 ? <h4>There are no answers for this question</h4> : <h4 id="answerHead">A:</h4>}
+          {this.state.displayedAnswers.length === 0 ? <h4 className="QnAPadLeft" id="noAnswers">There are no answers for this question</h4> : <h3 className="QnAPadDown" id="answerHead">A:</h3>}
 
           {this.state.displayedAnswers.map((answer) => <Answers answer={answer} /> )}
         </div>
@@ -95,14 +93,17 @@ class Questions extends React.Component {
         {
         this.state.answers.length > 2 ?
 
-        (!this.state.expanded ? <div onClick={this.loadMoreAnswers.bind(this)}><b>Load more answers</b></div> : <div onClick={this.collapseAnswers.bind(this)}><b>Collapse answers</b></div>)
+        (!this.state.expanded ? <div className="QnAPad" id="toggleAnswers" onClick={this.loadMoreAnswers.bind(this)}><b>LOAD MORE ANSWERS</b></div> : <div className="QnAPad" id="toggleAnswers" onClick={this.collapseAnswers.bind(this)}><b>COLLAPSE ANSWERS</b></div>)
 
         : <div></div>
         }
 
         </div>
-
-        <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} />
+        {
+          this.state.modalUp ?
+          <Modal type={'answer'} product={this.props.product} question={this.state.question} toggleModal={this.handleAnswerModal.bind(this)} refresh={this.props.refresh} />
+          : <></>
+        }
 
       </div>
     )
