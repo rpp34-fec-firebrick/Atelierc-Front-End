@@ -1,6 +1,6 @@
 import React from 'react';
 
-class MyOutfit extends React.Component {
+class MyOutfitCard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,4 +18,4 @@ class MyOutfit extends React.Component {
   }
 }
 
-export default MyOutfit;
+export default MyOutfitCard;
