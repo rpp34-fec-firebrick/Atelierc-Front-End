@@ -2,52 +2,94 @@ import React from 'react';
 import axios from 'axios';
 import Questions from './Questions.js';
 import Search from './Search.js';
+import Modal from './Modal.js';
 
 class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      productId: 64912,
+      productName: 'A Pretend Product, but only for now',
       questions: [],
       displayedQuestions: [],
-      searchText: ''
+      searched: [],
+      questionIndex: 2,
+      modalUp: false,
+      searchText: '',
     };
 
   }
 
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.productId !== prevState.productId) {
+  //     return { productId: nextProps.productId };
+  //   } else {
+  //     return null;
+  //   }
+  // }
+
   componentDidMount () {
+    var configureDate = (date) => {
+      let months = {
+        '01': 'January',
+        '02': 'February',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December'
+      };
+
+      date = date.split('-');
+      let day = date[2].split('T')[0];
+      let month = months[date[1]];
+      let year = date[0]
+
+      return `${month} ${day}, ${year}`;
+    };
+
     var orderAnswers = (ans) => {
       let orderedAnswers = [];
+      let sellerAnswers = [];
 
       for (var key in ans) {
         if (orderedAnswers.length === 0) {
-          orderedAnswers.push(ans[key]);
+          if (ans[key].answerer_name === 'Seller') {
+            sellerAnswers.push(ans[key]);
+
+          } else {
+            orderedAnswers.push(ans[key]);
+
+          }
 
         } else {
-          if (ans[key].helpfulness >= orderedAnswers[0].helpfulness) {
-            orderedAnswers.unshift(ans[key]);
-
-          } else if (ans[key].helpfulness <= orderedAnswers[0].helpfulness) {
+          if (ans[key].answerer_name === 'Seller') {
+            sellerAnswers.push(ans[key]);
+          } else {
             orderedAnswers.push(ans[key]);
           }
         }
       }
 
-      // if answerer_name === Seller, it needs to be put on the top of the array
-      // maybe that could be done in the top iteration? put sellers into a separate array and then merge it once others have been sorted
-
       orderedAnswers.sort((a, b) => {
         return b.helpfulness - a.helpfulness;
-      })
+      });
 
-      return orderedAnswers;
-    }
+      orderedAnswers.forEach((answer) => {
+        answer.date = configureDate(answer.date);
+      });
 
-    var randomIndex = Math.floor(Math.random() * 1011);
-    randomIndex += 64620;
+      return sellerAnswers.concat(orderedAnswers);
+    };
 
     axios.post('/questions', {
-      productId: randomIndex
+      productId: this.state.productId
     })
     .then((response) => {
       console.log('Successful Question Request: ', response.data);
@@ -60,38 +102,126 @@ class Questions_Answers extends React.Component {
     })
     .then((questions) => {
       this.setState({
-        questions: questions,
+        questions: questions.results,
         displayedQuestions: questions.results.slice(0, 2)
       })
     })
     .catch((error) => {
       console.log(`There was an error getting question data: ${error}`);
+    });
+
+    axios.post('/productsForQuestions', {
+      productId: this.state.productId
+    })
+    .then((productData) => {
+      this.setState({
+        productName: productData.data
+      })
     })
   }
 
-  onSearchChange (e) {
+  onTextChange (e) {
     this.setState({
-      searchText: e.target.value
-    })
+      [e.target.id]: e.target.value
+    }, this.searchUpdate());
+  }
+
+  searchUpdate () {
+    // ARRAY SEEMS TO BE BEHIND BY ONE CHARACTER
+    let search = [];
+
+    for (var i = 0; i < this.state.questions.length; i++) {
+      let currentQuestion = this.state.questions[i].question_body;
+      if (currentQuestion.includes(this.state.searchText)) {
+        search.push(this.state.questions[i]);
+      }
+    }
+
+    this.setState({
+      searched: search
+    }, () => { console.log(this.state.searched) });
+  }
+
+  loadMoreQuestions () {
+    if (this.state.displayedQuestions.length !== this.state.questions.length) {
+      if (this.state.questions.slice(0, this.state.questionIndex + 2) !== undefined) {
+        this.setState({
+          displayedQuestions: this.state.questions.slice(0, this.state.questionIndex + 2),
+          questionIndex: this.state.questionIndex + 2
+        });
+
+      } else {
+        this.setState({
+          displayedQuestions: this.state.questions,
+          questionIndex: this.state.questionIndex + 1
+        })
+      }
+    }
+  }
+
+  handleQuestionModal () {
+
+    if (!this.state.modalUp) {
+
+      this.setState({
+        modalUp: true
+      }, () => {
+        let questionModal = document.getElementById('questionModal');
+        questionModal.style.display = "block";
+      });
+    } else {
+      let questionModal = document.getElementById('questionModal');
+      questionModal.style.display = "none";
+
+      this.setState({
+        modalUp: false
+      });
+    }
+
   }
 
   render() {
-    return (
-      <div>
-        <h1>Questions and Answers</h1>
-        <Search searchChange={this.onSearchChange.bind(this)} text={this.state.searchText}/>
-        <div>
-          {this.state.displayedQuestions.map((question) =>
-            <Questions question={question} />
-          )}
+    if (this.state.questions.length === 0) {
+      return (
+        <div className="QnAContainer color">
+          <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
+          <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
+          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
+
+          {
+            this.state.modalUp ?
+            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+            : <></>
+          }
 
         </div>
-        <div>
-          <button>More Answered Questions</button>
-          <button>Add a Question +</button>
+      )
+    } else {
+      return (
+        <div className="QnAContainer color">
+          <div>
+            <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
+            <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
+            <div id="questionList">
+              <div>
+                {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
+
+              </div>
+              <div>
+                {
+                  this.state.modalUp ?
+                  <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+                  : <></>
+                }
+              </div>
+            </div>
+            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}><b>MORE ANSWERED QUESTIONS</b></div>) : <></>}
+            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)}><b>ADD A QUESTION +</b></div>
+          </div>
         </div>
-      </div>
-    );
+      );
+
+    }
   }
 };
 

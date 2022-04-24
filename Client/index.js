@@ -11,12 +11,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: 0,
+      currentProductId: Math.floor(Math.random() * 1011) * 64620,
       starValue: 0,
-      reviews : [],
+      reviews: [],
       styles: {},
-      relatedProducts : [],
-      myOutfit : [],
+      myOutfit: [],
       questions: [],
       productData: {},
     };
@@ -24,13 +23,14 @@ class App extends React.Component {
   }
 
   // Initial Post Request to the Server
+
 componentDidMount () {
-  var randomIndex = Math.floor(Math.random() * 1011);
+  var randomIndex = Math.floor(Math.random() * 1011)
   randomIndex += 64620;
   // var randomIndex = 64620;
-  this.setState({['currentProductId']: randomIndex})
+  this.setState({currentProductId: randomIndex});
   axios.post('/products', {
-    productId: randomIndex
+    productId: 64219
   })
   .then((response) => {
     console.log('Successful Product Request')
@@ -45,36 +45,30 @@ componentDidMount () {
     console.log('error', 'error');
   })
 
-  axios.post('/questions', {
-    productId: randomIndex
-  })
-  .then((response) => {
-    console.log('Successful Question Request')
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+    axios.post('/questions', {
+      productId: randomIndex
+    })
+    .then((response) => {
+      console.log('Successful Question Request')
+    }).catch((error) => {
+      console.log('error', 'error');
+    })
 
-  axios.post('/reviews', {
-    productId: randomIndex,
-  })
-  .then((response) => {
-    console.log('Successful Reviews Request')
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
+    axios.post('/reviews', {
+      productId: randomIndex,
+    })
+      .then((response) => {
+        console.log('Successful Reviews Request')
+      }).catch((error) => {
+        console.log('error', 'error');
+      })
+  }
 
-//   axios.post('/reviews', {
-//     productId: randomIndex,
-//   })
-//   .then((response) => {
-//     console.log('Successful Reviews Request');
-//     console.log(response.data);
-//   }).catch((error) => {
-//     console.log('error', 'error');
-//   })
-
-// }
-
+  //this click function handle related prodcut card click and update the current prodcut id
+  onClickEvent(productId) {
+    console.log('related product name is clicked!!!')
+    this.setState({ currentProductId: productId });
+  }
 
   render() {
     return (
@@ -83,8 +77,12 @@ componentDidMount () {
         <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId}/>
         <Ratings_Reviews />
-        <Questions_Answers />
-        <Related_Items_Comparisons />
+        <Questions_Answers productId={this.state.currentProductId}/>
+        <Related_Items_Comparisons
+          productId={this.state.currentProductId}
+          myOutfit={this.state.myOutfit}
+          eventHandler={this.onClickEvent.bind(this)}
+        />
       </div>
     );
   }
