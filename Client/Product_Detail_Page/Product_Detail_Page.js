@@ -82,10 +82,16 @@ class Product_Detail_Page extends React.Component {
             onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
           </div>
           <div className = "PDPLayout2">
+            <div className = "Pane2Top">
             <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+              </div>
+            <div className = "Pane2Middle">
             <StyleSelection onClick ={this.handleStyleClick.bind(this)}
             styles = {this.state.styles} styleId = {this.state.currentStyle}/>
+            </div>
+            <div className = "Pane2Bottom">
             <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+            </div>
           </div>
 
          </div>

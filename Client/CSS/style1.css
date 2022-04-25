@@ -12,7 +12,7 @@
 
 .PDPLayout1 {
   border: 5px solid red;
-  flex: 3.5;
+  flex: 3.25;
   width: 200px;
 }
 .PDPLayout2 {
@@ -23,34 +23,61 @@
 .PDPLayout3 {
   border: 5px solid black;
 }
+.Pane2Top {
+  border:5px solid black
+}
+
+.Pane2Middle {
+  border:5px solid red
+}
+
+.Pane2Bottom {
+  border:5px solid green;
+  flex-direction: column;
+  position: relative;
+}
+
+.styleRenderBorder {
+  max-height: 75px;
+  max-width: 75px;
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid black;
+  border-radius: 50%;
+  float: left;
+}
 
 .styleRender {
   max-height: 75px;
   max-width: 75px;
-  border: 2px solid greenyellow;
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  float: left;
+  margin: 5px;
 }
+
 
 .CentralPhoto1 {
-  height: 100px;
-  width: 100px;
+  height: 500px;
+  width: 500px;
+  max-width: 700px;
+  max-height: 700px;
 }
 
-/* .imageRender1 {
-  max-width: 100px;
-  height: auto;
-  border: 5px solid pink;
-}; */
 
 .test {
   height: 15px;
   width: 15px;
 }
 
-/* .imageRender1 test {
-  max-height: 100%;
-  max-width: 100%;
-  border: 5px solid pink;
-}; */
 
 .strike {
   text-decoration: line-through;

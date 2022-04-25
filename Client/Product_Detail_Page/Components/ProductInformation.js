@@ -28,7 +28,11 @@ class ProductInformation extends React.Component {
       <div>
         <br></br>
         Star Rating (To be added)
-        Button to Slide down to Read the reviews
+        <h6>
+          <u>
+            <a href="#RatingsReviews">Read all Reviews</a>
+          </u>
+        </h6>
         <br></br>
         Product Category
         {(this.state.productData) ? this.state.productData.category : null}
