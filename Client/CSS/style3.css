@@ -196,3 +196,7 @@ span:nth-child(2) {
 .color {
   color: #3e3e3e;
 }
+
+.onHover {
+  cursor: pointer;
+}

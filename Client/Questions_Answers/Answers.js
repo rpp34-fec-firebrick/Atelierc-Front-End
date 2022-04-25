@@ -91,7 +91,7 @@ class Answers extends React.Component {
           {this.state.modalUp ? <Photo photo={this.state.photo} togglePhoto={this.handlePhotoModal.bind(this)} /> : <></>}
 
           <div className="QnAPad" id="answerInfo">
-            by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u>Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u>{!this.state.reported ? 'Report' : 'Reported'}</u></span>
+            by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u className="onHover">Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u className="onHover">{!this.state.reported ? 'Report' : 'Reported'}</u></span>
           </div>
         </>
     )
