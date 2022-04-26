@@ -10,6 +10,20 @@
   flex-direction: row;
 }
 
+.layout2 {
+  display:inline-flex;
+  border: 5px solid lawngreen;
+}
+
+.descriptionPane1 {
+  flex: 1;
+  border: 5px solid red;
+}
+.featureListPane2 {
+  flex: 2;
+  border: 5px solid blue;
+}
+
 .PDPLayout1 {
   border: 5px solid red;
   flex: 3.25;
@@ -34,7 +48,6 @@
 .Pane2Bottom {
   border:5px solid green;
   flex-direction: column;
-  position: relative;
 }
 
 .styleRenderBorder {
@@ -82,3 +95,15 @@
 .strike {
   text-decoration: line-through;
 }
+.makeInline {
+  float: left;
+}
+
+/* .verticalLine {
+  border-left: 6px solid green;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+} */

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import Features from './Components/Features.js';
 import AddToCart from './Components/AddToCart.js';
 import ImageWheel from './Components/ImageWheel.js';
 import Description from './Components/Description.js';
@@ -89,16 +88,20 @@ class Product_Detail_Page extends React.Component {
             <StyleSelection onClick ={this.handleStyleClick.bind(this)}
             styles = {this.state.styles} styleId = {this.state.currentStyle}/>
             </div>
-            <div className = "Pane2Bottom">
+            <div className = "Pane2Botton">
             <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
             </div>
           </div>
 
          </div>
-         <div className = 'layout2'>
-          <Description data = {this.state.productData}/>
-          <DescriptionList listItems = {this.state.productData}/>
-          <Features data ={this.state.productData.features}/>
+         <div className = "layout2">
+            <div className = "descriptionPane1">
+              <Description data = {this.state.productData}/>
+            </div>
+            <div className="verticalLine"></div>
+            <div className = "featureListPane2">
+              <DescriptionList listItems = {this.state.productData}/>
+            </div>
          </div>
       </div>
     );

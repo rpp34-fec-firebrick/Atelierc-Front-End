@@ -27,24 +27,23 @@ class ProductInformation extends React.Component {
     return (
       <div>
         <br></br>
+        <div className = "makeInline">
         Star Rating (To be added)
-        <h6>
           <u>
             <a href="#RatingsReviews">Read all Reviews</a>
           </u>
-        </h6>
+        </div>
         <br></br>
-        Product Category
         {(this.state.productData) ? this.state.productData.category : null}
         <br></br>
-        Product Name
+        <h1>
         {(this.state.productData) ? this.state.productData.name : null}
+        </h1>
         <br></br>
-        Product Price
         <div className = {this.state.strikeThrough}>
-        {(this.state.currentSelectedStyle) ? this.state.currentSelectedStyle.original_price : null}
+        ${(this.state.currentSelectedStyle) ? this.state.currentSelectedStyle.original_price : null}
         </div>
-        {this.state.sale_price ? `Our Sale Price is ${this.state.sale_price}`: null}
+        {this.state.sale_price ? `Our Sale Price is $${this.state.sale_price}!`: null}
       </div>
     );
   }
