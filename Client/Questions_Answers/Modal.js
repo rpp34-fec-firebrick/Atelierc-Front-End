@@ -113,7 +113,7 @@ class Modal extends React.Component {
 
   render () {
     return (
-      <div className="lightText" id={`${this.props.type}Modal`}>
+      <div className="lightText" id={`${this.props.type}Modal`} data-testid="modal">
         <div id={`${this.props.type}ModalContent`}>
           <span className="close" onClick={() => { this.props.toggleModal() }}>&times;</span>
           {
@@ -124,7 +124,7 @@ class Modal extends React.Component {
               <div>
                 Your question:
               </div>
-              <textarea id="questionBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" value={this.state.questionBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
+              <textarea id="questionBody" data-testid="questionBody" maxLength="1000" rows="5" cols="33" placeholder="Why did you like the product or not?" value={this.state.questionBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
             </div>
 
             :
@@ -135,19 +135,19 @@ class Modal extends React.Component {
               <div>
                 Your answer:
               </div>
-              <textarea id="answerBody" maxLength="1000" rows="5" cols="33" placeholder="What would you like to say for this question?" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
+              <textarea id="answerBody" data-testid="answerBody" maxLength="1000" rows="5" cols="33" placeholder="What would you like to say for this question?" value={this.state.answerBody} onChange={(e) => { this.handleTextChange(e) }}></textarea>
             </div>
           }
 
           <div className="QnAPadTop">
             Nickname:
-            <input type="text" id="nickname" maxLength="60" placeholder={this.props.type === 'question' ? 'Example: jackson11!' : 'Example: jack543!'} value={this.state.nickname} onChange={(e) => { this.handleTextChange(e) }} />
+            <input type="text" id="nickname" data-testid="nickname" maxLength="60" placeholder={this.props.type === 'question' ? 'Example: jackson11!' : 'Example: jack543!'} value={this.state.nickname} onChange={(e) => { this.handleTextChange(e) }} />
           </div>
           <div id="noticeText">For privacy reasons, do not use your full name or email address.</div>
 
           <div>
             E-mail:
-            <input type="email" id="email" maxLength="60" placeholder="sample@email.com" value={this.state.email} onChange={(e) => { this.handleTextChange(e) }} />
+            <input type="email" id="email" data-testid="email" maxLength="60" placeholder="sample@email.com" value={this.state.email} onChange={(e) => { this.handleTextChange(e) }} />
           </div>
           <div id="noticeText">For authentication reasons, you will not be emailed.</div>
 
@@ -168,8 +168,8 @@ class Modal extends React.Component {
               ref={fileUpload => this.fileUpload = fileUpload}
               style={{display: 'none'}}
               multiple/>
-              <div className="questionButton" onClick={() => { this.fileUpload.click() }}><b>UPLOAD IMAGES</b></div>
-              <div className="questionButton" onClick={() => { this.handleSubmission('answer') }}><b>SUBMIT ANSWER</b></div>
+              <div className="questionButton" data-testid="uploadBtn" onClick={() => { this.fileUpload.click() }}><b>UPLOAD IMAGES</b></div>
+              <div className="questionButton" data-testid="submitAnswer" onClick={() => { this.handleSubmission('answer') }}><b>SUBMIT ANSWER</b></div>
             </div>
 
             : <></>
@@ -179,7 +179,7 @@ class Modal extends React.Component {
           {
             this.props.type === 'question' ?
             <div>
-              <div className="questionButton" onClick={() => { this.handleSubmission('question') }}><b>SUBMIT QUESTION</b></div>
+              <div className="questionButton" data-testid="submitQuestion" onClick={() => { this.handleSubmission('question') }}><b>SUBMIT QUESTION</b></div>
             </div>
             :
             <></>
