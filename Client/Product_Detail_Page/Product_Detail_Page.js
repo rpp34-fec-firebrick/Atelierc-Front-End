@@ -95,6 +95,7 @@ class Product_Detail_Page extends React.Component {
 
          </div>
          <div className = "layout2">
+           <div className = "emptySpace"></div>
             <div className = "descriptionPane1">
               <Description data = {this.state.productData}/>
             </div>

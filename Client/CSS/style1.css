@@ -12,16 +12,19 @@
 
 .layout2 {
   display:inline-flex;
-  border: 5px solid lawngreen;
+}
+.emptySpace {
+  flex: .5;
 }
 
 .descriptionPane1 {
-  flex: 1;
-  border: 5px solid red;
+  flex: 2.75;
+  vertical-align: top;
 }
 .featureListPane2 {
-  flex: 2;
-  border: 5px solid blue;
+  flex: 1;
+  float: right;
+  vertical-align: text-bottom;
 }
 
 .PDPLayout1 {
@@ -85,12 +88,13 @@
   max-height: 700px;
 }
 
-
-.test {
-  height: 15px;
-  width: 15px;
+.productSlogan {
+  font-weight: 700;
 }
 
+.productDescription {
+  font-size: small;
+}
 
 .strike {
   text-decoration: line-through;
@@ -99,11 +103,9 @@
   float: left;
 }
 
-/* .verticalLine {
-  border-left: 6px solid green;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-  top: 0;
-} */
+.verticalLine {
+  border-left: 2px solid rgba(76, 76, 76, 0.447);
+  max-height: 80px;
+  height: 80;
+  position: inherit;
+}
