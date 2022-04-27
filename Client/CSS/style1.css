@@ -1,8 +1,15 @@
 .productDetailPage1 {
-  border: 5px solid black;
   display: flex;
   flex-direction: column;
   margin: 3%;
+}
+
+.pageHeader {
+  margin: auto;
+  width: 90%;
+  padding-top: 0;
+  padding-bottom: 7.5%;
+  background-color: rgba(179, 179, 179, 0.603);
 }
 
 .layout1 {
@@ -28,25 +35,23 @@
 }
 
 .PDPLayout1 {
-  border: 5px solid red;
   flex: 3.25;
   width: 200px;
 }
 .PDPLayout2 {
-  border: 5px solid pink;
   flex: 1;
 }
 
 .PDPLayout3 {
-  border: 5px solid black;
+  border: 0px solid green;
 }
-.Pane2Top {
-  border:5px solid black
-}
+/* .Pane2Top {
+  border: 0px solid green
+} */
 
-.Pane2Middle {
+/* .Pane2Middle {
   border:5px solid red
-}
+} */
 
 .Pane2Bottom {
   border:5px solid green;

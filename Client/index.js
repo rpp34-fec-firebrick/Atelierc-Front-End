@@ -73,8 +73,6 @@ componentDidMount () {
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId}/>
         <div id="RatingsReviews">
         <Ratings_Reviews />

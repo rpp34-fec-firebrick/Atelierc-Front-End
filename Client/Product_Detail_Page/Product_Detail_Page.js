@@ -73,37 +73,40 @@ class Product_Detail_Page extends React.Component {
 
   render() {
     return (
-      <div className = "productDetailPage1">
-        <div className = "layout1">
+      <div>
+        <div className = "pageHeader"></div>
+        <div className = "productDetailPage1">
+          <div className = "layout1">
 
-          <div className ='PDPLayout1'>
-            <ImageWheel images = {this.state.styles}
-            onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
-          </div>
-          <div className = "PDPLayout2">
-            <div className = "Pane2Top">
-            <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+            <div className ='PDPLayout1'>
+              <ImageWheel images = {this.state.styles}
+              onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
+            </div>
+            <div className = "PDPLayout2">
+              <div className = "Pane2Top">
+              <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+                </div>
+              <div className = "Pane2Middle">
+              <StyleSelection onClick ={this.handleStyleClick.bind(this)}
+              styles = {this.state.styles} styleId = {this.state.currentStyle}/>
               </div>
-            <div className = "Pane2Middle">
-            <StyleSelection onClick ={this.handleStyleClick.bind(this)}
-            styles = {this.state.styles} styleId = {this.state.currentStyle}/>
+              <div className = "Pane2Botton">
+              <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+              </div>
             </div>
-            <div className = "Pane2Botton">
-            <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
-            </div>
-          </div>
 
-         </div>
-         <div className = "layout2">
-           <div className = "emptySpace"></div>
-            <div className = "descriptionPane1">
-              <Description data = {this.state.productData}/>
-            </div>
-            <div className="verticalLine"></div>
-            <div className = "featureListPane2">
-              <DescriptionList listItems = {this.state.productData}/>
-            </div>
-         </div>
+          </div>
+          <div className = "layout2">
+            <div className = "emptySpace"></div>
+              <div className = "descriptionPane1">
+                <Description data = {this.state.productData}/>
+              </div>
+              <div className="verticalLine"></div>
+              <div className = "featureListPane2">
+                <DescriptionList listItems = {this.state.productData}/>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }
