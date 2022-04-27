@@ -52,6 +52,13 @@
 /* .Pane2Middle {
   border:5px solid red
 } */
+.generalPhotoDisplay {
+  display: flex;
+  padding: 5px;
+}
+.imageWheel {
+  border: 5px solid red;
+}
 
 .Pane2Bottom {
   border:5px solid green;
@@ -66,10 +73,6 @@
   width: 200px;
   height: 200px;
   overflow: hidden;
-  border-radius: 50%;
-  border: 2px solid black;
-  border-radius: 50%;
-  float: left;
 }
 
 .styleRender {
@@ -93,10 +96,6 @@
   max-height: 700px;
 }
 
-.productSlogan {
-  font-weight: 700;
-}
-
 .productDescription {
   font-size: small;
 }
@@ -107,10 +106,15 @@
 .makeInline {
   float: left;
 }
+.bold {
+  font-weight: 700;
+}
 
 .verticalLine {
   border-left: 2px solid rgba(76, 76, 76, 0.447);
-  max-height: 80px;
+  max-height: 100px;
   height: 80;
   position: inherit;
+  margin-top: 1%;
+  padding-right: 15px;
 }

@@ -17,7 +17,7 @@ class Description extends React.Component {
     return (
       <div>
         <br></br>
-        <div className = "productSlogan">
+        <div className = "bold">
         {(this.state.productData) ? this.state.productData.slogan : null}
         </div>
         <br></br>

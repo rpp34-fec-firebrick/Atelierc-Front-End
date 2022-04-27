@@ -32,9 +32,8 @@ class ImageWheel extends React.Component {
 
   render() {
     return (
-      <div>
-        <img className = "CentralPhoto1" src = {this.state.largePhoto}/>
-        <div>
+      <div className ="generalPhotoDisplay">
+        <div className="imageWheel">
           <button onClick={this.imageWheelClick.bind(this)} name='UP'> UP </button>
           <br></br>
             <div className ='imageRender1'>
@@ -46,6 +45,9 @@ class ImageWheel extends React.Component {
             <br></br>
           </div>
           <button onClick={this.imageWheelClick.bind(this)} name='DOWN'>Down</button>
+        </div>
+        <div>
+          <img className = "CentralPhoto1" src = {this.state.largePhoto}/>
         </div>
       </div>
     );

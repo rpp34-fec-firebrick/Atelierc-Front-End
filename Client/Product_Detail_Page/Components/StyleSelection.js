@@ -22,7 +22,10 @@ class StyleSelection extends React.Component {
   render() {
     return (
       <div>
-        <div>Style > {this.state?.currentStyle?.name}</div>
+        <div className = "layout1">
+          <div className="bold">Style ></div>
+          {this.state?.currentStyle?.name}
+        </div>
           {(this.state.styles.length !== 0) ?
           this.state.styles.results?.map((style) =>
             <StyleRender onclick = {this.state.handleStyleClick}
