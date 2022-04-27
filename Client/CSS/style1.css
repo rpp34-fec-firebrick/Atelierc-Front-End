@@ -14,10 +14,20 @@
 
 .layout1 {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
+  background-color: rgba(179, 179, 179, 0.603);
+  margin: auto;
+  width: 90%;
+  padding-bottom: 3%;
 }
 
-.layout2 {
+ .Layout2ProductInfo {
+   float:right;
+  max-width: 350px;
+  text-align: center;
+}
+
+.productDesctiptionFeatrues {
   display:inline-flex;
 }
 .emptySpace {
@@ -34,36 +44,14 @@
   vertical-align: text-bottom;
 }
 
-.PDPLayout1 {
-  flex: 3.25;
-  width: 200px;
-}
-.PDPLayout2 {
-  flex: 1;
-}
-
-.PDPLayout3 {
-  border: 0px solid green;
-}
-/* .Pane2Top {
-  border: 0px solid green
-} */
-
-/* .Pane2Middle {
-  border:5px solid red
-} */
 .generalPhotoDisplay {
   display: flex;
   padding: 5px;
 }
-.imageWheel {
+/* .imageWheel {
   border: 5px solid red;
-}
+} */
 
-.Pane2Bottom {
-  border:5px solid green;
-  flex-direction: column;
-}
 
 .styleRenderBorder {
   max-height: 75px;
