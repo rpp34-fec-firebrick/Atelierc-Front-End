@@ -29,17 +29,16 @@ class ProductInformation extends React.Component {
         <br></br>
         <div className = "makeInline">
         Star Rating (To be added)
+        <br></br>
           <u>
             <a href="#RatingsReviews">Read all Reviews</a>
           </u>
         </div>
         <br></br>
         {(this.state.productData) ? this.state.productData.category : null}
-        <br></br>
         <h1>
         {(this.state.productData) ? this.state.productData.name : null}
         </h1>
-        <br></br>
         <div className = {this.state.strikeThrough}>
         ${(this.state.currentSelectedStyle) ? this.state.currentSelectedStyle.original_price : null}
         </div>

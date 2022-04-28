@@ -30,7 +30,7 @@ class StyleSelection extends React.Component {
           this.state.styles.results?.map((style) =>
             <StyleRender onclick = {this.state.handleStyleClick}
             style = {style} key = {style.style_id}
-            value = {style.style_id}/>)
+            value = {style.style_id} currentStyleId = {this.state?.currentStyle?.style_id}/>)
           : null}
       </div>
     );
