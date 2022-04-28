@@ -23,7 +23,8 @@ class RelatedCard extends React.Component {
           relatedProdVal: null
         }
         ]
-      }
+      },
+      product: this.props.product
     };
     this.hideModal = this.hideModal.bind(this);
     this.onCardSelect = this.onCardSelect.bind(this);
@@ -44,7 +45,7 @@ class RelatedCard extends React.Component {
       var currentValue = currentFeaturesArr[i].value;
       featureStorage[currentFeature] = [currentValue, null];
     }
-    
+
     //Adding related product's feature into the storage whether it existing or not
     for (var j = 0; j < relatedFeaturesArr.length; j++) {
       var relatedFeature = relatedFeaturesArr[j].feature;
@@ -98,9 +99,14 @@ class RelatedCard extends React.Component {
 
   render() {
     return (
-      <div className="product-list-card related">
-        <h3>Each related product card</h3>
+      <div className="related-product list-card">
+        <img
+          className="media-object"
+          src={this.state.product.thumbnail_url}
+          alt="related product image"
+        />
         <svg
+          className="star symbol"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -108,10 +114,12 @@ class RelatedCard extends React.Component {
           onClick={this.onStarSelect}>
           <path d="M12 6.76l1.379 4.246h4.465l-3.612 2.625 1.379 4.246-3.611-2.625-3.612 2.625 1.379-4.246-3.612-2.625h4.465l1.38-4.246zm0-6.472l-2.833 8.718h-9.167l7.416 5.389-2.833 8.718 7.417-5.388 7.416 5.388-2.833-8.718 7.417-5.389h-9.167l-2.833-8.718z" />
         </svg>
-        <Modal show={this.state.show} handleClose={this.hideModal} prodCharaData={this.state.prodCharaData}></Modal>
-        <p className="product-list-card-cat">{this.props.product.category}</p>
-        <p className="product-list-card-name" onClick={this.onCardSelect}>{this.props.product.name}</p>
-        <p className="product-list-card-price">${this.props.product.default_price}</p>
+        <div classname="card-info">
+          <Modal show={this.state.show} handleClose={this.hideModal} prodCharaData={this.state.prodCharaData}></Modal>
+          <p className="product-list-card-cat">{this.props.product.category}</p>
+          <p className="product-list-card-name" onClick={this.onCardSelect}>{this.props.product.name}</p>
+          <p className="product-list-card-price">${this.props.product.default_price}</p>
+        </div>
       </div>
     )
   }
