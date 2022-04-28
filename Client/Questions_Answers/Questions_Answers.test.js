@@ -1,43 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
-import {render, act, fireEvent, waitFor, screen, cleanup} from '@testing-library/react';
-import {describe, expect, test} from '@jest/globals';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { render, act, fireEvent, waitFor, screen, cleanup } from '@testing-library/react';
+import { describe, expect, test } from '@jest/globals';
 import { createRoot } from 'react-dom/client';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 
-// import "jest-dom/extend-expect";
 import renderer from "react-test-renderer"
 
-import  Questions_Answers from './Questions_Answers';
-import { data } from './fixtures/questions_answers';
+import Questions_Answers from './Questions_Answers';
+import fixtures from './fixtures/questions_answers'
+
+// jest.mock('../../API_Requests/requests.js');
 
 const server = setupServer(
     rest.post('/questions', (req, res, ctx) => {
-      return res(ctx.json(data))
+      console.log('******************FIXTURES', fixtures);
+      return res(ctx.json(fixtures.data));
     }),
 
     rest.post('/questionSubmit', (req, res, ctx) => {
-      return res.end();
+      return res.status(201).end();
     })
   );
 
-beforeAll(() => server.listen());
 
-afterEach(() => {
-  server.resetHandlers()
-  cleanup();
-
+beforeAll(() => {
+  server.listen();
 });
 
-afterAll(() => server.close());
+afterEach(() => {
+  server.resetHandlers();
+  cleanup();
+});
+
+afterAll(() => {
+  server.close();
+});
 
 describe('Questions and Answers Widget', () => {
 
-    test('Should render Questions and Answers widget without crashing', async () => {
+    test('Should render Questions and Answers widget without crashing', () => {
         render(<Questions_Answers />);
 
         const widget = screen.getByTestId('QnAWidget');
@@ -45,7 +51,7 @@ describe('Questions and Answers Widget', () => {
         expect(widget).toBeInTheDocument();
     });
 
-    test('Should render Question and Answers widget when no productId is passed', async () => {
+    test('Should render Question and Answers widget when no productId is passed', () => {
       render(<Questions_Answers />);
 
       const widget = screen.getByTestId('QnAWidget');
@@ -55,7 +61,6 @@ describe('Questions and Answers Widget', () => {
 
     test('Modal should exist on "Add a Question" button click and should have an id of "questionModal"', () => {
       render(<Questions_Answers />);
-
       const questionBtn = screen.getByTestId('questionBtn');
 
       fireEvent.click(questionBtn);
@@ -108,12 +113,24 @@ describe('Questions and Answers Widget', () => {
       // test if modal goes away after submit?
     });
 
-    // test('Should render Question and Answers widget when productId is passed', async () => {
-    //   await render(<Questions_Answers productId={64912} />);
+    // test('The Search component should render', () => {
+    //   render(<Questions_Answers />);
 
-    //   const questionList = screen.getByTestId('questionList');
+    //   const search = screen.getByTestId('questionSearch');
 
-    //   expect(questionList).toBeInTheDocument();
+    //   expect(search).toBeInTheDocument();
     // });
+
+    test('Should render Question and Answers widget when productId is passed', async () => {
+      render(<Questions_Answers productId={64912} />);
+
+      // act(() => {
+      //   render(<Questions_Answers productId={64912} />);
+      // });
+
+      const questionList =  screen.getByTestId('questionList');
+
+      expect(questionList).toBeInTheDocument();
+    });
 
   });

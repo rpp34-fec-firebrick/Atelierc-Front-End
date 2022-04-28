@@ -31,6 +31,10 @@ class Questions_Answers extends React.Component {
 
   componentDidMount () {
     var configureDate = (date) => {
+      if (date.indexOf('-') === -1) {
+        return date;
+      }
+
       let months = {
         '01': 'January',
         '02': 'February',
@@ -92,6 +96,7 @@ class Questions_Answers extends React.Component {
       productId: this.state.productId
     })
     .then((response) => {
+      console.log('RESPONSE', response);
       response.data.results.forEach((question) => {
         question.answers = orderAnswers(question.answers)
       })
@@ -175,7 +180,6 @@ class Questions_Answers extends React.Component {
         modalUp: false
       });
     }
-
   }
 
   render() {
