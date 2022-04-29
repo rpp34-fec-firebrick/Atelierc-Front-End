@@ -36,7 +36,7 @@ class AddToCartButton extends React.Component {
   render() {
     return (
       <div>
-        <button onClick ={this.props.onClick}>Add to Bag!</button>
+        <button className = "addToCartButton" onClick ={this.props.onClick}>Add to Bag!</button>
       </div>
     );
   }

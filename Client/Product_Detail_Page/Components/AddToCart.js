@@ -51,8 +51,11 @@ class AddToCart extends React.Component {
   render() {
     return (
       <div>
-        <SizeSelector currentStyle={this.state.currentStyle}
-        onChange={this.onSizeChange.bind(this)} selectedSize = {this.state.selectedSize}/>
+        <div className = "StyleCirclesRender">
+          <SizeSelector currentStyle={this.state.currentStyle}
+          onChange={this.onSizeChange.bind(this)} selectedSize = {this.state.selectedSize}/>
+        </div>
+        <div className = "SelectorRender">
         <QuantitySelector currentStyle={this.state.currentStyle}
         onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
         {(this.state.selectedQuantity && this.state.selectedSize) ?
@@ -61,6 +64,7 @@ class AddToCart extends React.Component {
         onClick={this.onAddToBagClick.bind(this)}
         /> : null
       }
+        </div>
       </div>
     );
   }

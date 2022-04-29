@@ -17,13 +17,13 @@ class Description extends React.Component {
     return (
       <div>
         <br></br>
-        Product Slogan
+        <div className = "bold">
         {(this.state.productData) ? this.state.productData.slogan : null}
+        </div>
         <br></br>
-        Product Description
+        <div className = "productDescription">
         {(this.state.productData) ? this.state.productData.description : null}
-        Product Features List
-        {/* <DescriptionList listItems = {(this.state.productData) ? this.state.productData : null}/> */}
+        </div>
       </div>
     );
   }
