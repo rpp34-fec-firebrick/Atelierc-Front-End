@@ -30,7 +30,7 @@ componentDidMount () {
   // var randomIndex = 64620;
   this.setState({currentProductId: randomIndex});
   axios.post('/products', {
-    productId: randomIndex
+    productId: 64219
   })
   .then((response) => {
     console.log('Successful Product Request')
