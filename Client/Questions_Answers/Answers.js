@@ -68,12 +68,12 @@ class Answers extends React.Component {
   render () {
     return (
         <>
-          <span className="QnAPad" id="answerBody">{this.state.answer.body}</span>
+          <span className="QnAPad" id="answerBody" data-testid="answer">{this.state.answer.body}</span>
           {
             this.state.answer.photos.length > 0 ?
 
-            <div className="QnAPadLeft">
-              {this.state.answer.photos.map((photo) => <img className="answerImage" onClick={(e) => {
+            <div key="photos" className="QnAPadLeft">
+              {this.state.answer.photos.map((photo) => <img className="answerImage" data-testid="photo" onClick={(e) => {
                 let srcArr = e.target.src.split('/');
                 for (var i = 0; i < this.state.answer.photos.length; i++) {
                   if (this.state.answer.photos[i].includes(srcArr[srcArr.length - 1])) {

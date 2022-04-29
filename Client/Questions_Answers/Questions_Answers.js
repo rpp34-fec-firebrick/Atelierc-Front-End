@@ -96,7 +96,7 @@ class Questions_Answers extends React.Component {
       productId: this.state.productId
     })
     .then((response) => {
-      console.log('RESPONSE', response);
+
       response.data.results.forEach((question) => {
         question.answers = orderAnswers(question.answers)
       })
