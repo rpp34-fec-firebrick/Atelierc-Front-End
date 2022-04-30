@@ -1,5 +1,6 @@
 const axios = require('axios').default;
 const AUTH = require('../Auth.js');
+require('dotenv').config();
 
 var getAllProducts  = (productId, callback) => {
   axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
@@ -29,7 +30,7 @@ var getAllProducts  = (productId, callback) => {
 }
 
 var getAllQuestions  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/`, {
     params: {

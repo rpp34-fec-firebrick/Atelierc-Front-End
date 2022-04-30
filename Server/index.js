@@ -6,6 +6,7 @@ const axios = require('axios');
 
 const requests = require('../API_Requests/requests.js');
 const AUTH = require('../Auth.js');
+require('dotenv').config();
 const s3Helpers = require('../Client/Questions_Answers/s3-helpers.js');
 
 const app = express();
@@ -46,7 +47,7 @@ app.post('/questions', (req, res) => {
 });
 
 app.post('/productsForQuestions', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get(`${root}/hr-rpp/products/${req.body.productId}`)
   .then((response) => {
@@ -58,7 +59,7 @@ app.post('/productsForQuestions', (req, res) => {
 })
 
 app.post('/questionHelpful', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.put(`${root}/qa/questions/${req.body.question_id}/helpful`)
   .then((helpfulRes) => {
@@ -70,7 +71,7 @@ app.post('/questionHelpful', (req, res) => {
 });
 
 app.post('/answerHelpful', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.put(`${root}/qa/answers/${req.body.answer_id}/helpful`)
   .then((helpfulRes) => {
@@ -82,7 +83,7 @@ app.post('/answerHelpful', (req, res) => {
 });
 
 app.post('/answerReport', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.put(`${root}/qa/answers/${req.body.answer_id}/report`)
   .then((reportedRes) => {
@@ -94,7 +95,7 @@ app.post('/answerReport', (req, res) => {
 });
 
 app.post('/questionSubmit', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.post(`${root}/qa/questions`, req.body)
   .then((questionCreatedRes) => {
@@ -106,7 +107,7 @@ app.post('/questionSubmit', (req, res) => {
 });
 
 app.post('/answerSubmit', (req, res) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   console.log(req.body);
 
