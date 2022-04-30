@@ -36,8 +36,8 @@ class Add extends React.Component {
       <div>
         <button type="button" onClick={this.handleReviewPopup.bind(this)}>Add Review</button>
         <div id="reviewPopup">
-        <span className="close" onClick={this.handleReviewPopup.bind(this)}>&times;</span>
           <div id="reviewPopupContent">
+          <span className="close" onClick={this.handleReviewPopup.bind(this)}>&times;</span>
             <h1>Add a Review</h1>
             <select id="reviewStars">
               <option value="1">1</option>

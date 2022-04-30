@@ -32,10 +32,10 @@ class Ratings_Reviews extends React.Component {
   render() {
     return (
       <div>
-        <Summary />
-        <Stars/>
-        <Review/>
-        <More/>
+        <Summary reviewData={this.state.data}/>
+        <Stars reviewData={this.state.data}/>
+        <Review reviewData={this.state.data}/>
+        <More reviewData={this.state.data}/>
         <Add productId={this.state.productId}/>
       </div>
     );

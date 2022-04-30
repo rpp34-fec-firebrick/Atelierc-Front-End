@@ -8,7 +8,7 @@ class Helpful extends React.Component {
   render() {
     return (
       <div>
-        <p>Helpful?</p>
+        <p>Helpful? Yes ({this.props.reviewData.helpfulness})</p>
       </div>
     );
   }
