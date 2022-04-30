@@ -1,5 +1,5 @@
 import React from 'react';
-import RelatedCardList from './components/RelatedProd';
+import RelatedCardList from './components/RelatedProdList';
 import MyOutfitCardList from './components/MyOutfitCardList';
 import axios from 'axios';
 // import { acceptsEncodings } from 'express/lib/request';
@@ -26,7 +26,6 @@ class Related_Items_Comparisons extends React.Component {
       productIds: [randomIndex]
     })
       .then((response) => {
-        console.log('Successful get current product information Request: ', response.data)
         //here we sorted the data based on the ID
         return response.data;
       })
@@ -45,7 +44,6 @@ class Related_Items_Comparisons extends React.Component {
       productIds: [randomIndex]
     })
       .then((response) => {
-        console.log('Successful get current product style information Request: ', response.data);
         return response.data;
       })
       .then((currentProductsStyleData) => {
@@ -63,7 +61,6 @@ class Related_Items_Comparisons extends React.Component {
       productIds: randomIndex
     })
       .then((response) => {
-        console.log('Successful get all related products ID Request: ', response.data);
         response.data.sort(function (a, b) {
           return a - b;
         })
@@ -85,7 +82,6 @@ class Related_Items_Comparisons extends React.Component {
           productIds: this.state.relatedProductsID
         })
           .then((response) => {
-            console.log('Successful get all related products information Request: ', response.data)
             //here we sorted the data based on the ID
             var data = response.data.sort((a, b) => Number(a.id) - Number(b.id));
             return data;
@@ -105,7 +101,6 @@ class Related_Items_Comparisons extends React.Component {
               productIds: this.state.relatedProductsID
             })
               .then((response) => {
-                console.log('Successful get all related products style Request: ', response.data);
                 //here we sorted the data based on the ID
                 var data = response.data.sort((a, b) => Number(a.product_id) - Number(b.product_id));
                 return data;
@@ -136,14 +131,14 @@ class Related_Items_Comparisons extends React.Component {
   render() {
     return (
       <div>
-        <h3 className="title related">Related Products</h3>
+        <h4 className="title related">Related Products</h4>
         <RelatedCardList
           productInfo={this.state.allRelatedProduct}
           productStyle={this.state.allRelatedProductStyle}
           eventHandler={this.props.eventHandler}
           currProdInfo={this.state.currentProdData}
         />
-        <h3 className="title outfit">Your OutFit</h3>
+        <h4 className="title outfit">Your OutFit</h4>
         <MyOutfitCardList
           currProdInfo={this.state.currentProdData}
           currProdStyle={this.state.currentProdStyle}
