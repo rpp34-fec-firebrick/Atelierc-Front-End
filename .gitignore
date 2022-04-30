@@ -1,12 +1,9 @@
 node_modules
 Auth.js
-<<<<<<< HEAD
 package-lock.json
 dist/
-=======
-package-lock
-dist/main.js
->>>>>>> 17dfdf3176ad0be4f7f8f21cb87c9d6cb34fc0ed
+*.pem
 main.js
 coverage
-
+connectingToAWS.txt
+.env
