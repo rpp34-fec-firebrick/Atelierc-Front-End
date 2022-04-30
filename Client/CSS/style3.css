@@ -1,6 +1,6 @@
 /* MODAL STYLING */
 
-#questionModal, #answerModal {
+#questionModal, #answerModal, #photoModal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -19,6 +19,19 @@
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+}
+
+#photoContent {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+#photo {
+  width: 50vw;
+  height: 80vh;
 }
 
 #questionBody, #answerBody {
@@ -182,4 +195,8 @@ span:nth-child(2) {
 
 .color {
   color: #3e3e3e;
+}
+
+.onHover {
+  cursor: pointer;
 }

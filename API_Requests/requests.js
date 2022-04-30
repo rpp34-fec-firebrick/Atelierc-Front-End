@@ -1,8 +1,8 @@
 const axios = require('axios').default;
-const AUTH = require('../Auth.js');
+require('dotenv').config();
 
 var getAllProducts  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   var count = 0;
   var dataSummary = [];
@@ -29,7 +29,7 @@ var getAllProducts  = (productId, callback) => {
 }
 
 var getAllQuestions  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/`, {
     params: {
@@ -48,7 +48,7 @@ var getAllQuestions  = (productId, callback) => {
 
 
 var getAllReviews  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`, {
     params: {
@@ -68,7 +68,7 @@ var getAllReviews  = (productId, callback) => {
 }
 
 var getMetaReviews = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta', {
     params: {
@@ -85,7 +85,7 @@ var getMetaReviews = (productId, callback) => {
 }
 
 var getRelatedProductId  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/related`, {
     params: {
@@ -102,7 +102,7 @@ var getRelatedProductId  = (productId, callback) => {
 }
 
 var getRelatedProductInfo  = (productIds, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
   var count = 0;
   var allRelatedProduct = [];
   //console.log('IDSSS', productIds)
@@ -127,7 +127,7 @@ var getRelatedProductInfo  = (productIds, callback) => {
 }
 
 var getRelatedProductStyle  = (productIds, callback) => {
-  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
   var count = 0;
   var allRelatedProductStyle = [];
   //console.log('IDSSS', productIds)

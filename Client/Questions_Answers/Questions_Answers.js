@@ -31,6 +31,10 @@ class Questions_Answers extends React.Component {
 
   componentDidMount () {
     var configureDate = (date) => {
+      if (date.indexOf('-') === -1) {
+        return date;
+      }
+
       let months = {
         '01': 'January',
         '02': 'February',
@@ -92,7 +96,6 @@ class Questions_Answers extends React.Component {
       productId: this.state.productId
     })
     .then((response) => {
-      console.log('Successful Question Request: ', response.data);
 
       response.data.results.forEach((question) => {
         question.answers = orderAnswers(question.answers)
@@ -110,14 +113,14 @@ class Questions_Answers extends React.Component {
       console.log(`There was an error getting question data: ${error}`);
     });
 
-    axios.post('/productsForQuestions', {
-      productId: this.state.productId
-    })
-    .then((productData) => {
-      this.setState({
-        productName: productData.data
-      })
-    })
+    // axios.post('/productsForQuestions', {
+    //   productId: this.state.productId
+    // })
+    // .then((productData) => {
+    //   this.setState({
+    //     productName: productData.data
+    //   })
+    // })
   }
 
   onTextChange (e) {
@@ -177,16 +180,15 @@ class Questions_Answers extends React.Component {
         modalUp: false
       });
     }
-
   }
 
   render() {
     if (this.state.questions.length === 0) {
       return (
-        <div className="QnAContainer color">
+        <div className="QnAContainer color" data-testid="QnAWidget">
           <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
           <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
-          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
+          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn">Add a Question +</div>
 
           {
             this.state.modalUp ?
@@ -198,11 +200,11 @@ class Questions_Answers extends React.Component {
       )
     } else {
       return (
-        <div className="QnAContainer color">
+        <div className="QnAContainer color" data-testid="QnAWidget">
           <div>
             <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
             <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
-            <div id="questionList">
+            <div id="questionList" data-testid="questionList">
               <div>
                 {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
 
@@ -216,7 +218,7 @@ class Questions_Answers extends React.Component {
               </div>
             </div>
             {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}><b>MORE ANSWERED QUESTIONS</b></div>) : <></>}
-            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)}><b>ADD A QUESTION +</b></div>
+            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn"><b>ADD A QUESTION +</b></div>
           </div>
         </div>
       );
