@@ -39,12 +39,11 @@ class QuantitySelector extends React.Component {
   render() {
     return (
       <div>
-        QuantitySelector
-        <label for="size-select">Select your Desired Quantity!</label>
-        <select name="pets" id="pet-select" onChange={this.state.onQuantityChange}>
+        <label for="size-select"></label>
+        <select name="pets" className="quantitySelector" onChange={this.state.onQuantityChange}>
           {(this.state.outOfStock) ?
-          <option value="">--Out of Stock!--</option> :
-          <option value="">--Select your Desired Quantity!--</option>}
+          <option value="">Out of Stock!</option> :
+          <option value="">Select Quantity!</option>}
         {(this.state.selectedSku !== null && this.state.outOfStock === false) ?
           this.state.selectedSku?.map((item) =>
           <QuantitySelectorRender index = {item} key = {item}/> )

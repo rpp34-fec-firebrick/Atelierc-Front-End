@@ -66,22 +66,59 @@ componentDidMount () {
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
-    console.log('related product name is clicked!!!')
     this.setState({ currentProductId: productId });
+  }
+
+  //this click function handle client's adding current item to the myoutfit list
+  onClickMyOutfitEvent() {
+    if (this.state.myOutfit) {
+      if (!this.state.myOutfit.includes(this.state.currentProductId)) {
+        this.setState(previousState => {
+          {
+            myOutfit: previousState.myOutfit.push(this.state.currentProductId)
+          }
+        });
+      }
+    }
+  }
+
+  //this click function handle client's deleting an item to the myoutfit list
+  onClickMyOutfitDeleteEvent(deletedProdId) {
+    //'client deleted an product from the outfit list'
+    console.log('client delete product, id:', deletedProdId);
+    //find the item based on the product ID
+    //take it out from the array
+    var currentProductList = this.state.myOutfit;
+    var newProductList = []
+    var i = 0;
+    if (currentProductList) {
+      while (i < currentProductList.length) {
+        if (currentProductList[i] !== deletedProdId) {
+          newProductList.push(currentProductList[i]);
+        }
+        i++;
+      }
+    }
+    this.setState(() =>
+      {
+      myOutfit: newProductList
+    })
   }
 
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <h2>It is</h2>
         <Product_Detail_Page productId={this.state.currentProductId}/>
+        <div id="RatingsReviews">
         <Ratings_Reviews />
+        </div>
         <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
-          productId={this.state.currentProductId}
-          myOutfit={this.state.myOutfit}
-          eventHandler={this.onClickEvent.bind(this)}
+        productId={this.state.currentProductId}
+        myOutfitIds={this.state.myOutfit}
+        eventHandler={this.onClickEvent.bind(this)}
+        myOutfitEventHandler={this.onClickMyOutfitEvent.bind(this)}
+        onClickMyOutfitDeleteEvent={this.onClickMyOutfitDeleteEvent.bind(this)}
         />
       </div>
     );
