@@ -1,9 +1,7 @@
 node_modules
 Auth.js
 package-lock.json
-dist/
 *.pem
-main.js
 coverage
 connectingToAWS.txt
 .env

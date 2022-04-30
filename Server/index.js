@@ -5,7 +5,6 @@ const upload = multer({ dest: 'uploads/' });
 const axios = require('axios');
 
 const requests = require('../API_Requests/requests.js');
-const AUTH = require('../Auth.js');
 require('dotenv').config();
 const s3Helpers = require('../Client/Questions_Answers/s3-helpers.js');
 
@@ -13,7 +12,6 @@ const app = express();
 const port = 3000;
 const root = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-// const HTML_FILE = path.join(DIST_DIR, 'index.html'); // NEW
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(express.text());
