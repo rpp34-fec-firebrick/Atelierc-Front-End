@@ -31,12 +31,11 @@ class SizeSelector extends React.Component {
   render() {
     return (
       <div>
-        SizeSelector
-        <label>Select your Size!</label>
-        <select onChange={this.state.onSizeChange}>
+        <label></label>
+        <select onChange={this.state.onSizeChange} className = "sizeSelector">
         {(this.state.outOfStock) ?
-          <option value="">--Out of Stock!--</option> :
-          <option value="">--Please choose your size!--</option>}
+          <option value="">Out of Stock!</option> :
+          <option value="">Select Size!</option>}
           {(this.state.selectedStyle !== null && this.state.outOfStock === false) ?
           Object.keys(this.state.selectedStyle?.skus).map((key, index) =>
             <SizeSelectorRender skuInfo = {this.state.selectedStyle?.skus[key]}

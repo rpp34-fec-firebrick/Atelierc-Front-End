@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import Features from './Components/Features.js';
 import AddToCart from './Components/AddToCart.js';
 import ImageWheel from './Components/ImageWheel.js';
 import Description from './Components/Description.js';
@@ -75,15 +74,32 @@ class Product_Detail_Page extends React.Component {
   render() {
     return (
       <div>
-        <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
-        <Features data ={this.state.productData.features}/>
-        <ImageWheel images = {this.state.styles}
-        onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
-        <StyleSelection onClick ={this.handleStyleClick.bind(this)}
-         styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-        <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
-        <Description data = {this.state.productData}/>
-        <DescriptionList listItems = {this.state.productData}/>
+        <div className = "pageHeader"></div>
+        <div className = "productDetailPage1">
+
+
+          <div className = "layout1">
+              <ImageWheel images = {this.state.styles}
+              onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
+            <div className = "Layout2ProductInfo">
+              <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+              <StyleSelection onClick ={this.handleStyleClick.bind(this)}
+              styles = {this.state.styles} styleId = {this.state.currentStyle}/>
+              <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+            </div>
+
+          </div>
+          <div className = "productDesctiptionFeatrues">
+            <div className = "emptySpace"></div>
+              <div className = "descriptionPane1">
+                <Description data = {this.state.productData}/>
+              </div>
+              <div className="verticalLine"></div>
+              <div className = "featureListPane2">
+                <DescriptionList listItems = {this.state.productData}/>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }
