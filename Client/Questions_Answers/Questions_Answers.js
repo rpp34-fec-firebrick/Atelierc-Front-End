@@ -132,23 +132,36 @@ class Questions_Answers extends React.Component {
   onTextChange (e) {
     this.setState({
       [e.target.id]: e.target.value
-    }, this.searchUpdate());
+    }, () => { this.searchUpdate(this.state.searchText) });
   }
 
   searchUpdate () {
-    // ARRAY SEEMS TO BE BEHIND BY ONE CHARACTER
-    let search = [];
+    let div = document.getElementById('questionList');
 
-    for (var i = 0; i < this.state.questions.length; i++) {
-      let currentQuestion = this.state.questions[i].question_body;
-      if (currentQuestion.includes(this.state.searchText)) {
-        search.push(this.state.questions[i]);
+    if (this.state.searchText.length >= 3) {
+      // div.removeChild(div.firstChild);
+      div.style.display = 'none';
+
+      let search = [];
+      let searchTerm = this.state.searchText;
+
+      for (var i = 0; i < this.state.questions.length; i++) {
+        let currentQuestion = this.state.questions[i].question_body;
+
+        if (currentQuestion.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          search.push(this.state.questions[i]);
+        }
       }
+
+      this.setState({
+        searched: search
+      }, () => { console.log(this.state.searched) });
+
+    } else {
+      div.style.display = '';
     }
 
-    this.setState({
-      searched: search
-    }, () => { console.log(this.state.searched) });
+
   }
 
   loadMoreQuestions () {
@@ -209,12 +222,14 @@ class Questions_Answers extends React.Component {
         <div className="QnAContainer color" data-testid="QnAWidget">
           <div>
             <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
-            <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
-            <div id="questionList" data-testid="questionList">
-              <div>
-                {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
+            <Search text={this.state.searchText} searchChange={this.onTextChange.bind(this)} />
+            <div>
+                <div id="questionList" data-testid="questionList">{this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> )}</div>
 
-              </div>
+                {
+                  this.state.searchText.length > 2 ? <div id="searchedList">{this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}</div> : <></>
+                }
+
               <div>
                 {
                   this.state.modalUp ?

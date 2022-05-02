@@ -76,7 +76,7 @@
   padding-left: 15vw;
 }
 
-#questionList {
+#questionList, #searchedList {
   max-height: 80vh;
   overflow-y: scroll;
 }

@@ -25,6 +25,10 @@ const server = setupServer(
 
     rest.post('/answerSubmit', (req, res, ctx) => {
       return res.end();
+    }),
+
+    rest.post('/productsForQuestions', (req, res, ctx) => {
+      return res(ctx.json('Some Fabric'));
     })
   );
 
@@ -232,8 +236,6 @@ describe('Questions and Answers Widget', () => {
     await waitFor(() => screen.getByTestId('questionList'));
 
     const answers = screen.queryAllByTestId('answer');
-
-    console.log('ANSWERS', answers)
 
     expect(answers.length).toEqual(2);
   });
