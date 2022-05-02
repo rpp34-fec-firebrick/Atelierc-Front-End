@@ -76,9 +76,15 @@
   padding-left: 15vw;
 }
 
-#questionList, #searchedList {
+#questionList {
   max-height: 80vh;
   overflow-y: scroll;
+}
+
+#searchedList {
+  max-height: 80vh;
+  overflow-y: scroll;
+  display: 'none';
 }
 
 #toggleAnswers {

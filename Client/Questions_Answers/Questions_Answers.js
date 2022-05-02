@@ -132,15 +132,17 @@ class Questions_Answers extends React.Component {
   onTextChange (e) {
     this.setState({
       [e.target.id]: e.target.value
-    }, () => { this.searchUpdate(this.state.searchText) });
+    }, () => { this.searchUpdate() });
   }
 
   searchUpdate () {
-    let div = document.getElementById('questionList');
+    let questionDiv = document.getElementById('questionList');
+    let searchDiv = document.getElementById('searchedList');
 
     if (this.state.searchText.length >= 3) {
-      // div.removeChild(div.firstChild);
-      div.style.display = 'none';
+      questionDiv.style.display = 'none';
+      searchDiv.style.display = '';
+
 
       let search = [];
       let searchTerm = this.state.searchText;
@@ -158,8 +160,15 @@ class Questions_Answers extends React.Component {
       }, () => { console.log(this.state.searched) });
 
     } else {
-      div.style.display = '';
-    }
+      if (questionDiv.style.display === 'none') {
+        questionDiv.style.display = '';
+        searchDiv.style.display = 'none';
+
+        this.setState({
+          searched: []
+        });
+      };
+    };
 
 
   }
@@ -226,9 +235,7 @@ class Questions_Answers extends React.Component {
             <div>
                 <div id="questionList" data-testid="questionList">{this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> )}</div>
 
-                {
-                  this.state.searchText.length > 2 ? <div id="searchedList">{this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}</div> : <></>
-                }
+                <div id="searchedList">{this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}</div>
 
               <div>
                 {
