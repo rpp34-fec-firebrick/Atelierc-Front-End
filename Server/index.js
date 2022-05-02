@@ -46,8 +46,8 @@ app.post('/questions', (req, res) => {
 
 app.post('/productsForQuestions', (req, res) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
-
-  axios.get(`${root}/hr-rpp/products/${req.body.productId}`)
+  console.log
+  axios.get(`${root}/products/${req.body.productId}`)
   .then((response) => {
     res.send(response.data.name);
   })

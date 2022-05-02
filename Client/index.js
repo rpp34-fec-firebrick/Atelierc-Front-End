@@ -30,7 +30,7 @@ componentDidMount () {
   // var randomIndex = 64620;
 
   axios.post('/products', {
-    productId: 64219
+    productId: this.state.currentProductId
   })
   .then((response) => {
     console.log('Successful Product Request')
@@ -41,15 +41,6 @@ componentDidMount () {
       if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
       if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
     }
-  }).catch((error) => {
-    console.log('error', 'error');
-  })
-
-  axios.post('/questions', {
-    productId: this.state.currentProductId
-  })
-  .then((response) => {
-    console.log('Successful Question Request')
   }).catch((error) => {
     console.log('error', 'error');
   });

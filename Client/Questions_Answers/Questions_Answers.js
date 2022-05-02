@@ -22,8 +22,6 @@ class Questions_Answers extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps, prevState);
-
     if (nextProps.productId !== prevState.productId) {
       return { productId: nextProps.productId };
     } else {
@@ -115,14 +113,14 @@ class Questions_Answers extends React.Component {
       console.log(`There was an error getting question data: ${error}`);
     });
 
-    // axios.post('/productsForQuestions', {
-    //   productId: this.state.productId
-    // })
-    // .then((productData) => {
-    //   this.setState({
-    //     productName: productData.data
-    //   })
-    // })
+    axios.post('/productsForQuestions', {
+      productId: this.state.productId
+    })
+    .then((productData) => {
+      this.setState({
+        productName: productData.data
+      })
+    })
   }
 
   onTextChange (e) {
