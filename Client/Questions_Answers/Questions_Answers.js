@@ -109,18 +109,24 @@ class Questions_Answers extends React.Component {
         displayedQuestions: questions.results.slice(0, 2)
       })
     })
-    .catch((error) => {
-      console.log(`There was an error getting question data: ${error}`);
-    });
-
-    axios.post('/productsForQuestions', {
-      productId: this.state.productId
+    .catch((err) => {
+      console.log(`There was an error getting question data: ${err}`);
     })
-    .then((productData) => {
-      this.setState({
-        productName: productData.data
+    .then(() => {
+      axios.post('/productsForQuestions', {
+        productId: this.state.productId
       })
+      .then((productData) => {
+        this.setState({
+          productName: productData.data
+        })
+      })
+
     })
+    .catch((err) => {
+      console.log(`There was an error getting the product name: ${err}`);
+    })
+
   }
 
   onTextChange (e) {
