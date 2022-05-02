@@ -9,7 +9,7 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: 64912,
+      productId: 0,
       productName: 'A Pretend Product, but only for now',
       questions: [],
       displayedQuestions: [],
@@ -21,13 +21,15 @@ class Questions_Answers extends React.Component {
 
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.productId !== prevState.productId) {
-  //     return { productId: nextProps.productId };
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps, prevState);
+
+    if (nextProps.productId !== prevState.productId) {
+      return { productId: nextProps.productId };
+    } else {
+      return null;
+    }
+  }
 
   componentDidMount () {
     var configureDate = (date) => {

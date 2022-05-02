@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: Math.floor(Math.random() * 1011) * 64620,
+      currentProductId: 64912,
       starValue: 0,
       reviews: [],
       styles: {},
@@ -25,10 +25,10 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
-  var randomIndex = Math.floor(Math.random() * 1011)
-  randomIndex += 64620;
+  // var randomIndex = Math.floor(Math.random() * 1011)
+  // randomIndex += 64620;
   // var randomIndex = 64620;
-  this.setState({currentProductId: randomIndex});
+
   axios.post('/products', {
     productId: 64219
   })
@@ -45,24 +45,24 @@ componentDidMount () {
     console.log('error', 'error');
   })
 
-    axios.post('/questions', {
-      productId: randomIndex
-    })
-    .then((response) => {
-      console.log('Successful Question Request')
-    }).catch((error) => {
-      console.log('error', 'error');
-    })
+  axios.post('/questions', {
+    productId: this.state.currentProductId
+  })
+  .then((response) => {
+    console.log('Successful Question Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
 
-    axios.post('/reviews', {
-      productId: randomIndex,
-    })
-      .then((response) => {
-        console.log('Successful Reviews Request')
-      }).catch((error) => {
-        console.log('error', 'error');
-      })
-  }
+  axios.post('/reviews', {
+    productId: this.state.currentProductId,
+  })
+  .then((response) => {
+    console.log('Successful Reviews Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
+}
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
