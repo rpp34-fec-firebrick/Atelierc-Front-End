@@ -2,11 +2,10 @@ import React from 'react';
 
 function ImageRender (props) {
   return (
-    <div className = 'test'>
-    <img onClick={props.onclick} src = {props.image.thumbnail_url} height='100' width='100'/>
+    <div onClick={props.onClick}>
+    <img src = {props.image.thumbnail_url} name = {props.imageUrl} height='75' width='75'/>
     </div>
   );
 }
-    // <button onClick={props.onclick}>
 
 export default ImageRender;

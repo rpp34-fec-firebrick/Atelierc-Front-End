@@ -21,9 +21,13 @@ class Product_Detail_Page extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps (props) {
-    this.setState({currentProductId: props.productId})
+    // this.setState({currentProductId: props.productId})
+    this.setState({currentProductId: 64620})
+    // axios.post('/products', {
+    //   productId: props.productId
+    // })
     axios.post('/products', {
-      productId: props.productId
+      productId: 64620
     })
     .then((response) => {
       console.log('Successful Product Request')
@@ -58,29 +62,22 @@ class Product_Detail_Page extends React.Component {
     }
   }
 
-  handleImageClick (event) {
-    // var clickedOnStyleId = Number(event.target.name);
-    // var currentStyles = this.state.styles.results;
-    // for (var i = 0; i < currentStyles.length; i++) {
-    //   if (currentStyles[i]['style_id'] === clickedOnStyleId) {
-    //     this.setState({['currentStyle']: currentStyles[i]});
-    //     break;
-    //   }
-    // }
-    console.log('hi')
-  }
+  // handleImageClick (event) {
+
+  //   console.log(event.target.name)
+  // }
 
 
   render() {
     return (
-      <div>
+      <div className ="generalBorder">
         <div className = "pageHeader"></div>
         <div className = "productDetailPage1">
 
 
           <div className = "layout1">
               <ImageWheel images = {this.state.styles}
-              onClick ={this.handleImageClick.bind(this)} styleId = {this.state.currentStyle}/>
+               styleId = {this.state.currentStyle}/>
             <div className = "Layout2ProductInfo">
               <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
               <StyleSelection onClick ={this.handleStyleClick.bind(this)}

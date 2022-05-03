@@ -134,3 +134,6 @@
   border-radius: 2px;
   padding: 5px;
 }
+.generalBorder {
+  border: 1.5px solid black;
+}
