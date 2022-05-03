@@ -157,7 +157,7 @@ class Questions_Answers extends React.Component {
 
       this.setState({
         searched: search
-      }, () => { console.log(this.state.searched) });
+      });
 
     } else {
       if (questionDiv.style.display === 'none') {
@@ -216,7 +216,7 @@ class Questions_Answers extends React.Component {
         <div className="QnAContainer color" data-testid="QnAWidget">
           <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
           <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
-          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn">Add a Question +</div>
+          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn"><b>ADD A QUESTION +</b></div>
 
           {
             this.state.modalUp ?
