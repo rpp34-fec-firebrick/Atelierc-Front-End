@@ -13,7 +13,7 @@ class Search extends React.Component {
   render () {
     return (
       <div className="QnAPadDown">
-        <input type="text" id="searchText" onChange={this.props.searchChange} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." value={this.props.text} />
+        <input type="text" id="searchText" data-testid="questionSearch" onChange={this.props.searchChange} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." value={this.props.text} />
       </div>
     )
   }

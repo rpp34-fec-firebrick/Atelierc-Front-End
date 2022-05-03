@@ -75,13 +75,13 @@ class Questions extends React.Component {
 
   render () {
     return (
-      <div key={this.state.question.question_id}>
+      <div key={this.state.question.question_id} data-testid="question">
         <h3 id="questionHead">Q: {this.state.question.question_body}</h3>
-        <span id="questionLinks">Helpful? <span onClick={this.questionHelpful.bind(this)}><u>Yes</u> ({this.state.questionHelpfulness})</span>
+        <span id="questionLinks">Helpful? <span onClick={this.questionHelpful.bind(this)}><u className="onHover">Yes</u> ({this.state.questionHelpfulness})</span>
 
         &nbsp; | &nbsp;
 
-        <span onClick={this.handleAnswerModal.bind(this)}><u>Add Answer</u></span>
+        <span  onClick={this.handleAnswerModal.bind(this)}><u data-testid="addAnswer" className="onHover">Add Answer</u></span>
         </span>
         <div>
           {this.state.displayedAnswers.length === 0 ? <h4 className="QnAPadLeft" id="noAnswers">There are no answers for this question</h4> : <h3 className="QnAPadDown" id="answerHead">A:</h3>}
@@ -93,7 +93,7 @@ class Questions extends React.Component {
         {
         this.state.answers.length > 2 ?
 
-        (!this.state.expanded ? <div className="QnAPad" id="toggleAnswers" onClick={this.loadMoreAnswers.bind(this)}><b>LOAD MORE ANSWERS</b></div> : <div className="QnAPad" id="toggleAnswers" onClick={this.collapseAnswers.bind(this)}><b>COLLAPSE ANSWERS</b></div>)
+        (!this.state.expanded ? <div className="QnAPad" id="toggleAnswers" onClick={this.loadMoreAnswers.bind(this)}><b className="onHover">LOAD MORE ANSWERS</b></div> : <div className="QnAPad" id="toggleAnswers" onClick={this.collapseAnswers.bind(this)}><b className="onHover">COLLAPSE ANSWERS</b></div>)
 
         : <div></div>
         }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import Photo from './Photo.js';
 
 class Answers extends React.Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class Answers extends React.Component {
       answer: props.answer,
       helpful: false,
       answerHelpfulness: props.answer.helpfulness,
-      reported: false
+      reported: false,
+      photo: '',
+      modalUp: false
     }
 
   }
@@ -42,19 +45,41 @@ class Answers extends React.Component {
     }
   }
 
+  handlePhotoModal () {
+    if (!this.state.modalUp) {
+      this.setState({
+        modalUp: true
+      }, () => {
+        let photoModal = document.getElementById('photoModal');
+        photoModal.style.display = "block";
+      });
+
+    } else {
+      let photoModal = document.getElementById('photoModal');
+      photoModal.style.display = "none";
+
+      this.setState({
+        modalUp: false
+      });
+    }
+
+  }
+
   render () {
     return (
         <>
-          <span className="QnAPad" id="answerBody">{this.state.answer.body}</span>
+          <span className="QnAPad" id="answerBody" data-testid="answer">{this.state.answer.body}</span>
           {
             this.state.answer.photos.length > 0 ?
 
-            <div className="QnAPadLeft">
-              {this.state.answer.photos.map((photo) => <img className="answerImage" onClick={(e) => {
+            <div key="photos" className="QnAPadLeft">
+              {this.state.answer.photos.map((photo) => <img className="answerImage" data-testid="photo" onClick={(e) => {
                 let srcArr = e.target.src.split('/');
                 for (var i = 0; i < this.state.answer.photos.length; i++) {
                   if (this.state.answer.photos[i].includes(srcArr[srcArr.length - 1])) {
-                    console.log('Found it!');
+                    this.setState({
+                      photo: this.state.answer.photos[i]
+                    }, () => { this.handlePhotoModal() })
                   }
                 } }} src={photo} />)}
             </div>
@@ -62,8 +87,11 @@ class Answers extends React.Component {
             :
             <></>
           }
+
+          {this.state.modalUp ? <Photo photo={this.state.photo} togglePhoto={this.handlePhotoModal.bind(this)} /> : <></>}
+
           <div className="QnAPad" id="answerInfo">
-            by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u>Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u>{!this.state.reported ? 'Report' : 'Reported'}</u></span>
+            by {this.state.answer.answerer_name === 'Seller' ? <b>Seller</b> : this.state.answer.answerer_name}, {this.state.answer.date} &nbsp; | &nbsp; Helpful? <span onClick={this.answerHelpful.bind(this)}><u className="onHover">Yes</u> ({this.state.answerHelpfulness})</span> &nbsp; | &nbsp; <span onClick={this.reportAnswer.bind(this)}><u className="onHover">{!this.state.reported ? 'Report' : 'Reported'}</u></span>
           </div>
         </>
     )
