@@ -145,9 +145,12 @@ app.get('/images/:key', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;
+  console.log('request body:' + req.body);
+  console.log('productID:' + productId);
   requests.getAllReviews(productId, (error, response) => {
     if (error) {
       res.sendStatus(500);
+      console.log('error getting product reviews' + productId);
     } else {
       console.log('Successful getAllReviews Data')
       res.send(response);
