@@ -6,3 +6,10 @@ package-lock.json
 coverage
 connectingToAWS.txt
 .env
+
+index.html.br
+index.html.gz
+main.js.br
+main.js.gz
+main.js.LICENSE.txt.br
+main.js.LICENSE.txt.gz
