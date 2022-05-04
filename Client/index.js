@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Product_Detail_Page from './Product_Detail_Page/Product_Detail_Page.js'
 import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.js'
 import Questions_Answers from './Questions_Answers/Questions_Answers.js'
@@ -28,6 +29,8 @@ componentDidMount () {
   // var randomIndex = Math.floor(Math.random() * 1011)
   // randomIndex += 64620;
   // var randomIndex = 64620;
+
+  // window.location.replace(`/${this.state.currentProductId}`);
 
   axios.post('/products', {
     productId: this.state.currentProductId
