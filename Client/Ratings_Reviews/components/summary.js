@@ -8,7 +8,8 @@ class Summary extends React.Component {
   render() {
     return (
       <div>
-        Hi
+        <h1>Reviews</h1>
+        <h2>Stars</h2>
       </div>
     );
   }

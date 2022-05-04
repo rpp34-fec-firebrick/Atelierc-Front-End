@@ -1,5 +1,5 @@
 import React from 'react';
-class Response extends React.Component {
+class More extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -8,10 +8,10 @@ class Response extends React.Component {
   render() {
     return (
       <div>
-        Hi
+        <button type="button">More Reviews</button>
       </div>
     );
   }
 }
 
-export default Response;
+export default More;

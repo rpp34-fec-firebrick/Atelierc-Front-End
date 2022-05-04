@@ -26,8 +26,14 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
+<<<<<<< HEAD
   // var randomIndex = Math.floor(Math.random() * 1011)
   // randomIndex += 64620;
+=======
+  console.log(this.state.currentProductId);
+  var randomIndex = Math.floor(Math.random() * 1011)
+  randomIndex += 64620;
+>>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
   // var randomIndex = 64620;
 
   // window.location.replace(`/${this.state.currentProductId}`);
@@ -48,6 +54,7 @@ componentDidMount () {
     console.log('error', 'error');
   });
 
+<<<<<<< HEAD
   axios.post('/reviews', {
     productId: this.state.currentProductId,
   })
@@ -57,6 +64,26 @@ componentDidMount () {
     console.log('error', 'error');
   });
 }
+=======
+    axios.post('/questions', {
+      productId: randomIndex
+    })
+    .then((response) => {
+      console.log('Successful Question Request')
+    }).catch((error) => {
+      console.log('error', 'error');
+    })
+
+    // axios.post('/reviews', {
+    //   productId: 64219
+    // })
+    //   .then((response) => {
+    //     console.log('Successful Reviews Request')
+    //   }).catch((error) => {
+    //     console.log('error', 'error');
+    //   })
+  }
+>>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
@@ -104,7 +131,7 @@ componentDidMount () {
       <div>
         <Product_Detail_Page productId={this.state.currentProductId}/>
         <div id="RatingsReviews">
-        <Ratings_Reviews />
+        <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>
         <Questions_Answers productId={this.state.currentProductId}/>
         <Related_Items_Comparisons
