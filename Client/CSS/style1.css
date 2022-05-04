@@ -137,3 +137,8 @@
 .generalBorder {
   border: 1.5px solid black;
 }
+
+.addToOutfitBox {
+  border: 1.5px solid black;
+  border-radius: 2px;
+}
