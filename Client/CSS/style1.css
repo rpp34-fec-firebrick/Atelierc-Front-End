@@ -53,11 +53,6 @@
   padding: 5px;
 }
 
-/* .imageWheel {
-  border: 5px solid red;
-} */
-
-
 .borderStyle {
   max-height: 75px;
   max-width: 75px;
@@ -133,4 +128,12 @@
   border: 1.5px solid black;
   border-radius: 2px;
   padding: 5px;
+}
+.generalBorder {
+  border: 1.5px solid black;
+}
+
+.addToOutfitBox {
+  border: 1.5px solid black;
+  border-radius: 2px;
 }
