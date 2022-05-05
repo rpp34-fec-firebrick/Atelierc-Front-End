@@ -1,8 +1,9 @@
 const axios = require('axios').default;
+var AUTH = require('../Auth.js');
 require('dotenv').config();
 
 var getAllProducts  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
   var count = 0;
   var dataSummary = [];
