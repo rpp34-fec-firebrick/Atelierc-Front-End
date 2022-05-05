@@ -65,7 +65,7 @@ class AddToCart extends React.Component {
         <div className = "SelectorRender">
         <QuantitySelector currentStyle={this.state.currentStyle}
         onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
-        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this)} add = {this.state.addToOutfit}/>
+        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this), this} add = {this.state.addToOutfit}/>
         {(this.state.selectedQuantity && this.state.selectedSize) ?
         <AddToCartButton sizeId = {this.state.selectedSize}
         quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
