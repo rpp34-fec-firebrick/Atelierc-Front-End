@@ -13,7 +13,7 @@ class App extends React.Component {
 
     this.state = {
       currentProductId: 64912,
-      starValue: 0,
+      starValue: 5,
       reviews: [],
       styles: {},
       myOutfit: [],
@@ -132,7 +132,10 @@ componentDidMount () {
   render() {
     return (
       <div>
-        <Product_Detail_Page productId={this.state.currentProductId} updateOutfit = {this.updateOutfit.bind(this)}/>
+        <Product_Detail_Page productId={this.state.currentProductId}
+        updateOutfit = {this.updateOutfit.bind(this)}
+        stars = {this.state.starValue}
+        />
         <div id="RatingsReviews">
         <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>
