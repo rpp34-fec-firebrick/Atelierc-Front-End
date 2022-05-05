@@ -9,8 +9,8 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: 0,
-      productName: '',
+      productId: 64912,
+      productName: 'A Pretend Product, but only for now',
       questions: [],
       displayedQuestions: [],
       searched: [],
@@ -21,15 +21,43 @@ class Questions_Answers extends React.Component {
 
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.productId !== prevState.productId) {
-      return { productId: nextProps.productId };
-    } else {
-      return null;
-    }
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.productId !== prevState.productId) {
+  //     return { productId: nextProps.productId };
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   componentDidMount () {
+    var configureDate = (date) => {
+      if (date.indexOf('-') === -1) {
+        return date;
+      }
+
+      let months = {
+        '01': 'January',
+        '02': 'February',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December'
+      };
+
+      date = date.split('-');
+      let day = date[2].split('T')[0];
+      let month = months[date[1]];
+      let year = date[0]
+
+      return `${month} ${day}, ${year}`;
+    };
+
     var orderAnswers = (ans) => {
       let orderedAnswers = [];
       let sellerAnswers = [];
@@ -57,18 +85,17 @@ class Questions_Answers extends React.Component {
         return b.helpfulness - a.helpfulness;
       });
 
-      if (sellerAnswers.length > 0) {
-        console.log('OH MY GOD THERES ACTUALLY SELLER ANSWERS IN HERE', sellerAnswers);
-      }
+      orderedAnswers.forEach((answer) => {
+        answer.date = configureDate(answer.date);
+      });
 
       return sellerAnswers.concat(orderedAnswers);
-    }
+    };
 
     axios.post('/questions', {
       productId: this.state.productId
     })
     .then((response) => {
-      console.log('Successful Question Request: ', response.data);
 
       response.data.results.forEach((question) => {
         question.answers = orderAnswers(question.answers)
@@ -86,14 +113,14 @@ class Questions_Answers extends React.Component {
       console.log(`There was an error getting question data: ${error}`);
     });
 
-    axios.post('/productsForQuestions', {
-      productId: this.state.productId
-    })
-    .then((productData) => {
-      this.setState({
-        productName: productData.data
-      })
-    })
+    // axios.post('/productsForQuestions', {
+    //   productId: this.state.productId
+    // })
+    // .then((productData) => {
+    //   this.setState({
+    //     productName: productData.data
+    //   })
+    // })
   }
 
   onTextChange (e) {
@@ -136,50 +163,62 @@ class Questions_Answers extends React.Component {
   }
 
   handleQuestionModal () {
-    let questionModal = document.getElementById('questionModal');
 
     if (!this.state.modalUp) {
-      questionModal.style.display = "block";
 
       this.setState({
         modalUp: true
-      })
+      }, () => {
+        let questionModal = document.getElementById('questionModal');
+        questionModal.style.display = "block";
+      });
     } else {
+      let questionModal = document.getElementById('questionModal');
       questionModal.style.display = "none";
 
       this.setState({
         modalUp: false
-      })
+      });
     }
-
   }
 
   render() {
     if (this.state.questions.length === 0) {
       return (
-        <div>
-          <h3>There isn't any questions for this product yet</h3>
-          <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
+        <div className="QnAContainer color" data-testid="QnAWidget">
+          <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
+          <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
+          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn">Add a Question +</div>
 
-          <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
+          {
+            this.state.modalUp ?
+            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+            : <></>
+          }
 
         </div>
       )
     } else {
       return (
-        <div>
-          <h1>Questions and Answers</h1>
-          <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
+        <div className="QnAContainer color" data-testid="QnAWidget">
           <div>
-            {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} /> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName}/>)}
+            <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
+            <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
+            <div id="questionList" data-testid="questionList">
+              <div>
+                {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
 
-          </div>
-          <div>
-            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <div></div> : <button onClick={this.loadMoreQuestions.bind(this)}>More Answered Questions</button>) : <div></div>}
-            <button onClick={this.handleQuestionModal.bind(this)}>Add a Question +</button>
-
-            <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} />
-
+              </div>
+              <div>
+                {
+                  this.state.modalUp ?
+                  <Modal type={'question'} product={this.state.productName} productId={this.state.productId} toggleModal={this.handleQuestionModal.bind(this)} refresh={this.componentDidMount.bind(this)} />
+                  : <></>
+                }
+              </div>
+            </div>
+            {this.state.questions.length > 2 ? (this.state.questions.length === this.state.displayedQuestions.length ? <></> : <div className="questionButton" onClick={this.loadMoreQuestions.bind(this)}><b>MORE ANSWERED QUESTIONS</b></div>) : <></>}
+            <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn"><b>ADD A QUESTION +</b></div>
           </div>
         </div>
       );
