@@ -17,12 +17,14 @@ class Product_Detail_Page extends React.Component {
       styles: '',
       currentStyle: {},
       currentProductId: null,
+      updateOutfit: null,
     };
   }
 
   UNSAFE_componentWillReceiveProps (props) {
     // this.setState({currentProductId: props.productId})
     this.setState({currentProductId: 64620})
+    this.setState({['updateOutfit']: props.updateOutfit});
     // axios.post('/products', {
     //   productId: props.productId
     // })
@@ -82,7 +84,10 @@ class Product_Detail_Page extends React.Component {
               <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
               <StyleSelection onClick ={this.handleStyleClick.bind(this)}
               styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-              <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+              <AddToCart currentStyle = {this.state.currentStyle}
+              productId = {this.state.currentProductId}
+              updateOutfit = {this.state.updateOutfit}
+              />
             </div>
 
           </div>

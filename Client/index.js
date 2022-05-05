@@ -26,37 +26,38 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
-  console.log(this.state.currentProductId);
+  // console.log(this.state.currentProductId);
   var randomIndex = Math.floor(Math.random() * 1011)
   randomIndex += 64620;
+  this.setState({['currentProductId']: randomIndex})
   // var randomIndex = 64620;
 
   // window.location.replace(`/${this.state.currentProductId}`);
 
-  axios.post('/products', {
-    productId: this.state.currentProductId
-  })
-  .then((response) => {
-    console.log('Successful Product Request')
-    //Update State Based on Data
-    //Each if Statement in the for loop is associated with a unique identifier in state
-    for (var i = 0; i < response.data.length; i++) {
-      if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
-      if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
-      if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
-    }
-  }).catch((error) => {
-    console.log('error', 'error');
-  });
+  // axios.post('/products', {
+  //   productId: this.state.currentProductId
+  // })
+  // .then((response) => {
+  //   console.log('Successful Product Request')
+  //   //Update State Based on Data
+  //   //Each if Statement in the for loop is associated with a unique identifier in state
+  //   for (var i = 0; i < response.data.length; i++) {
+  //     if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
+  //     if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
+  //     if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
+  //   }
+  // }).catch((error) => {
+  //   console.log('error', 'error');
+  // });
 
-    axios.post('/questions', {
-      productId: randomIndex
-    })
-    .then((response) => {
-      console.log('Successful Question Request')
-    }).catch((error) => {
-      console.log('error', 'error');
-    })
+  //   axios.post('/questions', {
+  //     productId: randomIndex
+  //   })
+  //   .then((response) => {
+  //     console.log('Successful Question Request')
+  //   }).catch((error) => {
+  //     console.log('error', 'error');
+  //   })
 
     // axios.post('/reviews', {
     //   productId: 64219
@@ -108,11 +109,30 @@ componentDidMount () {
       myOutfit: newProductList
     })
   }
+  updateOutfit (value) {
+    var currentProductId = this.state.currentProductId
+    console.log(value)
+    if (value === 'add') {
+      if (!this.state.myOutfit.includes(currentProductId)) {
+        var myOutfit = this.state.myOutfit;
+        myOutfit.push(currentProductId);
+        this.setState({['myOutfit']: myOutfit})
+      }
+    } else if (value === 'remove') {
+      var myOutfit = this.state.myOutfit;
+      var index = myOutfit.indexOf(currentProductId);
+      console.log(index)
+      if (index > -1) {
+        myOutfit.splice(index, 1);
+        this.setState({['myOutfit']: myOutfit})
+      }
+    }
+  }
 
   render() {
     return (
       <div>
-        <Product_Detail_Page productId={this.state.currentProductId}/>
+        <Product_Detail_Page productId={this.state.currentProductId} updateOutfit = {this.updateOutfit.bind(this)}/>
         <div id="RatingsReviews">
         <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>

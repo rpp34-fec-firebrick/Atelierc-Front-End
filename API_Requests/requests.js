@@ -86,7 +86,7 @@ var getMetaReviews = (productId, callback) => {
 }
 
 var getRelatedProductId  = (productId, callback) => {
-  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/related`, {
     params: {
@@ -103,7 +103,7 @@ var getRelatedProductId  = (productId, callback) => {
 }
 
 var getRelatedProductInfo  = (productIds, callback) => {
-  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
   var count = 0;
   var allRelatedProduct = [];
   //console.log('IDSSS', productIds)
@@ -128,7 +128,7 @@ var getRelatedProductInfo  = (productIds, callback) => {
 }
 
 var getRelatedProductStyle  = (productIds, callback) => {
-  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.defaults.headers.common['Authorization'] = AUTH.TOKEN;
   var count = 0;
   var allRelatedProductStyle = [];
   //console.log('IDSSS', productIds)

@@ -13,12 +13,14 @@ class AddToCart extends React.Component {
       selectedQuantity: null,
       productId: null,
       addToOutfit: false,
+      updateOutfit: null
     };
   }
 
 
   UNSAFE_componentWillReceiveProps (props) {
-    // console.log(props)
+    this.setState({['updateOutfit']: props.updateOutfit});
+
     if (typeof props.currentStyle?.name === 'string') {
       this.setState({['currentStyle']: props.currentStyle})
       this.setState({['productId']: props.productId})
@@ -50,8 +52,10 @@ class AddToCart extends React.Component {
   onAddToOutfitClick () {
     if (this.state.addToOutfit) {
       this.setState({['addToOutfit']: false})
+      this.state.updateOutfit('remove');
     } else {
       this.setState({['addToOutfit']: true})
+      this.state.updateOutfit('add');
     }
   }
 
@@ -65,7 +69,7 @@ class AddToCart extends React.Component {
         <div className = "SelectorRender">
         <QuantitySelector currentStyle={this.state.currentStyle}
         onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
-        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this), this} add = {this.state.addToOutfit}/>
+        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this)} add = {this.state.addToOutfit}/>
         {(this.state.selectedQuantity && this.state.selectedSize) ?
         <AddToCartButton sizeId = {this.state.selectedSize}
         quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
