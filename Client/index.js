@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Product_Detail_Page from './Product_Detail_Page/Product_Detail_Page.js'
 import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.js'
 import Questions_Answers from './Questions_Answers/Questions_Answers.js'
@@ -11,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: Math.floor(Math.random() * 1011) * 64620,
+      currentProductId: 64912,
       starValue: 0,
       reviews: [],
       styles: {},
@@ -25,13 +26,20 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
+<<<<<<< HEAD
+  // var randomIndex = Math.floor(Math.random() * 1011)
+  // randomIndex += 64620;
+=======
   console.log(this.state.currentProductId);
   var randomIndex = Math.floor(Math.random() * 1011)
   randomIndex += 64620;
+>>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
   // var randomIndex = 64620;
-  this.setState({currentProductId: randomIndex});
+
+  // window.location.replace(`/${this.state.currentProductId}`);
+
   axios.post('/products', {
-    productId: 64219
+    productId: this.state.currentProductId
   })
   .then((response) => {
     console.log('Successful Product Request')
@@ -44,8 +52,19 @@ componentDidMount () {
     }
   }).catch((error) => {
     console.log('error', 'error');
-  })
+  });
 
+<<<<<<< HEAD
+  axios.post('/reviews', {
+    productId: this.state.currentProductId,
+  })
+  .then((response) => {
+    console.log('Successful Reviews Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
+}
+=======
     axios.post('/questions', {
       productId: randomIndex
     })
@@ -64,6 +83,7 @@ componentDidMount () {
     //     console.log('error', 'error');
     //   })
   }
+>>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {

@@ -75,7 +75,7 @@ class Questions extends React.Component {
 
   render () {
     return (
-      <div key={this.state.question.question_id} data-testid="question">
+      <div id="fullQuestion" key={this.state.question.question_id} data-testid="question">
         <h3 id="questionHead">Q: {this.state.question.question_body}</h3>
         <span id="questionLinks">Helpful? <span onClick={this.questionHelpful.bind(this)}><u className="onHover">Yes</u> ({this.state.questionHelpfulness})</span>
 
