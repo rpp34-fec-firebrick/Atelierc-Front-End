@@ -68,7 +68,7 @@ class Answers extends React.Component {
   render () {
     return (
         <>
-          <span className="QnAPad" id="answerBody" data-testid="answer">{this.state.answer.body}</span>
+          <span className="QnAPad" id="answerBody" key={this.state.answer.id} data-testid="answer">{this.state.answer.body}</span>
           {
             this.state.answer.photos.length > 0 ?
 

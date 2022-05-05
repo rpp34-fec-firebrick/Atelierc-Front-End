@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const multer  = require('multer');
+const expressStaticGzip = require('express-static-gzip');
 const upload = multer({ dest: 'uploads/' });
 const axios = require('axios');
 
@@ -15,9 +16,10 @@ const root = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(express.text());
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(expressStaticGzip(path.join(__dirname, '../dist'), {
+  enableBrotli: true
+}));
 app.use(express.static(path.join(__dirname, '../Client')));
-
 
 
 app.post('/products', (req, res) => {
@@ -46,8 +48,8 @@ app.post('/questions', (req, res) => {
 
 app.post('/productsForQuestions', (req, res) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
-
-  axios.get(`${root}/hr-rpp/products/${req.body.productId}`)
+  console.log
+  axios.get(`${root}/products/${req.body.productId}`)
   .then((response) => {
     res.send(response.data.name);
   })
@@ -143,9 +145,12 @@ app.get('/images/:key', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;
+  console.log('request body:' + req.body);
+  console.log('productID:' + productId);
   requests.getAllReviews(productId, (error, response) => {
     if (error) {
       res.sendStatus(500);
+      console.log('error getting product reviews' + productId);
     } else {
       console.log('Successful getAllReviews Data')
       res.send(response);

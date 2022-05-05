@@ -9,7 +9,7 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: 64912,
+      productId: 0,
       productName: 'A Pretend Product, but only for now',
       questions: [],
       displayedQuestions: [],
@@ -21,13 +21,13 @@ class Questions_Answers extends React.Component {
 
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.productId !== prevState.productId) {
-  //     return { productId: nextProps.productId };
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.productId !== prevState.productId) {
+      return { productId: nextProps.productId };
+    } else {
+      return null;
+    }
+  }
 
   componentDidMount () {
     var configureDate = (date) => {
@@ -109,40 +109,68 @@ class Questions_Answers extends React.Component {
         displayedQuestions: questions.results.slice(0, 2)
       })
     })
-    .catch((error) => {
-      console.log(`There was an error getting question data: ${error}`);
-    });
+    .catch((err) => {
+      console.log(`There was an error getting question data: ${err}`);
+    })
+    .then(() => {
+      axios.post('/productsForQuestions', {
+        productId: this.state.productId
+      })
+      .then((productData) => {
+        this.setState({
+          productName: productData.data
+        })
+      })
 
-    // axios.post('/productsForQuestions', {
-    //   productId: this.state.productId
-    // })
-    // .then((productData) => {
-    //   this.setState({
-    //     productName: productData.data
-    //   })
-    // })
+    })
+    .catch((err) => {
+      console.log(`There was an error getting the product name: ${err}`);
+    })
+
   }
 
   onTextChange (e) {
     this.setState({
       [e.target.id]: e.target.value
-    }, this.searchUpdate());
+    }, () => { this.searchUpdate() });
   }
 
   searchUpdate () {
-    // ARRAY SEEMS TO BE BEHIND BY ONE CHARACTER
-    let search = [];
+    let questionDiv = document.getElementById('questionList');
+    let searchDiv = document.getElementById('searchedList');
 
-    for (var i = 0; i < this.state.questions.length; i++) {
-      let currentQuestion = this.state.questions[i].question_body;
-      if (currentQuestion.includes(this.state.searchText)) {
-        search.push(this.state.questions[i]);
+    if (this.state.searchText.length >= 3) {
+      questionDiv.style.display = 'none';
+      searchDiv.style.display = '';
+
+
+      let search = [];
+      let searchTerm = this.state.searchText;
+
+      for (var i = 0; i < this.state.questions.length; i++) {
+        let currentQuestion = this.state.questions[i].question_body;
+
+        if (currentQuestion.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          search.push(this.state.questions[i]);
+        }
       }
-    }
 
-    this.setState({
-      searched: search
-    }, () => { console.log(this.state.searched) });
+      this.setState({
+        searched: search
+      });
+
+    } else {
+      if (questionDiv.style.display === 'none') {
+        questionDiv.style.display = '';
+        searchDiv.style.display = 'none';
+
+        this.setState({
+          searched: []
+        });
+      };
+    };
+
+
   }
 
   loadMoreQuestions () {
@@ -188,7 +216,7 @@ class Questions_Answers extends React.Component {
         <div className="QnAContainer color" data-testid="QnAWidget">
           <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
           <h3 className="QnAPadLeft">There isn't any questions for this product yet</h3>
-          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn">Add a Question +</div>
+          <div className="questionButton" onClick={this.handleQuestionModal.bind(this)} data-testid="questionBtn"><b>ADD A QUESTION +</b></div>
 
           {
             this.state.modalUp ?
@@ -203,12 +231,12 @@ class Questions_Answers extends React.Component {
         <div className="QnAContainer color" data-testid="QnAWidget">
           <div>
             <h4 id="QnAHeader">QUESTIONS &amp; ANSWERS</h4>
-            <Search text={this.state.searchText}  searchChange={this.onTextChange.bind(this)} />
-            <div id="questionList" data-testid="questionList">
-              <div>
-                {this.state.searchText.length < 2 ? this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> ) : this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}
+            <Search text={this.state.searchText} searchChange={this.onTextChange.bind(this)} />
+            <div>
+                <div id="questionList" data-testid="questionList">{this.state.displayedQuestions.map((question) => <Questions question={question} product={this.state.productName} refresh={this.componentDidMount.bind(this)}/> )}</div>
 
-              </div>
+                <div id="searchedList">{this.state.searched.map((search) => <Questions question={search} product={this.state.productName} refresh={this.componentDidMount.bind(this)} />)}</div>
+
               <div>
                 {
                   this.state.modalUp ?

@@ -12,31 +12,62 @@ class Ratings_Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: this.props.productId,
-      data: []
+      productId: 64913,
+      stars: 0,
+      data: [],
+      reviewInfo: []
     };
   }
 
-  componentDidMount() {
+  UNSAFE_componentWillReceiveProps (props) {
+    this.setState({['productId']: props.productId});
+    console.log('product ID ' + props.productId)
     axios.post('/reviews', {
-      productId: this.props.productId,
+      productId: props.productId
     })
     .then((response) => {
       console.log('Successful Reviews Request');
-      this.setState({['data']: response.data});
+      console.log(response.data.results);
+      this.setState({['data']: response.data.results});
     }).catch((error) => {
-      console.log('error', 'error');
+      console.log('error', error);
+    });
+
+    axios.post('/reviews/meta' , {
+      productId: props.productId
     })
+    .then((response) => {
+      console.log('Get those stars');
+      console.log(response.data);
+      var ratingsObj = response.data.ratings;
+      var totalReviews = 0;
+      var totStars = 0;
+      var ratingsArr = Object.values(ratingsObj);
+      var ratingsNumArr = [];
+      for (var i = 0; i <= ratingsArr.length - 1; i++) {
+        let currentInt = parseInt(ratingsArr[i]);
+        ratingsNumArr.push(currentInt);
+        totalReviews += currentInt;
+        totStars = totStars + (currentInt * (i+1));
+      };
+      var starRating = parseInt(totStars/totalReviews);
+      this.setState({['stars']: starRating});
+      this.setState({['reviewInfo']: ratingsNumArr});
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
   render() {
+    console.log(this.state.data);
     return (
       <div>
-        <Summary />
-        <Stars/>
-        <Review/>
-        <More/>
-        <Add/>
+        <h2>Ratings & Reviews</h2>
+        <Stars stars={this.state.stars}/>
+        <Summary reviewData={this.state.data}/>
+        <Review reviewData={this.state.data}/>
+        <More reviewData={this.state.data}/>
+        <Add productId={this.state.productId}/>
       </div>
     );
   }

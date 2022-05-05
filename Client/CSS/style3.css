@@ -81,6 +81,12 @@
   overflow-y: scroll;
 }
 
+#searchedList {
+  max-height: 80vh;
+  overflow-y: scroll;
+  display: 'none';
+}
+
 #toggleAnswers {
   font-size: 12px;
 }
@@ -150,7 +156,7 @@ span:nth-child(2) {
   border: 1px solid rgb(199, 199, 199);
   background-image: url(https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png);
   background-size: 17px 17px;
-  background-position: 975px 14px;
+  background-position: 119vh 1vw;
   background-repeat: no-repeat;
   font-weight: 600;
   font-size: 15px;
