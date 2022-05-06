@@ -1,5 +1,6 @@
 import React from 'react';
 import SizeSelector from './SubComponentLevel1/SizeSelector.js';
+import AddToOutfit from './SubComponentLevel1/AddToOutfit.js';
 import QuantitySelector from './SubComponentLevel1/QuantitySelector.js';
 import AddToCartButton from './SubComponentLevel1/AddToCartButton.js';
 
@@ -10,7 +11,8 @@ class AddToCart extends React.Component {
       currentStyle : null,
       selectedSize: null,
       selectedQuantity: null,
-      productId: null
+      productId: null,
+      addToOutfit: false,
     };
   }
 
@@ -38,14 +40,19 @@ class AddToCart extends React.Component {
   }
 
   onAddToBagClick () {
-    console.log('clicked')
     var data = {
       sizeId : this.state.selectedSize,
       quantity : this.state.selectedQuantity,
       currentStyle: this.state.currentStyle,
       productId: this.state.productId
     };
-    // console.log(data)
+  }
+  onAddToOutfitClick () {
+    if (this.state.addToOutfit) {
+      this.setState({['addToOutfit']: false})
+    } else {
+      this.setState({['addToOutfit']: true})
+    }
   }
 
   render() {
@@ -58,6 +65,7 @@ class AddToCart extends React.Component {
         <div className = "SelectorRender">
         <QuantitySelector currentStyle={this.state.currentStyle}
         onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
+        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this), this} add = {this.state.addToOutfit}/>
         {(this.state.selectedQuantity && this.state.selectedSize) ?
         <AddToCartButton sizeId = {this.state.selectedSize}
         quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
