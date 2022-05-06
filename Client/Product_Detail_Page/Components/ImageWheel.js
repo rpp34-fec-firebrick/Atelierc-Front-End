@@ -107,8 +107,8 @@ class ImageWheel extends React.Component {
 
   render() {
     return (
-      <div className ="generalPhotoDisplay">
-        <div className="imageWheel">
+      <div className ="photoDisplay">
+        <div className="wheelimageGrid">
           {(this.state.showUp) ?
           <ion-icon name="chevron-up-outline" onClick={this.imageWheelClick.bind(this)}></ion-icon>
           : null}
@@ -125,12 +125,10 @@ class ImageWheel extends React.Component {
           <ion-icon name="chevron-down-outline" onClick={this.imageWheelClick.bind(this)}></ion-icon>
           : null}
         </div>
-        <div className = "imageStack">
+
+        <div className = "centralPhotoGrid">
           <img id = "CentralPhoto1" onMouseMove = {this._onMouseMove.bind(this)} className = "CentralPhoto1" src = {this.state.largePhoto}/>
           <div id = "image-zoom" className = "zoom-result" ></div>
-          <div>
-            {(this.state.largePhoto !== null) ? this.imageZoom() : null}
-          </div>
         </div>
       </div>
     );

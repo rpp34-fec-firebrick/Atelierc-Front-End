@@ -136,6 +136,11 @@ componentDidMount () {
         updateOutfit = {this.updateOutfit.bind(this)}
         stars = {this.state.starValue}
         />
+        <br></br> <br></br> <br></br> <br></br>
+        {/* <Product_Detail_Page productId={this.state.currentProductId}
+        updateOutfit = {this.updateOutfit.bind(this)}
+        stars = {this.state.starValue}
+        /> */}
         <div id="RatingsReviews">
         <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>
