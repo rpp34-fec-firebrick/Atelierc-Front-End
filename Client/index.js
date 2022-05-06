@@ -24,16 +24,10 @@ class App extends React.Component {
 
     window.addEventListener('hashchange', (e) => {
       window.location.reload();
-      // this.onRouteChange(e);
-    })
+    });
   }
 
 componentDidMount () {
-  // var randomIndex = Math.floor(Math.random() * 1011)
-  // randomIndex += 64620;
-  // var randomIndex = 64620;
-
-  // window.location.replace(`/${this.state.currentProductId}`);
 
   axios.post('/products', {
     productId: this.state.currentProductId
@@ -50,26 +44,6 @@ componentDidMount () {
   }).catch((error) => {
     console.log('error', 'error');
   });
-
-  axios.post('/reviews', {
-    productId: this.state.currentProductId,
-  })
-  .then((response) => {
-    console.log('Successful Reviews Request')
-  }).catch((error) => {
-    console.log('error', 'error');
-  });
-}
-
-onRouteChange (e) {
-  e.preventDefault();
-  let newRoute = Number(window.location.hash.slice(1, window.location.hash.length));
-
-  console.log('NEW ROUTE', newRoute);
-
-  this.setState({
-    currentProductId: newRoute
-  })
 }
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
