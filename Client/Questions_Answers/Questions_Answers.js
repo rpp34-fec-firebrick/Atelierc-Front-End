@@ -9,8 +9,8 @@ class Questions_Answers extends React.Component {
     super(props);
 
     this.state = {
-      productId: 0,
-      productName: 'A Pretend Product, but only for now',
+      productId: props.productId,
+      productName: '',
       questions: [],
       displayedQuestions: [],
       searched: [],
@@ -19,8 +19,8 @@ class Questions_Answers extends React.Component {
       searchText: '',
     };
 
-  }
 
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.productId !== prevState.productId) {
       return { productId: nextProps.productId };

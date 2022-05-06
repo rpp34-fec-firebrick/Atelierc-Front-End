@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Product_Detail_Page from './Product_Detail_Page/Product_Detail_Page.js'
 import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.js'
 import Questions_Answers from './Questions_Answers/Questions_Answers.js'
@@ -11,8 +10,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+
     this.state = {
-      currentProductId: 64912,
+      currentProductId: Number(window.location.hash.slice(1, window.location.hash.length)),
       starValue: 0,
       reviews: [],
       styles: {},
@@ -21,19 +22,15 @@ class App extends React.Component {
       productData: {},
     };
 
+    window.addEventListener('hashchange', (e) => {
+      window.location.reload();
+      // this.onRouteChange(e);
+    })
   }
 
-  // Initial Post Request to the Server
-
 componentDidMount () {
-<<<<<<< HEAD
   // var randomIndex = Math.floor(Math.random() * 1011)
   // randomIndex += 64620;
-=======
-  console.log(this.state.currentProductId);
-  var randomIndex = Math.floor(Math.random() * 1011)
-  randomIndex += 64620;
->>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
   // var randomIndex = 64620;
 
   // window.location.replace(`/${this.state.currentProductId}`);
@@ -54,7 +51,6 @@ componentDidMount () {
     console.log('error', 'error');
   });
 
-<<<<<<< HEAD
   axios.post('/reviews', {
     productId: this.state.currentProductId,
   })
@@ -64,30 +60,24 @@ componentDidMount () {
     console.log('error', 'error');
   });
 }
-=======
-    axios.post('/questions', {
-      productId: randomIndex
-    })
-    .then((response) => {
-      console.log('Successful Question Request')
-    }).catch((error) => {
-      console.log('error', 'error');
-    })
 
-    // axios.post('/reviews', {
-    //   productId: 64219
-    // })
-    //   .then((response) => {
-    //     console.log('Successful Reviews Request')
-    //   }).catch((error) => {
-    //     console.log('error', 'error');
-    //   })
-  }
->>>>>>> 11a52e7cf5c954b089d806573c43857e68fa1596
+onRouteChange (e) {
+  e.preventDefault();
+  let newRoute = Number(window.location.hash.slice(1, window.location.hash.length));
 
+  console.log('NEW ROUTE', newRoute);
+
+  this.setState({
+    currentProductId: newRoute
+  })
+}
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
-    this.setState({ currentProductId: productId });
+    this.setState({ currentProductId: productId }, () => {
+      window.location.replace(`/#${this.state.currentProductId}`);
+    });
+
+
   }
 
   //this click function handle client's adding current item to the myoutfit list
@@ -102,6 +92,7 @@ componentDidMount () {
       }
     }
   }
+
 
   //this click function handle client's deleting an item to the myoutfit list
   onClickMyOutfitDeleteEvent(deletedProdId) {
@@ -145,6 +136,5 @@ componentDidMount () {
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -21,7 +21,6 @@ app.use(expressStaticGzip(path.join(__dirname, '../dist'), {
 }));
 app.use(express.static(path.join(__dirname, '../Client')));
 
-
 app.post('/products', (req, res) => {
   var productId = req.body.productId;
   requests.getAllProducts(productId, (error, response) => {
