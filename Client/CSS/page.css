@@ -59,11 +59,6 @@
   padding: 5px;
 }
 
-/* .imageWheel {
-  border: 5px solid red;
-} */
-
-
 .borderStyle {
   max-height: 75px;
   max-width: 75px;
@@ -140,7 +135,30 @@
   border-radius: 2px;
   padding: 5px;
 }
+.generalBorder {
+  border: 1.5px solid black;
+}
 
+.addToOutfitBox {
+  border: 1.5px solid black;
+  border-radius: 2px;
+}
+
+.zoom-lens {
+  position: absolute;
+  border: 2px solid white;
+  width: 50px;
+  height: 50px;
+}
+
+.zoom-result {
+  border: 2px solid black;
+}
+#image-zoom {
+  border: 2px solid green;
+  height: 300px;
+  width: 500px;
+}
 
 /*
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

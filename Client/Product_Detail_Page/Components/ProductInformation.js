@@ -1,4 +1,5 @@
 import React from 'react';
+import StarsProductPage from './SubComponentLevel1/Stars.js';
 
 class ProductInformation extends React.Component {
   constructor(props) {
@@ -7,11 +8,13 @@ class ProductInformation extends React.Component {
       productData : null,
       currentSelectedStyle : null,
       strikeThrough : 'noStrike',
-      sale_price : null
+      sale_price : null,
+      stars: null
     }
   }
   UNSAFE_componentWillReceiveProps (props) {
     if (props !== undefined) {
+      this.setState({['stars']: props.stars})
       this.setState({['productData']: props.data})
       this.setState({['currentSelectedStyle']: props.style})
       if (props.style?.sale_price === null) {
@@ -28,7 +31,7 @@ class ProductInformation extends React.Component {
       <div>
         <br></br>
         <div className = "makeInline">
-        Star Rating (To be added)
+        <StarsProductPage stars ={this.state.stars}/>
         <br></br>
           <u>
             <a href="#RatingsReviews">Read all Reviews</a>

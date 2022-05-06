@@ -4,6 +4,7 @@ require('dotenv').config();
 var getAllProducts  = (productId, callback) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
+
   var count = 0;
   var dataSummary = [];
   var endPointsArray = [`/${productId}`, `/${productId}/styles`, `/${productId}/related`];
