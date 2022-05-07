@@ -29,6 +29,10 @@ const server = setupServer(
 
     rest.post('/productsForQuestions', (req, res, ctx) => {
       return res(ctx.json('Some Fabric'));
+    }),
+
+    rest.post('/answerHelpful', (req, res, ctx) => {
+      return res.end();
     })
   );
 
@@ -133,6 +137,29 @@ describe('Questions and Answers Widget', () => {
     // await waitFor(() => expect(screen.getByTestId('modal')).not.toBeInTheDocument());
   });
 
+  test('Modal should return an alert if not all the fields are filled out for a question submission', async () => {
+    render(<Questions_Answers />);
+
+    const questionBtn = screen.getByTestId('questionBtn');
+
+    fireEvent.click(questionBtn);
+
+    const questionBody = screen.getByTestId('questionBody');
+    const submit = screen.getByTestId('submitQuestion');
+
+    fireEvent.change(questionBody, {
+      target: {
+        value: 'Testing question body'
+      }
+    });
+
+    fireEvent.click(submit);
+
+    await waitFor(() => expect(screen.getByRole('alert').toBeInTheDocument()));
+
+    // await waitFor(() => expect(screen.getByTestId('modal')).not.toBeInTheDocument());
+  });
+
   test('Answer modal inputs should change', async () => {
     render(<Questions_Answers productId={64912} />);
 
@@ -171,6 +198,32 @@ describe('Questions and Answers Widget', () => {
 
     fireEvent.click(submit);
 
+    // await waitFor(() => expect(screen.getByTestId('modal')).not.toBeInTheDocument());
+  });
+
+  test('Modal should return an alert if not all the fields are filled out for an answer submission', async () => {
+    render(<Questions_Answers productId={64912} />);
+
+    await waitFor(() => screen.getByTestId('questionList'));
+
+    const addAnswerBtn = screen.queryAllByTestId('addAnswer')[0];
+
+    fireEvent.click(addAnswerBtn);
+
+    const answerBody = screen.getByTestId('answerBody');
+    const nickname = screen.getByTestId('nickname');
+    const email = screen.getByTestId('email');
+    const submit = screen.getByTestId('submitAnswer');
+
+    fireEvent.change(answerBody, {
+      target: {
+        value: 'Testing answer body'
+      }
+    });
+
+    fireEvent.click(submit);
+
+    await waitFor(() => expect(screen.getByRole('alert').toBeInTheDocument()));
     // await waitFor(() => expect(screen.getByTestId('modal')).not.toBeInTheDocument());
   });
 
@@ -266,4 +319,24 @@ describe('Questions and Answers Widget', () => {
     expect(answers.length).toEqual(2);
   });
 
-  });
+  // test('Clicking that an answer is helpful should raise its number', async () => {
+  //   render(<Questions_Answers productId={64912} />);
+
+  //   await waitFor(() => screen.getByTestId('questionList'));
+
+  //   const helpfulnessPreClick = screen.queryAllByTestId('answerHelpfulness')[0];
+
+  //   console.log('*******************************HELPFULNESS', helpfulnessPreClick);
+
+  //   fireEvent.click(screen.queryAllByTestId('answerHelpful')[0]);
+
+  //   await waitFor(() => screen.queryAllByTestId('answerHelpful')[0].toEqual('67'));
+
+  //   const helpfulnessPostClick = screen.queryAllByTestId('answerHelpfulness')[0];
+
+  //   console.log('***********************HELPFULNESS',helpfulnessPreClick, helpfulnessPostClick);
+
+  //   expect(helpfulnessPreClick).not.toEqual(helpfulnessPostClick);
+  // });
+
+});

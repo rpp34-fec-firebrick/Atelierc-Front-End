@@ -115,7 +115,7 @@ class Modal extends React.Component {
     return (
       <div className="lightText" id={`${this.props.type}Modal`} data-testid="modal">
         <div id={`${this.props.type}ModalContent`}>
-          <span className="close" onClick={() => { this.props.toggleModal() }}>&times;</span>
+          <span className="close" onClick={() => { this.props.toggleModal() }} data-testid="close">&times;</span>
           {
             this.props.type === 'question' ?
             <div>
