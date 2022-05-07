@@ -161,7 +161,7 @@ class ImageWheel extends React.Component {
           : null}
         </div>
 
-        <div className = "centralPhotoGrid">
+        <div className = "centralGridMainPhoto">
           {/* <img id = "CentralPhoto1Grid" onMouseMove = {this._onMouseMove.bind(this)}
           className = "CentralPhoto1" src = {this.state.largePhoto}/> */}
           <img id = "CentralPhoto1Grid"

@@ -32,6 +32,7 @@
 .styleSelectionGrid {
   grid-column: 8/13;
   grid-row: 8/15;
+  max-width: 375px;
 }
 
 .addToCartGrid {
@@ -47,14 +48,15 @@
   row-gap: 10px;
 }
 
-.centralPhotoGrid {
-  grid-column: 5/10;
-  grid-row: 1/6;
-}
 
 #CentralPhoto1Grid {
-  object-fit: scale-down;
+  object-fit: contain;
   overflow: hidden;
+  max-width: 100%;
+}
+.centralGridMainPhoto {
+  grid-column: 6/21;
+  grid-row: 1/4;
 }
 
 .img-zoom-lens{
