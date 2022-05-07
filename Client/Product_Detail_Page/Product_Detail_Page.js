@@ -23,15 +23,13 @@ class Product_Detail_Page extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps (props) {
-    // this.setState({currentProductId: props.productId})
+    this.setState({currentProductId: props.productId})
     this.setState({['stars']: props.stars})
-    this.setState({currentProductId: 64620})
+    // this.setState({currentProductId: 64620})
     this.setState({['updateOutfit']: props.updateOutfit});
-    // axios.post('/products', {
-    //   productId: props.productId
-    // })
+
     axios.post('/products', {
-      productId: 64620
+      productId: props.productId
     })
     .then((response) => {
       console.log('Successful Product Request')
@@ -56,6 +54,7 @@ class Product_Detail_Page extends React.Component {
   }
 
   handleStyleClick (event) {
+
     var clickedOnStyleId = Number(event.target.name);
     var currentStyles = this.state.styles.results;
     for (var i = 0; i < currentStyles.length; i++) {

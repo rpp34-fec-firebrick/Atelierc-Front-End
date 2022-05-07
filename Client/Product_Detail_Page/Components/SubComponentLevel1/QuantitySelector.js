@@ -19,8 +19,8 @@ class QuantitySelector extends React.Component {
       this.setState({['selectedSize']: props.selectedSize})
       this.setState({['onQuantityChange']: props.onChange})
       if (props.selectedSize !== null) {
-        var skuValue = props.selectedSize;
-        var quantity = props.currentStyle.skus[skuValue].quantity;
+        var skuValue = props?.selectedSize;
+        var quantity = props?.currentStyle?.skus[skuValue]?.quantity;
         var len = (quantity > 15) ? 15 : quantity;
         var arr = [];
         for (var i = 1; i <= len; i++) {
@@ -40,12 +40,12 @@ class QuantitySelector extends React.Component {
     return (
       <div>
         <label for="size-select"></label>
-        <select name="pets" className="quantitySelector" onChange={this.state.onQuantityChange}>
-          {(this.state.outOfStock) ?
+        <select className="quantitySelector" onChange={this.state?.onQuantityChange}>
+          {(this.state?.outOfStock) ?
           <option value="">Out of Stock!</option> :
           <option value="">Select Quantity!</option>}
-        {(this.state.selectedSku !== null && this.state.outOfStock === false) ?
-          this.state.selectedSku?.map((item) =>
+        {(this.state?.selectedSku !== null && this.state?.outOfStock === false) ?
+          this.state?.selectedSku?.map((item) =>
           <QuantitySelectorRender index = {item} key = {item}/> )
           : null
         }

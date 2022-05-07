@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: 64912,
-      starValue: 5,
+      currentProductId: Number(window.location.hash.slice(1, window.location.hash.length)),
+      starValue: 0,
       reviews: [],
       styles: {},
       myOutfit: [],
@@ -21,53 +21,45 @@ class App extends React.Component {
       productData: {},
     };
 
+
+    window.addEventListener('hashchange', (e) => { window.location.reload(); });
+
   }
 
   // Initial Post Request to the Server
 
 componentDidMount () {
-  // console.log(this.state.currentProductId);
-  var randomIndex = Math.floor(Math.random() * 1011)
-  randomIndex += 64620;
-  this.setState({['currentProductId']: randomIndex})
+  // var randomIndex = Math.floor(Math.random() * 1011)
+  // randomIndex += 64620;
   // var randomIndex = 64620;
 
   // window.location.replace(`/${this.state.currentProductId}`);
 
-  // axios.post('/products', {
-  //   productId: this.state.currentProductId
-  // })
-  // .then((response) => {
-  //   console.log('Successful Product Request')
-  //   //Update State Based on Data
-  //   //Each if Statement in the for loop is associated with a unique identifier in state
-  //   for (var i = 0; i < response.data.length; i++) {
-  //     if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
-  //     if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
-  //     if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
-  //   }
-  // }).catch((error) => {
-  //   console.log('error', 'error');
-  // });
+  axios.post('/products', {
+    productId: this.state.currentProductId
+  })
+  .then((response) => {
+    console.log('Successful Product Request')
+    //Update State Based on Data
+    //Each if Statement in the for loop is associated with a unique identifier in state
+    for (var i = 0; i < response.data.length; i++) {
+      if (response.data[i].length) this.setState({['relatedProducts']: response.data[i]});
+      if (response.data[i].campus !== undefined) this.setState({['productData']: response.data[i]});
+      if (response.data[i].results !== undefined) this.setState({['styles']: response.data[i]});
+    }
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
 
-  //   axios.post('/questions', {
-  //     productId: randomIndex
-  //   })
-  //   .then((response) => {
-  //     console.log('Successful Question Request')
-  //   }).catch((error) => {
-  //     console.log('error', 'error');
-  //   })
-
-    // axios.post('/reviews', {
-    //   productId: 64219
-    // })
-    //   .then((response) => {
-    //     console.log('Successful Reviews Request')
-    //   }).catch((error) => {
-    //     console.log('error', 'error');
-    //   })
-  }
+  axios.post('/reviews', {
+    productId: this.state.currentProductId,
+  })
+  .then((response) => {
+    console.log('Successful Reviews Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
+}
 
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
@@ -109,6 +101,7 @@ componentDidMount () {
       myOutfit: newProductList
     })
   }
+
   updateOutfit (value) {
     var currentProductId = this.state.currentProductId
     console.log(value)
@@ -132,15 +125,7 @@ componentDidMount () {
   render() {
     return (
       <div>
-        <Product_Detail_Page productId={this.state.currentProductId}
-        updateOutfit = {this.updateOutfit.bind(this)}
-        stars = {this.state.starValue}
-        />
-        <br></br> <br></br> <br></br> <br></br>
-        {/* <Product_Detail_Page productId={this.state.currentProductId}
-        updateOutfit = {this.updateOutfit.bind(this)}
-        stars = {this.state.starValue}
-        /> */}
+        <Product_Detail_Page productId={this.state.currentProductId}/>
         <div id="RatingsReviews">
         <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>
