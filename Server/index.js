@@ -183,6 +183,34 @@ app.post('/review/post', (req, res) => {
   })
 });
 
+app.post('/review/helpful', (req, res) => {
+  var reviewId = req.body.reviewId;
+  requests.helpfulReview(reviewId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+      console.log('error posting helpful for ' + reviewId);
+    } else {
+      console.log('Successful helpful post')
+      res.sendStatus(204);
+    }
+  })
+});
+
+app.post('/review/report', (req, res) => {
+  var reviewId = req.body.reviewId;
+  requests.reportReview(reviewId, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+      console.log('error posting report for ' + reviewId);
+    } else {
+      console.log('Successful report post')
+      res.sendStatus(204);
+    }
+  })
+});
+
+
+
 app.post('/relatedProductId', (req, res) => {
   //this is an array of all related product IDs
   var productIds = req.body.productIds;

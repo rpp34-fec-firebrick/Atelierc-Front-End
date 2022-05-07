@@ -33,7 +33,7 @@ class Stars extends React.Component {
     } else if (this.props.stars === 5) {
       return (
         <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-o"></span>
+          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>
         </div>
       );
     } else if (this.props.stars === 0) {

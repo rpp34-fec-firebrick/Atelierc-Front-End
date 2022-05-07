@@ -54,7 +54,7 @@ var getAllReviews  = (productId, callback) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`, {
     params: {
       product_id: productId,
-      count: 15,
+      count: 30,
       page: 1,
       sort: 'relevant'
     }
@@ -175,6 +175,32 @@ var postReviews  = (productId, productObject, callback) => {
   })
 }
 
+var helpfulReview  = (reviewId, callback) => {
+  var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewId}/helpful`
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.put(url)
+  .then((response) => {
+    const data = response.data;
+    callback(null, data);
+  }).catch((error) => {
+    console.log(`There was an error posting helpful review: ${error}`);
+    callback(error, null)
+  })
+}
+
+var reportReview  = (reviewId, callback) => {
+  var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${reviewId}/report`
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+  axios.put(url)
+  .then((response) => {
+    const data = response.data;
+    callback(null, data);
+  }).catch((error) => {
+    console.log(`There was an error reporting review: ${error}`);
+    callback(error, null)
+  })
+}
+
 module.exports.getAllReviews = getAllReviews;
 module.exports.getAllProducts = getAllProducts;
 module.exports.getAllQuestions = getAllQuestions;
@@ -183,3 +209,5 @@ module.exports.getRelatedProductInfo = getRelatedProductInfo;
 module.exports.getRelatedProductStyle = getRelatedProductStyle;
 module.exports.getMetaReviews = getMetaReviews;
 module.exports.postReview = postReviews;
+module.exports.helpfulReview = helpfulReview;
+module.exports.reportReview = reportReview;
