@@ -29,16 +29,18 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div>
-        <br></br>
         <div className = "makeInline">
-        <StarsProductPage stars ={this.state.stars}/>
-        <br></br>
-          <u>
+          <div className = "starProductPage">
+            <StarsProductPage stars ={this.state.stars}/>
+          </div>
+          <div className = "readReviews">
             <a href="#RatingsReviews">Read all Reviews</a>
-          </u>
+          </div>
         </div>
-        <br></br>
+      <br></br>
+        <h3>
         {(this.state.productData) ? this.state.productData.category : null}
+          </h3>
         <h1>
         {(this.state.productData) ? this.state.productData.name : null}
         </h1>
@@ -46,6 +48,7 @@ class ProductInformation extends React.Component {
         ${(this.state.currentSelectedStyle) ? this.state.currentSelectedStyle.original_price : null}
         </div>
         {this.state.sale_price ? `Our Sale Price is $${this.state.sale_price}!`: null}
+        <br></br>
       </div>
     );
   }
