@@ -55,6 +55,7 @@ class ImageWheel extends React.Component {
         this.setState({['firstWheelPhotoIndex']: newStartIndex});
         this.setState({['wheelPhotos']: this.state.allWheelPhotos.slice(newStartIndex, newEndIndex)});
       }
+
     }
   }
 
@@ -62,39 +63,6 @@ class ImageWheel extends React.Component {
     this.setState({['largePhoto']: event.target.name})
   }
 
-  // imageZoom () {
-  //   var image = document.getElementById('CentralPhoto1Grid');
-  //   var magnifyingGlass = document.createElement('div');
-  //   magnifyingGlass.setAttribute("class", "newMagnifyingGlass");
-  //   image.parentElement.insertBefore(magnifyingGlass, image);
-
-  //   var zoom = 3;
-
-  //   magnifyingGlass.style.backgroundImage = "url('" + image.src + "')";
-  //   magnifyingGlass.style.backgroundRepeat = "no-repeat";
-  //   magnifyingGlass.style.backgroundSize = (image.width * zoom) + "px" + (image.height * zoom) + "px";
-
-  //   var w = magnifyingGlass.offsetWidth / 2;
-  //   var h = magnifyingGlass.offsetHeight / 2;
-
-  //   magnifyingGlass.addEventListener("mousemove", moveMagnifier);
-  //   image.addEventListener("mousemove", moveMagnifier);
-
-  //   var x = this.state.mouseX;
-  //   var y = this.state.mouseY;
-
-  //   if (x > image.width - (w / zoom)) x = image.width - (w / zoom);
-  //   if (x < w / zoom) x = w / zoom;
-  //   if (y > image.height - (h / zoom)) y = image.height - (h / zoom);
-  //   if (y < h / zoom) y = h / zoom;
-
-  //   magnifyingGlass.style.left = (x - w) + "px";
-  //   magnifyingGlass.style.top = (y - h) + "px";
-  //   magnifyingGlass.style.backgroundPosition = "-" + ((x * zoom) - w + zoom) + "px -" + ((y * zoom) - h + zoom) + "px";
-  //   console.log('hi')
-
-  //   // setTimeout(magnifyingGlass.remove(),160);
-  // }
 
   imageZoom () {
     console.log('hi')
@@ -147,12 +115,12 @@ class ImageWheel extends React.Component {
           {(this.state.showUp) ?
           <ion-icon name="chevron-up-outline" onClick={this.imageWheelClick.bind(this)}></ion-icon>
           : null}
-          <br></br>
+          <br></br><br></br>
             <div className ='imageRender1'>
             {(this.state.wheelPhotos) ?
             this.state.wheelPhotos?.map((item) =>
             <ImageRender onClick ={this.handleImageClick.bind(this)}
-            image = {item} imageUrl = {item.url} key = {item.url}/>)
+            image = {item} imageUrl = {item.url} key = {item.url} selected = {item.url === this.state.largePhoto}/>)
             : null}
             <br></br>
           </div>

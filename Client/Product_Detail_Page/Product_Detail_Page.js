@@ -56,6 +56,7 @@ class Product_Detail_Page extends React.Component {
   }
 
   handleStyleClick (event) {
+
     var clickedOnStyleId = Number(event.target.name);
     var currentStyles = this.state.styles.results;
     for (var i = 0; i < currentStyles.length; i++) {
