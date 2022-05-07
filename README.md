@@ -1,4 +1,4 @@
-# FEC
+# Front End Capstone | Hack Reactor
 
 Hello! Welcome to our team's Front End Capstone, or FEC for short.
 
