@@ -73,7 +73,7 @@
 
 .wheelimageGrid {
   grid-column: 3/4;
-  grid-row-start: 2;
+  grid-row-start: 1;
   text-align: center;
 }
 
@@ -90,11 +90,14 @@
 }
 
 .styleRender {
-  max-height: 75px;
-  max-width: 75px;
-  display: inline-block;
-  position: relative;
+  /* max-height: 75px; */
+  /* max-width: 75px; */
+  /* display: inline-block; */
+  /* position: absolute; */
   border-radius: 50%;
+  margin: 0%;
+  padding: 0%;
+  border: 5px solid black;
 }
 
 
@@ -111,9 +114,6 @@
 
 .strike {
   text-decoration: line-through;
-}
-.styleName {
-  flex: left;
 }
 
 .makeInline {
@@ -221,6 +221,9 @@
   padding: 5px;
   width: 100%;
   object-fit: contain;
+}
+.checkLocationRender {
+  display: flex;
 }
 
 /*
