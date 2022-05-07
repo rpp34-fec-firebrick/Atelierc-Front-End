@@ -1,3 +1,20 @@
+.summaryArea {
+  display:inline-block;
+  width: 30%;
+  vertical-align: top;
+}
+
+.reviewArea {
+  display:inline-block;
+  width: 70%;
+}
+
+.reviewContainer {
+  width: 70%;
+  padding-left: 15%;
+  margin-top: 10px;
+}
+
 #reviewPopup {
   display: none;
   position: fixed;
@@ -19,6 +36,16 @@
   width: 80%;
 }
 
+#summary {
+  width: 60%;
+  height: 40px;
+}
+
+#body {
+  width: 60%;
+  height: 200px;
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -35,4 +62,98 @@
 
 .checked {
   color: black;
+}
+
+.reviewButton {
+  display: inline-block;
+  border: 2px solid #565656;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  margin-right: 10px;
+  font-size: 18px;
+  transition-duration: 0.5s;
+  font-weight: bold;
+}
+
+.reviewButton:hover {
+  cursor: pointer;
+  background-color: #f3f2f2;
+}
+
+.indvReview {
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+}
+
+.buttons {
+  height: 100px;
+  margin-top: 20px;
+}
+
+.fa-star {
+  padding-left: 0px !important;
+}
+
+.fa-star-o {
+  padding-left:0px !important;
+}
+
+.numRating {
+  display: inline-block;
+  font-size: 70px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.starRating {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 15px;
+}
+
+.reviewStars {
+  display: inline-block;
+  width: 30px;
+}
+
+.rating {
+  display: inline-block;
+  border:none;
+}
+.rating:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+  clip:rect(0, 0, 0, 0);
+}
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  padding:0 .1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:200%;
+  line-height:1.2;
+  color:#ddd;
+}
+.rating:not(:checked) > label:before {
+  content:'★ ';
+}
+.rating > input:checked ~ label {
+  color: black;
+}
+.rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+  color: black;
+}
+.rating > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .rating > label:hover ~ input:checked ~ label {
+  color: black;
+}
+.rating > label:active {
+  position:relative;
+}
+
+.recommendPercent {
+  font-size: 12px !important;
+  margin-bottom: 10px;
 }
