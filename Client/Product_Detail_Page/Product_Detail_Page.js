@@ -17,12 +17,16 @@ class Product_Detail_Page extends React.Component {
       styles: '',
       currentStyle: {},
       currentProductId: null,
+      updateOutfit: null,
+      stars: null,
     };
   }
 
   UNSAFE_componentWillReceiveProps (props) {
     // this.setState({currentProductId: props.productId})
+    this.setState({['stars']: props.stars})
     this.setState({currentProductId: 64620})
+    this.setState({['updateOutfit']: props.updateOutfit});
     // axios.post('/products', {
     //   productId: props.productId
     // })
@@ -74,15 +78,24 @@ class Product_Detail_Page extends React.Component {
         <div className = "pageHeader"></div>
         <div className = "productDetailPage1">
 
-
           <div className = "layout1">
+
               <ImageWheel images = {this.state.styles}
                styleId = {this.state.currentStyle}/>
+
             <div className = "Layout2ProductInfo">
-              <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
+
+              <ProductInformation data = {this.state.productData}
+              style = {this.state.currentStyle}
+              stars = {this.state.stars}/>
+
               <StyleSelection onClick ={this.handleStyleClick.bind(this)}
               styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-              <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
+
+              <AddToCart currentStyle = {this.state.currentStyle}
+              productId = {this.state.currentProductId}
+              updateOutfit = {this.state.updateOutfit}
+              />
             </div>
 
           </div>

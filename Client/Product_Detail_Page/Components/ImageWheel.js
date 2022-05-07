@@ -12,6 +12,8 @@ class ImageWheel extends React.Component {
       firstWheelPhotoIndex: 0,
       showUp: false,
       showDown: false,
+      mouseX: null,
+      mouseY: null
     }
   }
   UNSAFE_componentWillReceiveProps (props) {
@@ -60,6 +62,49 @@ class ImageWheel extends React.Component {
     this.setState({['largePhoto']: event.target.name})
   }
 
+  imageZoom () {
+    console.log('hi')
+    var img, lens, result, cx, cy;
+    img = document.getElementById("CentralPhoto1");
+    result = document.getElementById("image-zoom");
+    lens = document.createElement("DIV");
+    lens.setAttribute("class", 'img-zoom-lens');
+
+    img.parentElement.insertBefore(lens, img);
+
+    cx = result.offsetWidth / lens.offsetWidth;
+    cy = result.offsetHeight / 1;
+
+    result.style.backgroundImage = "url('" + img.src + "')";
+    result.style.backgroundSize - (img.width * cx) + "px " + (img.height * cy) + "px";
+
+    lens.addEventListener("mouseOver", moveLens(this.state.mouseX, this.state.mouseY));
+    img.addEventListener("mouseMove", moveLens(this.state.mouseX, this.state.mouseY));
+    lens.addEventListener("touchmove", moveLens(this.state.mouseX, this.state.mouseY));
+    img.addEventListener("touchmove", moveLens(this.state.mouseX, this.state.mouseY));
+
+    function moveLens (xPos, yPos) {
+      console.log('hidfghj')
+      console.log(xPos)
+      var x = xPos - (lens.offsetWidth / 2);
+      var y = yPos - (lens.offsetHeight / 2);
+
+      if (x > img.width - lens.offsetWidth) x = img.width - lens.offsetWidth;
+      if (x < 0) x = 0;
+      if (y > img.height - lens.offsetHeight) y = img.height - lens.offsetHeight;
+      if (y < 0) y = 0;
+
+      lens.style.left = x + "px";
+      lens.style.top = y + "px";
+      result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+    }
+  }
+
+  _onMouseMove (event) {
+    this.setState({ mouseX: event.nativeEvent.offsetX, mouseY: event.nativeEvent.offsetY });
+    this.imageZoom()
+  }
+
   render() {
     return (
       <div className ="generalPhotoDisplay">
@@ -80,14 +125,16 @@ class ImageWheel extends React.Component {
           <ion-icon name="chevron-down-outline" onClick={this.imageWheelClick.bind(this)}></ion-icon>
           : null}
         </div>
-        <div>
-          <img className = "CentralPhoto1" src = {this.state.largePhoto}/>
+        <div className = "imageStack">
+          <img id = "CentralPhoto1" onMouseMove = {this._onMouseMove.bind(this)} className = "CentralPhoto1" src = {this.state.largePhoto}/>
+          <div id = "image-zoom" className = "zoom-result" ></div>
+          <div>
+            {(this.state.largePhoto !== null) ? this.imageZoom() : null}
+          </div>
         </div>
       </div>
     );
   }
 }
-
-
 
 export default ImageWheel;

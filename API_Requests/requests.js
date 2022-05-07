@@ -4,6 +4,7 @@ require('dotenv').config();
 var getAllProducts  = (productId, callback) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
+
   var count = 0;
   var dataSummary = [];
   var endPointsArray = [`/${productId}`, `/${productId}/styles`, `/${productId}/related`];
@@ -151,6 +152,29 @@ var getRelatedProductStyle  = (productIds, callback) => {
   }
 }
 
+var postReviews  = (productId, productObject, callback) => {
+  axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
+
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`, {
+      product_id: productId,
+      rating: productObject.rating,
+      summary: productObject.summary,
+      body: productObject.body,
+      recommend: productObject.recommend,
+      name: productObject.name,
+      email: productObject.email,
+      photos: productObject.photos,
+      characteristics: productObject.characteristics
+  })
+  .then((response) => {
+    const data = response.data;
+    callback(null, data);
+  }).catch((error) => {
+    console.log(`There was an error posting review: ${error}`);
+    callback(error, null)
+  })
+}
+
 module.exports.getAllReviews = getAllReviews;
 module.exports.getAllProducts = getAllProducts;
 module.exports.getAllQuestions = getAllQuestions;
@@ -158,3 +182,4 @@ module.exports.getRelatedProductId = getRelatedProductId;
 module.exports.getRelatedProductInfo = getRelatedProductInfo;
 module.exports.getRelatedProductStyle = getRelatedProductStyle;
 module.exports.getMetaReviews = getMetaReviews;
+module.exports.postReview = postReviews;

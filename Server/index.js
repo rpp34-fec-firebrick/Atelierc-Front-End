@@ -144,8 +144,6 @@ app.get('/images/:key', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   var productId = req.body.productId;
-  console.log('request body:' + req.body);
-  console.log('productID:' + productId);
   requests.getAllReviews(productId, (error, response) => {
     if (error) {
       res.sendStatus(500);
@@ -164,6 +162,21 @@ app.post('/reviews/meta', (req, res) => {
       res.sendStatus(500);
     } else {
       console.log('Successful getMetaReviews Data');
+      res.send(response);
+    }
+  })
+});
+
+app.post('/review/post', (req, res) => {
+  var productId = req.body.productId;
+  var productObject = req.body.productObject;
+  console.log('request body:' + req.body.productObject);
+  requests.postReview(productId, productObject, (error, response) => {
+    if (error) {
+      res.sendStatus(500);
+      console.log('error posting product review for ' + productId);
+    } else {
+      console.log('Successful review post')
       res.send(response);
     }
   })

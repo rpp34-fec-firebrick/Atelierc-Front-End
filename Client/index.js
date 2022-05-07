@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Product_Detail_Page from './Product_Detail_Page/Product_Detail_Page.js'
 import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.js'
 import Questions_Answers from './Questions_Answers/Questions_Answers.js'
@@ -10,11 +11,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
-
     this.state = {
-      currentProductId: Number(window.location.hash.slice(1, window.location.hash.length)),
-      starValue: 0,
+      currentProductId: 64912,
+      starValue: 5,
       reviews: [],
       styles: {},
       myOutfit: [],
@@ -22,12 +21,17 @@ class App extends React.Component {
       productData: {},
     };
 
-    window.addEventListener('hashchange', (e) => {
-      window.location.reload();
-    });
   }
 
+  // Initial Post Request to the Server
+
 componentDidMount () {
+  console.log(this.state.currentProductId);
+  var randomIndex = Math.floor(Math.random() * 1011)
+  randomIndex += 64620;
+  // var randomIndex = 64620;
+
+  // window.location.replace(`/${this.state.currentProductId}`);
 
   axios.post('/products', {
     productId: this.state.currentProductId
@@ -44,14 +48,20 @@ componentDidMount () {
   }).catch((error) => {
     console.log('error', 'error');
   });
+
+  axios.post('/reviews', {
+    productId: this.state.currentProductId,
+  })
+  .then((response) => {
+    console.log('Successful Reviews Request')
+  }).catch((error) => {
+    console.log('error', 'error');
+  });
 }
+
   //this click function handle related prodcut card click and update the current prodcut id
   onClickEvent(productId) {
-    this.setState({ currentProductId: productId }, () => {
-      window.location.replace(`/#${this.state.currentProductId}`);
-    });
-
-
+    this.setState({ currentProductId: productId });
   }
 
   //this click function handle client's adding current item to the myoutfit list
@@ -66,7 +76,6 @@ componentDidMount () {
       }
     }
   }
-
 
   //this click function handle client's deleting an item to the myoutfit list
   onClickMyOutfitDeleteEvent(deletedProdId) {
@@ -110,5 +119,6 @@ componentDidMount () {
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
