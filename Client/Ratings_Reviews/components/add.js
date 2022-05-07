@@ -1,60 +1,100 @@
 import React from 'react';
+import axios from 'axios';
 class Add extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      popup: false,
-      productId: this.props.productId,
+      productId: 0,
       rating: 0,
       summary: '',
       body: '',
       recommend: false,
-      name: '',
+      username: '',
       email: '',
       photos: [],
-      characteristics: {}
+      characteristics: {},
+      success: false
     };
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleStarChange = this.handleStarChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleReviewPopup () {
-    let reviewPopup = document.getElementById('reviewPopup');
-    if (!this.state.popup) {
-      reviewPopup.style.display = "block";
-      this.setState({
-        popup: true
-      })
-    } else {
-      reviewPopup.style.display = "none";
-      this.setState({
-        popup: false
-      })
-    }
+  handleTextChange (e) {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
   }
+
+  handleStarChange (e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit () {
+    var rating = parseInt(this.state.rating);
+    var productObj = {
+      rating: rating,
+      summary: this.state.summary,
+      body: this.state.body,
+      recommend: this.state.recommend,
+      name: this.state.username,
+      email: this.state.email,
+      photos: this.state.photos,
+      characteristics: this.state.characteristics
+    }
+    console.log(JSON.stringify(productObj));
+    console.log(this.props.productId);
+    axios.post('/review/post', {
+      productId: this.props.productId,
+      productObject: productObj
+    }).then((response) => {
+      console.log('successful review post');
+      this.setState({['success']: true});
+    }).catch((error) => {
+      console.log('error posting review' + error)
+    })
+  }
+
 
   render() {
     return (
       <div>
-        <button type="button" onClick={this.handleReviewPopup.bind(this)}>Add Review</button>
         <div id="reviewPopup">
           <div id="reviewPopupContent">
-          <span className="close" onClick={this.handleReviewPopup.bind(this)}>&times;</span>
+          <span className="close" onClick={this.props.handleReviewPopup}>&times;</span>
             <h1>Add a Review</h1>
-            <select id="reviewStars">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+            <div>Number of Stars</div>
+            <div>
+              <fieldset class="rating" id="rating" onChange={(e) => {this.handleStarChange(e)}}>
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1">1 star</label>
+              </fieldset>
+            </div>
+            <div>Review Title</div>
+            <textarea id="summary" maxLength="50" placeholder="Title for your review" onChange={(e) => {this.handleTextChange(e)}}></textarea>
+            <div>Review</div>
+            <textarea id="body" maxLength="500" placeholder="Enter review here" onChange={(e) => {this.handleTextChange(e)}}></textarea>
+            <div>Would you recommend this product?</div>
+            <select id="recommend" onChange={(e) => {this.handleTextChange(e)}}>
+            <option value="false">No</option>
+              <option value="true">Yes</option>
             </select>
-            <textarea id="reviewSummary" maxLenth="50" placeholder="Title for your review"></textarea>
-            <textarea id="reviewBody" maxLength="500" placeholder="Enter review here"></textarea>
-            <select id="recommend">
-              <option value="1">Yes</option>
-              <option value="0">No</option>
-            </select>
-            <textarea id="username" maxLength="20"></textarea>
-            <textarea id="email" maxlength="30"></textarea>
-
+            <div>Username</div>
+            <textarea id="username" maxLength="20" placeholder="username" onChange={(e) => {this.handleTextChange(e)}}></textarea>
+            <div>Email</div>
+            <textarea id="email" maxLength="30" placeholder="email" onChange={(e) => {this.handleTextChange(e)}}></textarea>
+            <div></div>
+            <div class="reviewButton" onClick={this.handleSubmit}>Submit</div>
           </div>
         </div>
       </div>
