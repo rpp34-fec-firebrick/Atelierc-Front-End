@@ -20,6 +20,14 @@ Specifically, what we built was a product page for an online storefront. It is c
 
 ### Questions & Answers
 
+The Questions & Answers widget was made up of three main parts, the container, the question list, and the individual questions.
+
+The container holds the widget together and displays the search bar, question list, and buttons to interact with the question list. The search bar allows the user to search through the questions and, after three characters have been typed in, it will display any questions that matched the search string in the question list. Falling below three characters reverts the question list back to the original, full list of questions for the product. The buttons at the bottom of the container expand the question list to include two more quesitons at a time and also allows the user to add a question to the list. 
+
+The question list itself is made up of all the questions for the given product that the user is viewing. Each question has a "Q:" before it, then the first answer in the list is prefaced with "A:", with all the other answers falling below the first in line. The question list will expand quite a bit if the button to view more questions is clicked enough, so it turns into a scrollable widget once it has taken up the viewable portion of the screen. 
+
+The individual questions themselves allow for the greatest interaction within the Questions & Answers widget. Each question and answer is able to be voted as helpful, changing their ranking on the next page reload. Unlike questions, answers are able to be reported, so if they contain inaccurate information or otherwise unproductive text to the question, they can be removed and flagged for the site owners to review. Users can also add answers to a question containing their name, email, answer, and up to five photos. Lastly, they are able to load all remaining answers than just the two that are preloaded on page load and then collapse those answers back to the original two. All questions and answers are sorted based on helpfulness.
+
 ### Ratings & Reviews
 
 We're all excited for you to take a look at our project and can't wait to tell you more about it!
