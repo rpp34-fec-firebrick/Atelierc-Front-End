@@ -21,6 +21,7 @@ class App extends React.Component {
       productData: {},
     };
 
+
     window.addEventListener('hashchange', (e) => { window.location.reload(); });
 
   }
