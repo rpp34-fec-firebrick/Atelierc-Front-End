@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: 64912,
+      currentProductId: Number(window.location.hash.slice(1, window.location.hash.length)),
       starValue: 0,
       reviews: [],
       styles: {},
@@ -20,6 +20,8 @@ class App extends React.Component {
       questions: [],
       productData: {},
     };
+
+    window.addEventListener('hashchange', (e) => { window.location.reload(); });
 
   }
 
@@ -97,6 +99,26 @@ componentDidMount () {
       {
       myOutfit: newProductList
     })
+  }
+
+  updateOutfit (value) {
+    var currentProductId = this.state.currentProductId
+    console.log(value)
+    if (value === 'add') {
+      if (!this.state.myOutfit.includes(currentProductId)) {
+        var myOutfit = this.state.myOutfit;
+        myOutfit.push(currentProductId);
+        this.setState({['myOutfit']: myOutfit})
+      }
+    } else if (value === 'remove') {
+      var myOutfit = this.state.myOutfit;
+      var index = myOutfit.indexOf(currentProductId);
+      console.log(index)
+      if (index > -1) {
+        myOutfit.splice(index, 1);
+        this.setState({['myOutfit']: myOutfit})
+      }
+    }
   }
 
   render() {
