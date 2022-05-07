@@ -99,7 +99,7 @@ class Product_Detail_Page extends React.Component {
               />
         </div>
 
-          {/* <div className = "productDesctiptionFeatrues">
+          <div className = "productDesctiptionFeatrues">
             <div className = "emptySpace"></div>
               <div className = "descriptionPane1">
                 <Description data = {this.state.productData}/>
@@ -108,7 +108,7 @@ class Product_Detail_Page extends React.Component {
               <div className = "featureListPane2">
                 <DescriptionList listItems = {this.state.productData}/>
               </div>
-          </div> */}
+          </div>
         </div>
     );
   }

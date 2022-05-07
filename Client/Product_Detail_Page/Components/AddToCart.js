@@ -61,21 +61,25 @@ class AddToCart extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className = "StyleCirclesRender">
-          <SizeSelector currentStyle={this.state.currentStyle}
+      <div className = "cartGrid">
+        <div className = "sizeSelectorGrid">
+          <SizeSelector currentStyle={this.state.currentStyle} className = "StyleCirclesRender"
           onChange={this.onSizeChange.bind(this)} selectedSize = {this.state.selectedSize}/>
         </div>
-        <div className = "SelectorRender">
-        <QuantitySelector currentStyle={this.state.currentStyle}
-        onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
-        <AddToOutfit onClick={this.onAddToOutfitClick.bind(this)} add = {this.state.addToOutfit}/>
-        {(this.state.selectedQuantity && this.state.selectedSize) ?
-        <AddToCartButton sizeId = {this.state.selectedSize}
-        quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
-        onClick={this.onAddToBagClick.bind(this)}
-        /> : null
-      }
+        <div className = "quantitySelectorGrid">
+          <QuantitySelector currentStyle={this.state.currentStyle}
+          onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
+        </div>
+        <div className = "addToOutfitGrid">
+          <AddToOutfit onClick={this.onAddToOutfitClick.bind(this)} add = {this.state.addToOutfit}/>
+        </div>
+        <div className = "addToCartButtonGrid">
+          {(this.state.selectedQuantity && this.state.selectedSize) ?
+          <AddToCartButton sizeId = {this.state.selectedSize}
+          quantity = {this.state.selectedQuantity} currentStyle = {this.state.currentStyle}
+          onClick={this.onAddToBagClick.bind(this)}
+          /> : null
+          }
         </div>
       </div>
     );
