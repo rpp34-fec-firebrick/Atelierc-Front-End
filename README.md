@@ -12,7 +12,7 @@ Our team was made up of:
 
 ## Description
 
-Specifically, what we built was a product page for an online storefront. It is complete with everything you might expect in a modern online retailer, like a product overview, see related items, a place to ask questions, and to see reviews. The page is fully interactive as well. You can click around the different styles, compare a related item to the current item, leave a question or an answer, as well as leave a review.
+Specifically, what we built was a product page for an online storefront. It is complete with everything you might expect in a modern online retailer, like a product overview, see related items, a place to ask questions, and to see reviews. The page is fully interactive as well! You can click around the different styles, compare a related item to the current item, leave a question or answer, and even leave a review.
 
 Maybe we should add gifs of interactions of different things on the screen.
 

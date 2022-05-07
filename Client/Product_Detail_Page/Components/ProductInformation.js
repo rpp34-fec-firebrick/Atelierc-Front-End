@@ -1,4 +1,5 @@
 import React from 'react';
+import StarsProductPage from './SubComponentLevel1/Stars.js';
 
 class ProductInformation extends React.Component {
   constructor(props) {
@@ -7,11 +8,13 @@ class ProductInformation extends React.Component {
       productData : null,
       currentSelectedStyle : null,
       strikeThrough : 'noStrike',
-      sale_price : null
+      sale_price : null,
+      stars: null
     }
   }
   UNSAFE_componentWillReceiveProps (props) {
     if (props !== undefined) {
+      this.setState({['stars']: props.stars})
       this.setState({['productData']: props.data})
       this.setState({['currentSelectedStyle']: props.style})
       if (props.style?.sale_price === null) {
@@ -26,16 +29,18 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div>
-        <br></br>
         <div className = "makeInline">
-        Star Rating (To be added)
-        <br></br>
-          <u>
+          <div className = "starProductPage">
+            <StarsProductPage stars ={this.state.stars}/>
+          </div>
+          <div className = "readReviews">
             <a href="#RatingsReviews">Read all Reviews</a>
-          </u>
+          </div>
         </div>
-        <br></br>
+      <br></br>
+        <h3>
         {(this.state.productData) ? this.state.productData.category : null}
+          </h3>
         <h1>
         {(this.state.productData) ? this.state.productData.name : null}
         </h1>
@@ -43,6 +48,7 @@ class ProductInformation extends React.Component {
         ${(this.state.currentSelectedStyle) ? this.state.currentSelectedStyle.original_price : null}
         </div>
         {this.state.sale_price ? `Our Sale Price is $${this.state.sale_price}!`: null}
+        <br></br>
       </div>
     );
   }

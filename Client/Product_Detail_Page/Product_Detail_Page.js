@@ -17,12 +17,16 @@ class Product_Detail_Page extends React.Component {
       styles: '',
       currentStyle: {},
       currentProductId: null,
+      updateOutfit: null,
+      stars: null,
     };
   }
 
   UNSAFE_componentWillReceiveProps (props) {
     // this.setState({currentProductId: props.productId})
+    this.setState({['stars']: props.stars})
     this.setState({currentProductId: 64620})
+    this.setState({['updateOutfit']: props.updateOutfit});
     // axios.post('/products', {
     //   productId: props.productId
     // })
@@ -70,34 +74,41 @@ class Product_Detail_Page extends React.Component {
 
   render() {
     return (
-      <div className ="generalBorder">
-        <div className = "pageHeader"></div>
-        <div className = "productDetailPage1">
+      <div className ="productDetailPageGrid">
+        <div className = "pageHeadergrid"></div>
+        <div className = "imageWheelGrid">
+          <ImageWheel images = {this.state.styles}
+            styleId = {this.state.currentStyle}/>
+        </div>
 
+        <div className = "productInformationGrid">
+          <ProductInformation data = {this.state.productData}
+          style = {this.state.currentStyle}
+          stars = {this.state.stars}/>
+        </div>
 
-          <div className = "layout1">
-              <ImageWheel images = {this.state.styles}
-               styleId = {this.state.currentStyle}/>
-            <div className = "Layout2ProductInfo">
-              <ProductInformation data = {this.state.productData} style = {this.state.currentStyle}/>
-              <StyleSelection onClick ={this.handleStyleClick.bind(this)}
-              styles = {this.state.styles} styleId = {this.state.currentStyle}/>
-              <AddToCart currentStyle = {this.state.currentStyle} productId = {this.state.currentProductId}/>
-            </div>
+        <div className = "styleSelectionGrid">
+          <StyleSelection onClick ={this.handleStyleClick.bind(this)}
+          styles = {this.state.styles} styleId = {this.state.currentStyle}/>
+        </div>
 
-          </div>
+        <div className = "addToCartGrid">
+              <AddToCart currentStyle = {this.state.currentStyle}
+              productId = {this.state.currentProductId}
+              updateOutfit = {this.state.updateOutfit}
+              />
+        </div>
+
           <div className = "productDesctiptionFeatrues">
-            <div className = "emptySpace"></div>
-              <div className = "descriptionPane1">
-                <Description data = {this.state.productData}/>
-              </div>
-              <div className="verticalLine"></div>
-              <div className = "featureListPane2">
-                <DescriptionList listItems = {this.state.productData}/>
-              </div>
+            <div className = "descriptionPane1">
+              <Description data = {this.state.productData}/>
+            </div>
+            <div className="verticalLine"></div>
+            <div className = "featureListPane2">
+              <DescriptionList listItems = {this.state.productData}/>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 };
