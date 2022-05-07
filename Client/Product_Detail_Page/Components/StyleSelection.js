@@ -22,8 +22,8 @@ class StyleSelection extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <div className="bold">Style ></div>
+        <div className = "styleName">
+          <div className="bold">Style > </div>
           {this.state?.currentStyle?.name}
         </div>
           {(this.state.styles.length !== 0) ?

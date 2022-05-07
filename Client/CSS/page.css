@@ -52,8 +52,8 @@
   grid-row: 1/6;
 }
 
-.CentralPhoto1Grid {
-  object-fit: contain;
+#CentralPhoto1Grid {
+  object-fit: scale-down;
   overflow: hidden;
 }
 
@@ -98,10 +98,9 @@
 
 .productDesctiptionFeatrues {
   grid-column: 1/17;
-  grid-row: 16/19;
+  grid-row: 17/19;
   text-align: center;
   vertical-align: center;
-  border: 3px solid gray;
 }
 
 .productDescription {
@@ -110,6 +109,9 @@
 
 .strike {
   text-decoration: line-through;
+}
+.styleName {
+  flex: left;
 }
 
 .makeInline {
@@ -205,15 +207,18 @@
   vertical-align: bottom;
 }
 
-.addToCartButton {
-  border: 1.5px solid black;
-  border-radius: 2px;
-  padding: 5px;
-}
-
 .addToCartButtonGrid {
   grid-column: 1/4;
   grid-row: 3/3;
+}
+
+.addToCartButton {
+  border: 1.5px solid black;
+  background-color: grey;
+  border-radius: 2px;
+  padding: 5px;
+  width: 100%;
+  object-fit: contain;
 }
 
 /*

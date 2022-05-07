@@ -29,7 +29,6 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div>
-
         <div className = "makeInline">
           <div className = "starProductPage">
             <StarsProductPage stars ={this.state.stars}/>
@@ -50,7 +49,6 @@ class ProductInformation extends React.Component {
         </div>
         {this.state.sale_price ? `Our Sale Price is $${this.state.sale_price}!`: null}
         <br></br>
-
       </div>
     );
   }

@@ -100,14 +100,13 @@ class Product_Detail_Page extends React.Component {
         </div>
 
           <div className = "productDesctiptionFeatrues">
-            <div className = "emptySpace"></div>
-              <div className = "descriptionPane1">
-                <Description data = {this.state.productData}/>
-              </div>
-              <div className="verticalLine"></div>
-              <div className = "featureListPane2">
-                <DescriptionList listItems = {this.state.productData}/>
-              </div>
+            <div className = "descriptionPane1">
+              <Description data = {this.state.productData}/>
+            </div>
+            <div className="verticalLine"></div>
+            <div className = "featureListPane2">
+              <DescriptionList listItems = {this.state.productData}/>
+            </div>
           </div>
         </div>
     );

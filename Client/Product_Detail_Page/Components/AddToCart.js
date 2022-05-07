@@ -13,7 +13,6 @@ class AddToCart extends React.Component {
       selectedQuantity: null,
       productId: null,
       addToOutfit: false,
-      updateOutfit: null
     };
   }
 
@@ -52,10 +51,8 @@ class AddToCart extends React.Component {
   onAddToOutfitClick () {
     if (this.state.addToOutfit) {
       this.setState({['addToOutfit']: false})
-      this.state.updateOutfit('remove');
     } else {
       this.setState({['addToOutfit']: true})
-      this.state.updateOutfit('add');
     }
   }
 
