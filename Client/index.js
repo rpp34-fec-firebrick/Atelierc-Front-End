@@ -126,7 +126,7 @@ componentDidMount () {
     return (
       <div>
         <Product_Detail_Page productId={this.state.currentProductId}/>
-        <div id="RatingsReviews">
+        <div id="RatingsReviewsScrollFeature">
         <Ratings_Reviews productId={this.state.currentProductId}/>
         </div>
         <Questions_Answers productId={this.state.currentProductId}/>
