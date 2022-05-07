@@ -22,7 +22,7 @@ class StyleSelection extends React.Component {
   render() {
     return (
       <div>
-        <div className = "layout1">
+        <div>
           <div className="bold">Style ></div>
           {this.state?.currentStyle?.name}
         </div>
