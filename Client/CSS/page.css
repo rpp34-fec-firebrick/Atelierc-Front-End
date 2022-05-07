@@ -6,7 +6,7 @@
 
 .productDetailPageGrid {
   display: grid;
-  grid-template-columns: repeat(25, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(20, 30px);
   column-gap: 10px;
   row-gap: 10px;
@@ -55,6 +55,14 @@
   overflow: hidden;
   max-width: 100%;
 }
+
+.CentralPhoto1 {
+  height: 500px;
+  width: 500px;
+  max-width: 700px;
+  max-height: 700px;
+}
+
 .centralGridMainPhoto {
   grid-column: 6/21;
   grid-row: 1/4;
@@ -91,14 +99,17 @@
 }
 
 .styleRender {
-  /* max-height: 75px; */
-  /* max-width: 75px; */
-  /* display: inline-block; */
-  /* position: absolute; */
+  max-height: 75px;
+  max-width: 75px;
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
   border-radius: 50%;
-  margin: 0%;
-  padding: 0%;
-  border: 5px solid black;
+  float: left;
+  margin: 5px;
+  border: 3px solid rgba(71, 71, 71, 0.084);
 }
 
 
@@ -110,7 +121,7 @@
 }
 
 .productDescription {
-  font-size: medium;
+  font-size: small;
 }
 
 .strike {
@@ -449,6 +460,16 @@ span:nth-child(2) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
+/* make related product and myoutfit list */
+/* body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+} */
 
 .modal {
   position: fixed;
