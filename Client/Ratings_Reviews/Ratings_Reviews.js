@@ -129,12 +129,16 @@ class Ratings_Reviews extends React.Component {
       return (
         <div class="reviewContainer">
           <div class="summaryArea">
-            <p>Ratings & Reviews</p>
+            <h3>Ratings & Reviews</h3>
             <div class='numRating'>{this.state.stars}</div>
             <Stars stars={this.state.stars}/>
             <Summary starsInfo={this.state.starsInfo} recommend={this.state.recommend} totalReviews={this.state.totalReviews}/>
           </div>
           <div class="reviewArea">
+            <div>
+              <span>{this.state.totalReviews}</span>
+              <span>reviews, sorted by Relevant</span>
+            </div>
             <div>{ reviews }</div>
             <div class="buttons">
              <div class="reviewButton" onClick={this.handleMoreReviews}>More Reviews</div><div class="reviewButton" onClick={this.handleReviewPopup}>Add Review   +</div>

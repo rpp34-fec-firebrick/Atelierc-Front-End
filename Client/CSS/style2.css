@@ -7,6 +7,7 @@
 .reviewArea {
   display:inline-block;
   width: 70%;
+  padding-top: 70px;
 }
 
 .reviewContainer {
@@ -156,4 +157,28 @@
 .recommendPercent {
   font-size: 12px !important;
   margin-bottom: 10px;
+}
+
+.reviewerName {
+  display: inline-block;
+  width: 80%;
+  text-align: right;
+  font-size: 12px;
+  padding-top: 15px;
+}
+
+.responseBox, .responseBox2 {
+  background-color: #aaa;
+  width: 100%;
+}
+
+.helpful-link {
+  color:#565656;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.helpful-text {
+  color:#565656;
+  font-size: 12px;
 }
