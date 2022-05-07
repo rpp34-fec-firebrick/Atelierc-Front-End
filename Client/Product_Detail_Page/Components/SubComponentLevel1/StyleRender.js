@@ -9,5 +9,3 @@ function StyleRender (props) {
 }
 
 export default StyleRender;
-
-// className = {(props.value === props.currentStyleId) ? "checkMark" : null}

@@ -29,11 +29,6 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
-  // var randomIndex = Math.floor(Math.random() * 1011)
-  // randomIndex += 64620;
-  // var randomIndex = 64620;
-
-  // window.location.replace(`/${this.state.currentProductId}`);
 
   axios.post('/products', {
     productId: this.state.currentProductId

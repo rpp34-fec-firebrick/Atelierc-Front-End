@@ -65,11 +65,6 @@ class Product_Detail_Page extends React.Component {
     }
   }
 
-  // handleImageClick (event) {
-
-  //   console.log(event.target.name)
-  // }
-
 
   render() {
     return (

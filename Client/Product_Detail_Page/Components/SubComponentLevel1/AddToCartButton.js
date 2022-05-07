@@ -23,16 +23,6 @@ class AddToCartButton extends React.Component {
     }
   }
 
-  // onAddToBagClick () {
-  //   console.log('clicked')
-  //   // var data = {
-  //   //   sizeId : props.sizeId,
-  //   //   quantity : props.quantity,
-  //   //   currentStyle: props.currentStyle
-  //   // }
-  //   // console.log(data)
-  // }
-
   render() {
     return (
       <div>
