@@ -6,10 +6,11 @@
 
 .productDetailPageGrid {
   display: grid;
-  grid-template-columns: repeat(25, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(20, 30px);
   column-gap: 10px;
   row-gap: 10px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .pageHeadergrid {
@@ -54,6 +55,14 @@
   overflow: hidden;
   max-width: 100%;
 }
+
+.CentralPhoto1 {
+  height: 500px;
+  width: 500px;
+  max-width: 700px;
+  max-height: 700px;
+}
+
 .centralGridMainPhoto {
   grid-column: 6/21;
   grid-row: 1/4;
@@ -73,7 +82,7 @@
 
 .wheelimageGrid {
   grid-column: 3/4;
-  grid-row-start: 2;
+  grid-row-start: 1;
   text-align: center;
 }
 
@@ -94,7 +103,13 @@
   max-width: 75px;
   display: inline-block;
   position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
   border-radius: 50%;
+  float: left;
+  margin: 5px;
+  border: 3px solid rgba(71, 71, 71, 0.084);
 }
 
 
@@ -106,14 +121,11 @@
 }
 
 .productDescription {
-  font-size: medium;
+  font-size: small;
 }
 
 .strike {
   text-decoration: line-through;
-}
-.styleName {
-  flex: left;
 }
 
 .makeInline {
@@ -221,6 +233,9 @@
   padding: 5px;
   width: 100%;
   object-fit: contain;
+}
+.checkLocationRender {
+  display: flex;
 }
 
 /*
@@ -445,6 +460,16 @@ span:nth-child(2) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
+/* make related product and myoutfit list */
+/* body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+} */
 
 .modal {
   position: fixed;

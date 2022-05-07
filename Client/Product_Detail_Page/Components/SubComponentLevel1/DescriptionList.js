@@ -1,5 +1,5 @@
 import React from 'react';
-import DescriptionListRender from './DescriptionListRender.js';
+import DescriptionListRender from './SubComponentLevel2/DescriptionListRender.js';
 var count = 0;
 
 function DescriptionList (props) {

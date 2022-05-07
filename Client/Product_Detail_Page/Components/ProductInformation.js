@@ -9,12 +9,12 @@ class ProductInformation extends React.Component {
       currentSelectedStyle : null,
       strikeThrough : 'noStrike',
       sale_price : null,
-      stars: null
+      stars: 3
     }
   }
   UNSAFE_componentWillReceiveProps (props) {
     if (props !== undefined) {
-      this.setState({['stars']: props.stars})
+      // this.setState({['stars']: props.stars})
       this.setState({['productData']: props.data})
       this.setState({['currentSelectedStyle']: props.style})
       if (props.style?.sale_price === null) {
@@ -26,6 +26,10 @@ class ProductInformation extends React.Component {
     }
   }
 
+  scrollFeature () {
+    document.getElementById('RatingsReviewsScrollFeature').scrollIntoView(true)
+  }
+
   render() {
     return (
       <div>
@@ -33,8 +37,8 @@ class ProductInformation extends React.Component {
           <div className = "starProductPage">
             <StarsProductPage stars ={this.state.stars}/>
           </div>
-          <div className = "readReviews">
-            <a href="#RatingsReviews">Read all Reviews</a>
+          <div className = "readReviews" >
+            <button onClick = {this.scrollFeature}>Read All Reviews!</button>
           </div>
         </div>
       <br></br>

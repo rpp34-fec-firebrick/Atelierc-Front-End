@@ -64,8 +64,8 @@ class AddToCart extends React.Component {
           onChange={this.onSizeChange.bind(this)} selectedSize = {this.state.selectedSize}/>
         </div>
         <div className = "quantitySelectorGrid">
-          <QuantitySelector currentStyle={this.state.currentStyle}
-          onChange={this.onQuantityChange.bind(this)} selectedSize={this.state.selectedSize}/>
+          <QuantitySelector currentStyle={this.state?.currentStyle}
+          onChange={this.onQuantityChange.bind(this)} selectedSize={this.state?.selectedSize}/>
         </div>
         <div className = "addToOutfitGrid">
           <AddToOutfit onClick={this.onAddToOutfitClick.bind(this)} add = {this.state.addToOutfit}/>
