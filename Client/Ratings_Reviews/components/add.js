@@ -44,8 +44,8 @@ class Add extends React.Component {
       photos: this.state.photos,
       characteristics: this.state.characteristics
     }
-    console.log(JSON.stringify(productObj));
-    console.log(this.props.productId);
+    // console.log(JSON.stringify(productObj));
+    // console.log(this.props.productId);
     axios.post('/review/post', {
       productId: this.props.productId,
       productObject: productObj
@@ -67,17 +67,17 @@ class Add extends React.Component {
             <h1>Add a Review</h1>
             <div>Number of Stars</div>
             <div>
-              <fieldset class="rating" id="rating" onChange={(e) => {this.handleStarChange(e)}}>
+              <fieldset className="rating" id="rating" onChange={(e) => {this.handleStarChange(e)}}>
                 <input type="radio" id="star5" name="rating" value="5" />
-                <label for="star5">5 stars</label>
+                <label form="star5">5 stars</label>
                 <input type="radio" id="star4" name="rating" value="4" />
-                <label for="star4">4 stars</label>
+                <label form="star4">4 stars</label>
                 <input type="radio" id="star3" name="rating" value="3" />
-                <label for="star3">3 stars</label>
+                <label form="star3">3 stars</label>
                 <input type="radio" id="star2" name="rating" value="2" />
-                <label for="star2">2 stars</label>
+                <label form="star2">2 stars</label>
                 <input type="radio" id="star1" name="rating" value="1" />
-                <label for="star1">1 star</label>
+                <label form="star1">1 star</label>
               </fieldset>
             </div>
             <div>Review Title</div>
@@ -94,7 +94,7 @@ class Add extends React.Component {
             <div>Email</div>
             <textarea id="email" maxLength="30" placeholder="email" onChange={(e) => {this.handleTextChange(e)}}></textarea>
             <div></div>
-            <div class="reviewButton" onClick={this.handleSubmit}>Submit</div>
+            <div className="reviewButton" onClick={this.handleSubmit}>Submit</div>
           </div>
         </div>
       </div>

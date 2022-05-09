@@ -40,7 +40,7 @@ app.post('/questions', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getAllQuestions Data')
+      // console.log('Successful getAllQuestions Data')
       res.send(response);
     }
   })
@@ -48,7 +48,7 @@ app.post('/questions', (req, res) => {
 
 app.post('/productsForQuestions', (req, res) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
-  console.log
+  // console.log
   axios.get(`${root}/products/${req.body.productId}`)
   .then((response) => {
     res.send(response.data.name);
@@ -110,7 +110,7 @@ app.post('/questionSubmit', (req, res) => {
 app.post('/answerSubmit', (req, res) => {
   axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN;
 
-  console.log(req.body);
+  // console.log(req.body);
 
   axios.post(`${root}/qa/questions/${req.body.question_id}/answers`, req.body.answerContents)
   .then((answerCreatedRes) => {
@@ -150,7 +150,7 @@ app.post('/reviews', (req, res) => {
       res.sendStatus(500);
       console.log('error getting product reviews' + productId);
     } else {
-      console.log('Successful getAllReviews Data')
+      // console.log('Successful getAllReviews Data')
       res.send(response);
     }
   })
@@ -171,13 +171,13 @@ app.post('/reviews/meta', (req, res) => {
 app.post('/review/post', (req, res) => {
   var productId = req.body.productId;
   var productObject = req.body.productObject;
-  console.log('request body:' + req.body.productObject);
+  // console.log('request body:' + req.body.productObject);
   requests.postReview(productId, productObject, (error, response) => {
     if (error) {
       res.sendStatus(500);
       console.log('error posting product review for ' + productId);
     } else {
-      console.log('Successful review post')
+      // console.log('Successful review post')
       res.send(response);
     }
   })
@@ -190,7 +190,7 @@ app.post('/review/helpful', (req, res) => {
       res.sendStatus(500);
       console.log('error posting helpful for ' + reviewId);
     } else {
-      console.log('Successful helpful post')
+      // console.log('Successful helpful post')
       res.sendStatus(204);
     }
   })
@@ -203,7 +203,7 @@ app.post('/review/report', (req, res) => {
       res.sendStatus(500);
       console.log('error posting report for ' + reviewId);
     } else {
-      console.log('Successful report post')
+      // console.log('Successful report post')
       res.sendStatus(204);
     }
   })
@@ -219,7 +219,7 @@ app.post('/relatedProductId', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getRelatedProductId Data');
+      // console.log('Successful getRelatedProductId Data');
       res.send(response);
     }
   })
@@ -234,7 +234,7 @@ app.post('/relatedProductInfo', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getRelatedProductInfo Data');
+      // console.log('Successful getRelatedProductInfo Data');
       res.send(response);
     }
   })
@@ -248,7 +248,7 @@ app.post('/relatedProductstyle', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getRelatedProductStyle Data');
+      // console.log('Successful getRelatedProductStyle Data');
       res.send(response);
     }
   })
