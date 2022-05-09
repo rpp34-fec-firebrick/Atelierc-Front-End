@@ -18,6 +18,12 @@ Specifically, what we built was a product page for an online storefront. It is c
 
 ### Related Products & Comparisons
 
+The Related Products & Comparisons widget was made up of two main parts, the related product list, and the your outfit list. 
+
+The related product list displays the products related to the current product. Each related product card has a star button, it displays a table to compare the characteristics of the current product and the product when clicked. 
+
+The your outfit list stores the products when the user clicked the "+" card inside the list or the heart button on the page. The user cannot add a similar product twice but they can delete the product from the list by clicking the "X" button at the top right corner of each card. The product data is persistent and will be stored in the local storage.
+
 ### Questions & Answers
 
 The Questions & Answers widget was made up of three main parts, the container, the question list, and the individual questions.
