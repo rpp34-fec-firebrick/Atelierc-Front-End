@@ -39,7 +39,7 @@ class QuantitySelector extends React.Component {
   render() {
     return (
       <div>
-        <label for="size-select"></label>
+        <label form="size-select"></label>
         <select className="quantitySelector" onChange={this.state?.onQuantityChange}>
           {(this.state?.outOfStock) ?
           <option value="">Out of Stock!</option> :

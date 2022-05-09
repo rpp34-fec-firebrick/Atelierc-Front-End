@@ -28,13 +28,13 @@ class Ratings_Reviews extends React.Component {
 
   UNSAFE_componentWillReceiveProps (props) {
     this.setState({['productId']: props.productId});
-    console.log('product ID ' + props.productId)
+    // console.log('product ID ' + props.productId)
     axios.post('/reviews', {
       productId: props.productId
     })
     .then((response) => {
       console.log('Successful Reviews Request');
-      console.log(response.data.results);
+      // console.log(response.data.results);
       this.setState({['data']: response.data.results});
       if (response.data.results.length > 5) {
         var tempArr = [];
@@ -53,8 +53,8 @@ class Ratings_Reviews extends React.Component {
       productId: props.productId
     })
     .then((response) => {
-      console.log('Get those stars');
-      console.log(response.data);
+      // console.log('Get those stars');
+      // console.log(response.data);
       var ratingsObj = response.data.ratings;
       this.setState({['starsInfo']: ratingsObj});
       var totalReviews = 0;
@@ -77,7 +77,7 @@ class Ratings_Reviews extends React.Component {
       var recommend = parseInt(response.data.recommended.true);
       var notRecommend = parseInt(response.data.recommended.false);
       var totRecommend = recommend + notRecommend;
-      console.log('recommendations total ' + totRecommend);
+      // console.log('recommendations total ' + totRecommend);
       var recommendPercent = parseInt((recommend/totRecommend)*100);
       this.setState({['recommend']: recommendPercent});
     }).catch((error) => {
@@ -127,21 +127,21 @@ class Ratings_Reviews extends React.Component {
     })
     if (this.state.data.length > 0 && this.state.reviewInfo.length !== 0) {
       return (
-        <div class="reviewContainer">
-          <div class="summaryArea">
+        <div className="reviewContainer">
+          <div className="summaryArea">
             <h3>Ratings & Reviews</h3>
-            <div class='numRating'>{this.state.stars}</div>
+            <div className='numRating'>{this.state.stars}</div>
             <Stars stars={this.state.stars}/>
             <Summary starsInfo={this.state.starsInfo} recommend={this.state.recommend} totalReviews={this.state.totalReviews}/>
           </div>
-          <div class="reviewArea">
+          <div className="reviewArea">
             <div>
               <span>{this.state.totalReviews}</span>
               <span>reviews, sorted by Relevant</span>
             </div>
             <div>{ reviews }</div>
-            <div class="buttons">
-             <div class="reviewButton" onClick={this.handleMoreReviews}>More Reviews</div><div class="reviewButton" onClick={this.handleReviewPopup}>Add Review   +</div>
+            <div className="buttons">
+             <div className="reviewButton" onClick={this.handleMoreReviews}>More Reviews</div><div className="reviewButton" onClick={this.handleReviewPopup}>Add Review   +</div>
              <Add productId={this.state.productId} handleReviewPopup={this.handleReviewPopup}/>
             </div>
           </div>

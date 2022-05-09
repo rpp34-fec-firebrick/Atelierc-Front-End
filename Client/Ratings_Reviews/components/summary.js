@@ -22,17 +22,17 @@ class Summary extends React.Component {
       };
       return (
         <div>
-          <div class="recommendPercent">{this.props.recommend}% of reviews recommend this product</div>
-          <div class="starsBarNum">5 stars</div>
-          <progress class="starsBar" id="5starbar" value={ratingsBarObj['5'] || 0} max="100"> 100% </progress>
-          <div class="starsBarNum">4 stars</div>
-          <progress class="starsBar" id="4starbar" value={ratingsBarObj['4'] || 0} max="100"> 100% </progress>
-          <div class="starsBarNum">3 stars</div>
-          <progress class="starsBar" id="3starbar" value={ratingsBarObj['3'] || 0} max="100"> 100% </progress>
-          <div class="starsBarNum">2 stars</div>
-          <progress class="starsBar" id="2starbar" value={ratingsBarObj['2'] || 0} max="100"> 100% </progress>
-          <div class="starsBarNum">1 stars</div>
-          <progress class="starsBar" id="1starbar"value={ratingsBarObj['1'] || 0} max="100"> 100% </progress>
+          <div className="recommendPercent">{this.props.recommend}% of reviews recommend this product</div>
+          <div className="starsBarNum">5 stars</div>
+          <progress className="starsBar" id="5starbar" value={ratingsBarObj['5'] || 0} max="100"> 100% </progress>
+          <div className="starsBarNum">4 stars</div>
+          <progress className="starsBar" id="4starbar" value={ratingsBarObj['4'] || 0} max="100"> 100% </progress>
+          <div className="starsBarNum">3 stars</div>
+          <progress className="starsBar" id="3starbar" value={ratingsBarObj['3'] || 0} max="100"> 100% </progress>
+          <div className="starsBarNum">2 stars</div>
+          <progress className="starsBar" id="2starbar" value={ratingsBarObj['2'] || 0} max="100"> 100% </progress>
+          <div className="starsBarNum">1 stars</div>
+          <progress className="starsBar" id="1starbar"value={ratingsBarObj['1'] || 0} max="100"> 100% </progress>
         </div>
       );
     }

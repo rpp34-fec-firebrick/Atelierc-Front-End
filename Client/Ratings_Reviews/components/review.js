@@ -12,7 +12,7 @@ class Review extends React.Component {
 
   UNSAFE_componentWillReceiveProps (props) {
     this.setState({['data']: props.reviewData});
-    console.log('review:' + JSON.stringify(this.state['data']));
+    // console.log('review:' + JSON.stringify(this.state['data']));
   }
 
   render() {
@@ -45,18 +45,18 @@ class Review extends React.Component {
     var cleanDate = configureDate(this.props.reviewData.date);
     if(this.state.data.length !== 0) {
       return (
-        <div class='indvReview'>
-          <div class="reviewInfo">
+        <div className='indvReview'>
+          <div className="reviewInfo">
             <Stars stars={this.props.reviewData.rating}/>
-            <div class="reviewerName">
+            <div className="reviewerName">
               <span>{this.props.reviewData.reviewer_name}</span>
               <span>{cleanDate}</span>
             </div>
           </div>
           <h4>{this.props.reviewData.summary}</h4>
           <p>{this.props.reviewData.body}</p>
-          <div class="response-box">
-            <div class="response-box2">{this.props.reviewData.response}</div>
+          <div className="response-box">
+            <div className="response-box2">{this.props.reviewData.response}</div>
           </div>
           <Helpful reviewData={this.props.reviewData}/>
         </div>

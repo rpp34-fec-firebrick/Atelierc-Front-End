@@ -8,32 +8,32 @@ class Stars extends React.Component {
   render() {
     if (this.props.stars === 1) {
       return (
-        <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
+        <div className="starRating">
+          <span className="fa fa-star checked"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span>
         </div>
       );
     } else if (this.props.stars === 2) {
       return (
-        <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
+        <div className="starRating">
+          <span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span>
         </div>
       );
     } else if (this.props.stars === 3) {
       return (
-        <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
+        <div className="starRating">
+          <span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star-o"></span><span className="fa fa-star-o"></span>
         </div>
       );
     } else if (this.props.stars === 4) {
       return (
-        <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star-o"></span>
+        <div className="starRating">
+          <span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star-o"></span>
         </div>
       );
     } else if (this.props.stars === 5) {
       return (
-        <div class="starRating">
-          <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>
+        <div className="starRating">
+          <span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span><span className="fa fa-star checked"></span>
         </div>
       );
     } else if (this.props.stars === 0) {

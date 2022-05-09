@@ -94,7 +94,7 @@ class Product_Detail_Page extends React.Component {
         </div>
 
           <div className = "productDesctiptionFeatrues">
-            <div className = "descriptionPane1">
+            <div className = "productDesctiptionSummary">
               <Description data = {this.state.productData}/>
             </div>
             <div className="verticalLine"></div>

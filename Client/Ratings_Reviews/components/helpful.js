@@ -22,7 +22,7 @@ class Helpful extends React.Component {
     axios.post('/review/report', {
       reviewId: this.props.reviewData.review_id,
     }).then((response) => {
-      console.log('successful review report post');
+      // console.log('successful review report post');
     }).catch((error) => {
       console.log('error posting review report' + error)
     })
@@ -31,11 +31,11 @@ class Helpful extends React.Component {
   render() {
     return (
       <div>
-        <span class="helpful-text">Helpful?</span>
-        <span class="helpful-link" onClick={this.handleHelpful}>Yes (</span>
-        <span class="helpful-text">{this.props.reviewData.helpfulness}</span>
-        <span class="helpful-text">)   |   </span>
-        <span class="helpful-link" onClick={this.handleReport}>Report</span>
+        <span className="helpful-text">Helpful?</span>
+        <span className="helpful-link" onClick={this.handleHelpful}>Yes (</span>
+        <span className="helpful-text">{this.props.reviewData.helpfulness}</span>
+        <span className="helpful-text">)   |   </span>
+        <span className="helpful-link" onClick={this.handleReport}>Report</span>
       </div>
     );
   }

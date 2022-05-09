@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentProductId: Number(window.location.hash.slice(1, window.location.hash.length)),
+      currentProductId: 64624,
       starValue: 0,
       reviews: [],
       styles: {},
@@ -29,6 +29,12 @@ class App extends React.Component {
   // Initial Post Request to the Server
 
 componentDidMount () {
+
+  if (Number(window.location.hash.slice(1, window.location.hash.length))) {
+    this.setState({['currentProductId']: Number(window.location.hash.slice(1, window.location.hash.length))})
+  } else {
+    this.setState({['currentProductId']: 64624})
+  }
 
   axios.post('/products', {
     productId: this.state.currentProductId
