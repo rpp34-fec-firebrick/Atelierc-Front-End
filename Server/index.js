@@ -28,7 +28,7 @@ app.post('/products', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getAllProducts Data')
+      // console.log('Successful getAllProducts Data')
       res.send(response);
     }
   })
@@ -162,7 +162,7 @@ app.post('/reviews/meta', (req, res) => {
     if (error) {
       res.sendStatus(500);
     } else {
-      console.log('Successful getMetaReviews Data');
+      // console.log('Successful getMetaReviews Data');
       res.send(response);
     }
   })

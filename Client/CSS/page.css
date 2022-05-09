@@ -32,8 +32,10 @@
 
 .styleSelectionGrid {
   grid-column: 8/13;
-  grid-row: 8/15;
+  grid-row: 8/16;
   max-width: 375px;
+  max-height: 225px;
+  overflow: scroll;
 }
 
 .addToCartGrid {
@@ -66,18 +68,6 @@
 .centralGridMainPhoto {
   grid-column: 6/21;
   grid-row: 1/4;
-}
-
-.img-zoom-lens{
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 2px solid black;
-}
-
-.zoom-result {
-  grid-column-start: 15;
-  grid-row-start: 2;
 }
 
 .wheelimageGrid {
