@@ -40,7 +40,7 @@ afterAll(() => {
   server.close();
 });
 
-it ("Should Render each file without crashing", () => {
+it ("Should render QuantitySelectorRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -48,7 +48,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render SizeSelectorRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -56,7 +56,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render DescriptionListRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {

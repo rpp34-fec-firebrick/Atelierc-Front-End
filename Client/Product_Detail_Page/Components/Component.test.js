@@ -42,7 +42,7 @@ afterAll(() => {
   server.close();
 });
 
-it ("Renders Product Detail Page without crashing", () => {
+it ("Renders AddToCart without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -50,7 +50,7 @@ it ("Renders Product Detail Page without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render ImageWheel without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -58,7 +58,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render ProductInformation without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -66,7 +66,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render StyleSelection without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -74,9 +74,9 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-describe('Product Detail Page Widget', () => {
+describe('StyleSelection Component', () => {
 
-  test('Should render Product Detail Page widget without crashing', () => {
+  test('Should render StyleSelection without crashing', () => {
       render(<StyleSelection currentProductId={71967}/>);
 
       const widget = screen.getByTestId('style');
@@ -86,8 +86,8 @@ describe('Product Detail Page Widget', () => {
 });
 
 
-describe('Product Detail Page Widget', () => {
-  test('Clicking the "More Answered Questions" button should load two more questions each time it is clicked', async () => {
+describe('ImageWheel Component', () => {
+  test('Tests ImageWheel Length', async () => {
     render(<ImageWheel currentProductId={71967} />);
 
     await waitFor(() => screen.getByTestId('imageWheel'));

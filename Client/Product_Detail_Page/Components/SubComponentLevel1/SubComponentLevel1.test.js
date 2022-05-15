@@ -47,7 +47,7 @@ afterAll(() => {
 });
 
 
-it ("Renders Product Detail Page without crashing", () => {
+it ("Renders Stars without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -55,7 +55,7 @@ it ("Renders Product Detail Page without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render AddToOutfit without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -63,7 +63,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render SizeSelector without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -71,7 +71,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render QuantitySelector without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -79,7 +79,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render AddToCartButton without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -87,7 +87,7 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-it ("Should Render each file without crashing", () => {
+it ("Should render ImageRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -96,7 +96,7 @@ it ("Should Render each file without crashing", () => {
 })
 
 
-it ("Should Render each file without crashing", () => {
+it ("Should render StyleRender without crashing", () => {
   const container = document.createElement('div');
   const root = createRoot(container);
   act(() => {
@@ -104,15 +104,14 @@ it ("Should Render each file without crashing", () => {
   });
 })
 
-describe('Product Detail Page Widget', () => {
-  test('Clicking the "More Answered Questions" button should load two more questions each time it is clicked', async () => {
+describe('DescriptionList', () => {
+  test('DescriptonListFeatureRender', async () => {
     render(<DescriptionList currentProductId={71967} />);
 
     await waitFor(() => screen.getByTestId('descriptionFeatures'));
 
-    let images = screen.queryAllByTestId('descriptionFeatures');
-      console.log(images, 'lkasjdflksjdlfkjsdlfkjslfksjlskjfdlkdsj')
-    expect(images.length).toEqual(undefined);
+    let feature = screen.queryAllByTestId('descriptionFeatures');
+    expect(feature).toEqual(undefined);
   });
 })
 
