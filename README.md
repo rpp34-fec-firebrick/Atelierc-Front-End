@@ -10,6 +10,25 @@ Our team was made up of:
 * Keegan Wolf, responsible for Question & Answers.
 * Alex Belmonte, responsible for Ratings & Reviews.
 
+
+### A note from Ahmad!
+
+Do you want to take a quick look at the page? Checkout the Product Overview Image to see my front end contribution to the project!
+
+* * * Set Up Instructions * * *
+
+1. Create a file .env file. Make sure to add it to your .gitignore
+
+2. Create a github token (to access the api content);
+
+3. Add a single line with the below format
+
+GIT_TOKEN='INSERT GIT TOKEN HERE'
+
+4. Run the following commands in your terminal: npm install --> then split the terminal to show two terminal windows and run --> npm start
+
+5. Take a look at our project at http://localhost:3000/
+
 ## Description
 
 Specifically, what we built was a product page for an online storefront. It is complete with everything you might expect in a modern online retailer, like a product overview, see related items, a place to ask questions, and to see reviews. The page is fully interactive as well! You can click around the different styles, compare a related item to the current item, leave a question or answer, and even leave a review.
