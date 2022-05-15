@@ -110,7 +110,7 @@ class ImageWheel extends React.Component {
 
   render() {
     return (
-      <div className ="photoDisplay">
+      <div data-testid="imageWheel" className ="photoDisplay">
         <div className="wheelimageGrid">
           {(this.state.showUp) ?
           <ion-icon name="chevron-up-outline" onClick={this.imageWheelClick.bind(this)}></ion-icon>
