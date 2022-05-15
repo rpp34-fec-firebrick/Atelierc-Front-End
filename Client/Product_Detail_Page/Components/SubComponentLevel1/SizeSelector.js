@@ -30,9 +30,9 @@ class SizeSelector extends React.Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="size-selector">
         <label></label>
-        <select onChange={this.state.onSizeChange} className = "sizeSelector">
+        <select data-testid="sizesRendered" onChange={this.state.onSizeChange} className = "sizeSelector">
         {(this.state.outOfStock) ?
           <option value="">Out of Stock!</option> :
           <option value="">Select Size!</option>}

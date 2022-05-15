@@ -22,7 +22,7 @@ class StyleSelection extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div data-testid="style">
           <div className="bold">Style > </div>
           {this.state?.currentStyle?.name}
         </div>

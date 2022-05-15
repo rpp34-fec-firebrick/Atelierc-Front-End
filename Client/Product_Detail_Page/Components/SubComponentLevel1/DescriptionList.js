@@ -8,7 +8,7 @@ function DescriptionList (props) {
       <br></br>
       {(props.listItems.features) ?
         props.listItems.features.map((item) =>
-        <DescriptionListRender item = {item} key = {count++}/>)
+        <DescriptionListRender data-testid="descriptionFeatures" item = {item} key = {count++}/>)
         : null}
 
     </div>

@@ -7,7 +7,9 @@
     "test": "jest --coverage",
     "start": "nodemon server/index.js",
     "webpack": "webpack --mode development -w",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "compTest": "jest client/Product_Detail_Page/Components/Component.test.js",
+    "subCompTest": "jest client/Product_Detail_Page/Components/SubComponentLevel1/SubComponentLevel1.test.js"
   },
   "jest": {
     "testEnvironment": "jsdom"
