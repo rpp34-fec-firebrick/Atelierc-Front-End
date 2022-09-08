@@ -1,8 +1,8 @@
-# Front End Capstone
+# Atelier.io
 
-Hello! Welcome to our team's Front End Capstone, or FEC for short.
+Hello! Welcome to Aterlier, this is a front for a E-commerce client that sells fashion prodcuts. 
 
-This was our first project as we entered the Senior Phase of the HackReactor Program. The goal of this project was to challenge, primiarly, our Front End Skills. The aim was to build a complex webpage that interacts with an API, server, and four widgets made by four different people while being thoroughly tested to ensure the best outcome. We had the oppurtunity to use some technologies including React, Jest, HTML, CSS, Axios, Express and, hopefully to no suprise, Javascript!
+The aim was to build a complex webpage that interacts with an API, server, and four widgets made by four different people while being thoroughly tested to ensure the best outcome. We had the oppurtunity to use some technologies including React, Jest, HTML, CSS, Axios, Express and, hopefully to no suprise, Javascript!
 
 Our team was made up of:
 * Ahmad Almomani, responsible for Product Overview.
